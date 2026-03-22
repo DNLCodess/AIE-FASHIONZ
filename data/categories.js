@@ -1,0 +1,58 @@
+const U = "https://images.unsplash.com";
+
+export const categories = [
+  {
+    id: "cat_1",
+    name: "Luxury Fabrics",
+    slug: "luxury-fabrics",
+    description: "Silk, lace, Ankara, cashmere and premium dress fabrics — sold by the metre.",
+    hero_image_url: `${U}/photo-1558769132-cb1aea458c5e?w=1600&h=700&fit=crop&crop=center&q=90`,
+    display_order: 1,
+    is_active: true,
+  },
+  {
+    id: "cat_2",
+    name: "Bags & Shoes",
+    slug: "bags-shoes",
+    description: "Handbags, clutches, totes, heels, flats, boots and mules.",
+    hero_image_url: `${U}/photo-1548036328-c9fa89d128fa?w=1600&h=700&fit=crop&crop=center&q=90`,
+    display_order: 2,
+    is_active: true,
+  },
+  {
+    id: "cat_3",
+    name: "Jewellery",
+    slug: "jewellery",
+    description: "Necklaces, earrings, bracelets, rings and statement sets.",
+    hero_image_url: `${U}/photo-1515562141207-7a88fb7ce338?w=1600&h=700&fit=crop&crop=center&q=90`,
+    display_order: 3,
+    is_active: true,
+  },
+  {
+    id: "cat_4",
+    name: "Party & Dinner Wear",
+    slug: "party-dinner-wear",
+    description: "Evening gowns, co-ords, jumpsuits, cocktail dresses and occasion sets.",
+    hero_image_url: `${U}/photo-1490481651871-ab68de25d43d?w=1600&h=700&fit=crop&crop=top&q=90`,
+    display_order: 4,
+    is_active: true,
+  },
+  {
+    id: "cat_5",
+    name: "Children's Wear",
+    slug: "childrens-wear",
+    description: "Premium childrenswear for girls, boys and unisex — ages 0 to 14.",
+    hero_image_url: `${U}/photo-1503454537195-1dcabb73ffb9?w=1600&h=700&fit=crop&crop=center&q=90`,
+    display_order: 5,
+    is_active: true,
+  },
+  {
+    id: "cat_6",
+    name: "Body Shapers",
+    slug: "body-shapers",
+    description: "Waist trainers, butt-enhancing pieces, full-body shapewear and corsets.",
+    hero_image_url: `${U}/photo-1518611012118-696072aa579a?w=1600&h=700&fit=crop&crop=center&q=90`,
+    display_order: 6,
+    is_active: true,
+  },
+];

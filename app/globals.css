@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+@theme {
+  /* Backgrounds */
+  --color-background: #fdfbf7;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f8f5f2;
+
+  /* Text */
+  --color-foreground: #1c1c1a;
+  --color-muted: #6b6a66;
+  --color-subtle: #a8a7a3;
+
+  /* Border */
+  --color-border: #e8e5e0;
+
+  /* Brand */
+  --color-gold: #8b6c14;
+  --color-gold-dark: #7a5c10;
+  --color-gold-light: #f7f0d8;
+
+  /* Semantic */
+  --color-error: #c0392b;
+  --color-success: #2d7a47;
+
+  /* Typography */
+  --font-heading: "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-surface-raised: #2a2a2a;
+  --color-foreground: #f5f5f5;
+  --color-muted: #a0a0a0;
+  --color-subtle: #6b6b6b;
+  --color-border: #2e2e2e;
+  --color-gold: #d4af37;
+  --color-gold-dark: #e0c07a;
+}
+
+/* ── Container ─────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 3rem;
+  }
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scroll reveal ─────────────────────────────────────── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal[data-reveal="up"] {
+    transform: translateY(24px);
+  }
+  .reveal.is-visible {
+    animation: reveal-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .reveal[data-reveal="fade"].is-visible {
+    animation: reveal-fade 0.7s ease forwards;
+  }
+  .reveal[data-delay="1"].is-visible {
+    animation-delay: 0.08s;
+  }
+  .reveal[data-delay="2"].is-visible {
+    animation-delay: 0.16s;
+  }
+  .reveal[data-delay="3"].is-visible {
+    animation-delay: 0.24s;
+  }
+  .reveal[data-delay="4"].is-visible {
+    animation-delay: 0.32s;
+  }
+  .reveal[data-delay="5"].is-visible {
+    animation-delay: 0.4s;
+  }
+  .reveal[data-delay="6"].is-visible {
+    animation-delay: 0.48s;
+  }
+}
+
+/* ── Marquee ───────────────────────────────────────────── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 45s linear infinite;
+}
+
+/* ── Hero animations (CSS-driven, no JS) ──────────────── */
+@keyframes hero-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-line {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 3rem;
+    opacity: 1;
+  }
+}
+
+/* Subtle zoom for triptych images */
+@keyframes hero-scale {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Scroll indicator drop */
+@keyframes scroll-drop {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  40% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+.hero-up {
+  animation: hero-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-fade {
+  animation: hero-fade 1.4s ease both;
+}
+.hero-line {
+  animation: hero-line 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-scale {
+  animation: hero-scale 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.scroll-line {
+  animation: scroll-drop 1s ease 1.5s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-up,
+  .hero-fade,
+  .hero-line,
+  .hero-scale,
+  .scroll-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Font utilities (Tailwind v4 doesn't auto-generate font-family) ── */
+.font-heading {
+  font-family: var(--font-heading);
+}
+.font-body {
+  font-family: var(--font-body);
+}
