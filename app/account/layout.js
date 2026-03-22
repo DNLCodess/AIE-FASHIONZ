@@ -5,6 +5,7 @@ import AccountSidebar from "@/components/account/AccountSidebar";
 
 export const metadata = {
   title: "My Account | AIE Fashionz",
+  robots: { index: false, follow: false },
 };
 
 export default async function AccountLayout({ children }) {

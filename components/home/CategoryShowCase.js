@@ -34,7 +34,7 @@ export default function CategoryShowcase({ categories }) {
             <p
               className="font-body uppercase"
               style={{
-                fontSize: "10px",
+                fontSize: "15px",
                 letterSpacing: "0.4em",
                 color: "var(--color-subtle)",
               }}
@@ -116,7 +116,7 @@ function CategoryRow({ cat, index }) {
                 fontSize: "5rem",
                 lineHeight: 1,
                 color: "var(--color-gold)",
-                opacity: 0.12,
+                opacity: 0.5,
                 display: "block",
                 marginBottom: "1rem",
                 transition: "opacity 300ms ease",

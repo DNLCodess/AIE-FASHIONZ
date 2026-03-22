@@ -6,6 +6,7 @@ const useUiStore = create(
     (set) => ({
       cartOpen: false,
       mobileNavOpen: false,
+      searchOpen: false,
       currency: "GBP",
 
       openCart: () => set({ cartOpen: true }),
@@ -16,6 +17,9 @@ const useUiStore = create(
       closeMobileNav: () => set({ mobileNavOpen: false }),
       toggleMobileNav: () =>
         set((state) => ({ mobileNavOpen: !state.mobileNavOpen })),
+
+      openSearch: () => set({ searchOpen: true }),
+      closeSearch: () => set({ searchOpen: false }),
 
       setCurrency: (currency) => set({ currency }),
     }),

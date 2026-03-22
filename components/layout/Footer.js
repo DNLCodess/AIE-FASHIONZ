@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 const SHOP_LINKS = [
@@ -32,33 +33,90 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground">
+    <footer style={{ backgroundColor: "var(--color-foreground)" }}>
       {/* Main grid */}
-      <div className="container py-16 md:py-20 border-b border-white/10">
+      <div
+        className="container"
+        style={{
+          paddingTop: "4rem",
+          paddingBottom: "4rem",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-
           {/* Brand */}
           <div>
             <Link
               href="/"
-              className="inline-block mb-2 font-heading text-xl tracking-[0.2em] uppercase text-gold hover:text-gold-dark transition-colors duration-200"
+              style={{
+                display: "inline-block",
+                marginBottom: "0.5rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "1.25rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                color: "var(--color-gold)",
+                transition: "color 200ms ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-gold-dark)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-gold)")
+              }
             >
               AIE Fashionz
             </Link>
-            <p className="font-body text-[11px] tracking-[0.2em] uppercase text-white/30 mb-6">
+
+            <p
+              className="font-body"
+              style={{
+                fontSize: "11px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: "1.5rem",
+              }}
+            >
               UK Luxury Fashion
             </p>
-            <p className="font-body text-sm leading-relaxed text-white/50 mb-8 max-w-xs">
+
+            <p
+              className="font-body"
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.7,
+                color: "rgba(255,255,255,0.5)",
+                marginBottom: "2rem",
+                maxWidth: "26ch",
+              }}
+            >
               Premium fashion for women who shop with intention. Delivered
               globally from the UK.
             </p>
-            <div className="flex items-center gap-6">
+
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}
+            >
               {SOCIAL_LINKS.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
-                  className="font-body text-xs tracking-wide text-white/35 hover:text-gold transition-colors duration-200"
                   aria-label={s.label}
+                  className="font-body"
+                  style={{
+                    fontSize: "12px",
+                    color: "rgba(255,255,255,0.3)",
+                    textDecoration: "none",
+                    transition: "color 200ms ease",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--color-gold)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "rgba(255,255,255,0.3)")
+                  }
                 >
                   {s.label}
                 </a>
@@ -68,18 +126,23 @@ export default function Footer() {
 
           {/* Shop */}
           <div>
-            <h3 className="font-body text-[10px] tracking-[0.2em] uppercase text-white/30 mb-6">
+            <h3
+              className="font-body"
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: "1.5rem",
+                fontWeight: 500,
+              }}
+            >
               Shop
             </h3>
-            <ul className="space-y-3.5">
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {SHOP_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-sm text-white/50 hover:text-white/90 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
+                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -87,18 +150,23 @@ export default function Footer() {
 
           {/* Help */}
           <div>
-            <h3 className="font-body text-[10px] tracking-[0.2em] uppercase text-white/30 mb-6">
+            <h3
+              className="font-body"
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: "1.5rem",
+                fontWeight: 500,
+              }}
+            >
               Help
             </h3>
-            <ul className="space-y-3.5">
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {HELP_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-sm text-white/50 hover:text-white/90 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
+                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -106,35 +174,80 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-body text-[10px] tracking-[0.2em] uppercase text-white/30 mb-6">
+            <h3
+              className="font-body"
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: "1.5rem",
+                fontWeight: 500,
+              }}
+            >
               Legal
             </h3>
-            <ul className="space-y-3.5">
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-sm text-white/50 hover:text-white/90 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
+                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
-
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="container py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-        <p className="font-body text-xs text-white/25">
-          AIE Fashionz Ltd · Company No. [XXXXXXXX] · Registered in England & Wales
+      <div
+        className="container"
+        style={{
+          paddingTop: "1.25rem",
+          paddingBottom: "1.25rem",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "0.5rem",
+        }}
+      >
+        <p
+          className="font-body"
+          style={{ fontSize: "12px", color: "rgba(255,255,255,0.22)" }}
+        >
+          AIE Fashionz Ltd · Company No. [XXXXXXXX] · Registered in England
+          &amp; Wales
         </p>
-        <p className="font-body text-xs text-white/25">
+        <p
+          className="font-body"
+          style={{ fontSize: "12px", color: "rgba(255,255,255,0.22)" }}
+        >
           © {new Date().getFullYear()} AIE Fashionz. All rights reserved.
         </p>
       </div>
     </footer>
+  );
+}
+
+function FooterLink({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="font-body"
+      style={{
+        fontSize: "14px",
+        color: "rgba(255,255,255,0.5)",
+        textDecoration: "none",
+        transition: "color 200ms ease",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.color = "rgba(255,255,255,0.9)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
+      }
+    >
+      {children}
+    </Link>
   );
 }

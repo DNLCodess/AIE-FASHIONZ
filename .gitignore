@@ -19,7 +19,7 @@
 
 # production
 /build
-
+.claude/
 # misc
 .DS_Store
 *.pem
@@ -39,3 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+supabase/migrations/20260322_phase6_reviews.sql

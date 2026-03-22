@@ -3,7 +3,10 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 
-export const metadata = { title: "Admin | AIE Fashionz" };
+export const metadata = {
+  title: "Admin | AIE Fashionz",
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminLayout({ children }) {
   const cookieStore = await cookies();

@@ -15,8 +15,8 @@
   --color-border: #e8e5e0;
 
   /* Brand */
-  --color-gold: #8b6c14;
-  --color-gold-dark: #7a5c10;
+  --color-gold: #d4af37;
+  --color-gold-dark: #bf9b2f;
   --color-gold-light: #f7f0d8;
 
   /* Semantic */
@@ -248,4 +248,11 @@ body {
 }
 .font-body {
   font-family: var(--font-body);
+}
+
+/* ── Footer grid ───────────────────────────────────────── */
+@media (min-width: 768px) {
+  .md\:grid-cols-footer {
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  }
 }

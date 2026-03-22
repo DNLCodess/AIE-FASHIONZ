@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/utils";
+import { MessageCircle, Star } from "lucide-react";
 
 export async function generateMetadata({ params }) {
   return { title: `Order ${(await params).id} | AIE Fashionz` };
@@ -87,6 +88,34 @@ export default async function OrderDetailPage({ params }) {
         </ul>
       </section>
 
+      {/* Support banner — always visible */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1rem",
+          padding: "1rem 1.25rem",
+          border: "1px solid var(--color-border)",
+          backgroundColor: "var(--color-surface)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <MessageCircle size={16} style={{ color: "var(--color-gold)", flexShrink: 0 }} />
+          <p className="font-body text-sm text-muted">
+            Issue with this order? Payment problem? Wrong item?
+          </p>
+        </div>
+        <Link
+          href={`/contact?issueType=order&ref=${order.reference}`}
+          className="font-body text-xs tracking-widest uppercase text-foreground border border-border px-4 py-2 hover:border-gold transition-colors"
+          style={{ whiteSpace: "nowrap" }}
+        >
+          Get help →
+        </Link>
+      </div>
+
       {/* Totals + Address grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Totals */}
@@ -115,6 +144,29 @@ export default async function OrderDetailPage({ params }) {
           </address>
         </section>
       </div>
+      {/* Review prompt — only for delivered orders */}
+      {order.status === "delivered" && (
+        <section className="border border-border p-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Star size={16} className="text-gold" />
+            <h3 className="font-heading text-sm text-foreground">Review your purchase</h3>
+          </div>
+          <p className="font-body text-sm text-muted mb-4">
+            Share your experience to help other shoppers. Reviews take less than a minute.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {order.order_items.map((item) => (
+              <Link
+                key={item.id}
+                href={`/product/${item.slug ?? item.product_id}#reviews`}
+                className="font-body text-xs tracking-widest uppercase text-foreground border border-border px-4 py-2 hover:border-gold transition-colors"
+              >
+                Review: {item.title}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

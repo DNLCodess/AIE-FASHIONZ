@@ -8,6 +8,9 @@ import { getProducts } from "@/lib/api/products";
 import ProductGrid from "@/components/product/ProductGrid";
 import FilterBar from "@/components/shop/FilterBar";
 import Reveal from "@/components/ui/Reveal";
+import JsonLd from "@/components/seo/JsonLd";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
 
 export async function generateStaticParams() {
   const categories = await getCategories();
@@ -18,9 +21,28 @@ export async function generateMetadata({ params }) {
   const { category } = await params;
   const cat = await getCategoryBySlug(category);
   if (!cat) return {};
+
+  const desc = `Shop ${cat.name} at AIE Fashionz — ${cat.description ?? "premium luxury fashion for women"}. Free UK delivery on orders over £150. Worldwide shipping.`;
+
   return {
-    title: `${cat.name} — AIE Fashionz`,
-    description: cat.description,
+    title: `${cat.name} | AIE Fashionz`,
+    description: desc,
+    keywords: [cat.name, "luxury fashion UK", "women's clothing", "AIE Fashionz", "buy online UK"],
+    alternates: { canonical: `/shop/${category}` },
+    openGraph: {
+      title: `${cat.name} | AIE Fashionz`,
+      description: desc,
+      url: `/shop/${category}`,
+      images: cat.hero_image_url
+        ? [{ url: cat.hero_image_url, width: 1200, height: 630, alt: cat.name }]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${cat.name} | AIE Fashionz`,
+      description: desc,
+      images: cat.hero_image_url ? [cat.hero_image_url] : [],
+    },
   };
 }
 
@@ -37,8 +59,29 @@ export default async function CategoryPage({ params, searchParams }) {
 
   if (!cat) notFound();
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Shop", item: `${SITE_URL}/shop` },
+      { "@type": "ListItem", position: 3, name: cat.name, item: `${SITE_URL}/shop/${category}` },
+    ],
+  };
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: cat.name,
+    description: cat.description,
+    url: `${SITE_URL}/shop/${category}`,
+    breadcrumb: breadcrumbSchema,
+  };
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={collectionSchema} />
       {/* Hero */}
       <section className="relative -mt-16 md:-mt-20 h-[65vh] min-h-[25rem] max-h-[40rem] overflow-hidden">
         <Image

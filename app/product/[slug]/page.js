@@ -7,6 +7,10 @@ import ProductGallery from "@/components/product/ProductGallery";
 import VariantSelector from "@/components/product/VariantSelector";
 import ProductGrid from "@/components/product/ProductGrid";
 import Reveal from "@/components/ui/Reveal";
+import JsonLd from "@/components/seo/JsonLd";
+import ReviewList from "@/components/reviews/ReviewList";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
 
 export async function generateStaticParams() {
   return getAllProductSlugs();
@@ -16,9 +20,42 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return {};
+
+  const primaryImage =
+    product.images?.find((i) => i.is_primary)?.url ?? product.images?.[0]?.url;
+  const price = (product.base_price / 100).toFixed(2);
+  const desc = `${product.description.slice(0, 130)} Free UK delivery. 14-day returns.`;
+
   return {
-    title: `${product.title} — AIE Fashionz`,
-    description: product.description.slice(0, 160),
+    title: `${product.title} | AIE Fashionz`,
+    description: desc,
+    keywords: [
+      product.title,
+      "luxury fashion UK",
+      "women's clothing",
+      product.category_slug.replace(/-/g, " "),
+      "AIE Fashionz",
+    ],
+    alternates: { canonical: `/product/${slug}` },
+    openGraph: {
+      title: product.title,
+      description: desc,
+      url: `/product/${slug}`,
+      type: "website",
+      images: primaryImage
+        ? [{ url: primaryImage, width: 800, height: 1067, alt: product.title }]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.title,
+      description: desc,
+      images: primaryImage ? [primaryImage] : [],
+    },
+    other: {
+      "product:price:amount": price,
+      "product:price:currency": "GBP",
+    },
   };
 }
 
@@ -35,8 +72,83 @@ export default async function ProductPage({ params }) {
     getRelatedProducts(product, 4),
   ]);
 
+  const primaryImage =
+    product.images?.find((i) => i.is_primary)?.url ?? product.images?.[0]?.url;
+
+  const inStock = product.variants?.some((v) => (v.stock_count ?? v.stock_quantity ?? 0) > 0);
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description,
+    sku: product.variants?.[0]?.sku ?? product.slug,
+    brand: { "@type": "Brand", name: "AIE Fashionz" },
+    category: category?.name ?? product.category_slug,
+    image: product.images?.map((img) => img.url) ?? [],
+    url: `${SITE_URL}/product/${product.slug}`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "GBP",
+      price: (product.base_price / 100).toFixed(2),
+      availability: inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: { "@type": "Organization", name: "AIE Fashionz" },
+      url: `${SITE_URL}/product/${product.slug}`,
+      priceValidUntil: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+        .toISOString()
+        .slice(0, 10),
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0",
+          currency: "GBP",
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "GB",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: 2, maxValue: 5, unitCode: "DAY" },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 14,
+        returnMethod: "https://schema.org/ReturnByMail",
+      },
+    },
+    ...(product.materials ? { material: product.materials } : {}),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Shop", item: `${SITE_URL}/shop` },
+      ...(category
+        ? [{ "@type": "ListItem", position: 3, name: category.name, item: `${SITE_URL}/shop/${category.slug}` }]
+        : []),
+      {
+        "@type": "ListItem",
+        position: category ? 4 : 3,
+        name: product.title,
+        item: `${SITE_URL}/product/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={productSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       {/* Breadcrumb */}
       <nav className="border-b border-border bg-surface" aria-label="Breadcrumb">
         <div className="container py-4 flex items-center gap-1.5 font-body text-xs text-muted">
@@ -157,6 +269,11 @@ export default async function ProductPage({ params }) {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Reviews */}
+      <div className="container" style={{ paddingBottom: "5rem" }}>
+        <ReviewList productId={product.id} productTitle={product.title} />
       </div>
 
       {/* Related products */}

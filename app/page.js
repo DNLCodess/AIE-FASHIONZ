@@ -7,13 +7,37 @@ import NewsletterForm from "@/components/home/NewsletterForm";
 import Marquee from "@/components/ui/Marquee";
 import Reveal from "@/components/ui/Reveal";
 import CategoryShowcase from "@/components/home/CategoryShowCase";
+import JsonLd from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+
 export const metadata = {
-  title: "AIE Fashionz | UK Luxury Fashion",
+  title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
   description:
-    "UK-based luxury fashion for women. Shop premium fabrics, bags & shoes, jewellery, party wear, children's wear, and body shapers. Delivered worldwide.",
+    "AIE Fashionz — the UK's destination for luxury women's fashion. Shop premium fabrics, designer bags & shoes, gold jewellery, party & occasion wear, children's fashion and body shapers. Free UK delivery over £150. Worldwide shipping.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
+    description:
+      "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free UK delivery. Worldwide shipping.",
+    url: "/",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90",
+        width: 1200,
+        height: 630,
+        alt: "AIE Fashionz Luxury Fashion",
+      },
+    ],
+  },
+  twitter: {
+    title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
+    description:
+      "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
+    images: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90"],
+  },
 };
 
 const HERO_A =
@@ -29,8 +53,42 @@ export default async function HomePage() {
     getCategories(),
   ]);
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "AIE Fashionz",
+    url: SITE_URL,
+    description:
+      "UK-based luxury fashion boutique for women. Premium fabrics, bags & shoes, jewellery, party wear, children's wear and body shapers. Worldwide delivery.",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "GB",
+    },
+    sameAs: [
+      "https://www.instagram.com/aiefashionz",
+      "https://www.facebook.com/aiefashionz",
+    ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "AIE Fashionz",
+    url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <>
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={websiteSchema} />
       {/* ─────────────────────────────────────────────────────────
           HERO — Triptych layout
           Desktop: large left image / centre editorial text / right image
