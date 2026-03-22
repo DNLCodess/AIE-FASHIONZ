@@ -1,18 +1,11 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
-import { createClient } from "@supabase/supabase-js";
-
-// Service role client to bypass RLS for the verified flag update
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY,
-  { auth: { persistSession: false } }
-);
+import supabaseAdmin from "@/lib/supabase/admin";
 
 export async function POST(req) {
   try {
-    const { productId, orderId, rating, title, body } = await req.json();
+    const { productId, rating, title, body } = await req.json();
 
     // ── Validate inputs ──────────────────────────────────────────────────────
     if (!productId?.trim()) {
@@ -23,6 +16,9 @@ export async function POST(req) {
     }
     if (!body?.trim() || body.trim().length < 10) {
       return NextResponse.json({ error: "Review body must be at least 10 characters." }, { status: 400 });
+    }
+    if (body.trim().length > 1000) {
+      return NextResponse.json({ error: "Review body must be 1000 characters or fewer." }, { status: 400 });
     }
 
     // ── Auth ─────────────────────────────────────────────────────────────────
@@ -44,7 +40,8 @@ export async function POST(req) {
     }
 
     // ── Verify purchase ──────────────────────────────────────────────────────
-    // User must have a delivered/shipped order containing this product
+    // User must have a delivered/shipped order containing this product.
+    // orderId is resolved server-side only — never trusted from client.
     const { data: eligibleOrder } = await supabase
       .from("orders")
       .select("id, order_items!inner(product_id)")
@@ -54,7 +51,7 @@ export async function POST(req) {
       .limit(1)
       .maybeSingle();
 
-    // Also allow if they have an existing review (editing)
+    // Allow editing an existing review even if order status changed
     const { data: existingReview } = await supabase
       .from("reviews")
       .select("id")
@@ -70,10 +67,11 @@ export async function POST(req) {
     }
 
     const isVerified = Boolean(eligibleOrder);
-    const resolvedOrderId = orderId ?? eligibleOrder?.id ?? null;
+    // Always use server-resolved order ID — never accept orderId from client
+    const resolvedOrderId = eligibleOrder?.id ?? null;
 
     // ── Upsert review ────────────────────────────────────────────────────────
-    // Use admin client to set is_verified (users cannot set this themselves via RLS)
+    // is_published: false — requires admin moderation before going live
     const { error } = await supabaseAdmin
       .from("reviews")
       .upsert(
@@ -82,23 +80,21 @@ export async function POST(req) {
           user_id: user.id,
           order_id: resolvedOrderId,
           rating,
-          title: title?.trim() || null,
+          title: title?.trim().slice(0, 200) || null,
           body: body.trim(),
           is_verified: isVerified,
-          is_published: true,
+          is_published: false,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "user_id,product_id" }
       );
 
     if (error) {
-      console.error("Review upsert error:", error);
       return NextResponse.json({ error: "Failed to save review." }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: "Review submitted for moderation." });
   } catch (err) {
-    console.error("Review route error:", err);
     return NextResponse.json({ error: "Unexpected error." }, { status: 500 });
   }
 }

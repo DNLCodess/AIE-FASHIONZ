@@ -169,7 +169,7 @@ export default function FilterBar({ totalCount }) {
             style={{
               display: "flex",
               alignItems: "center",
-              height: "52px",
+              height: "56px",
               gap: "0.5rem",
             }}
           >
@@ -212,8 +212,8 @@ export default function FilterBar({ totalCount }) {
                     display: "flex",
                     alignItems: "center",
                     gap: "0.3rem",
-                    padding: "4px 10px",
-                    fontSize: "11px",
+                    padding: "6px 12px",
+                    fontSize: "13px",
                     fontFamily: "var(--font-body)",
                     color: "var(--color-foreground)",
                     backgroundColor: "var(--color-gold-light)",
@@ -237,8 +237,8 @@ export default function FilterBar({ totalCount }) {
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
-                    padding: "6px 14px",
-                    fontSize: "12px",
+                    padding: "8px 14px",
+                    fontSize: "13px",
                     fontFamily: "var(--font-body)",
                     fontWeight: 500,
                     letterSpacing: "0.05em",
@@ -259,12 +259,12 @@ export default function FilterBar({ totalCount }) {
                   {activeFilterCount > 0 && (
                     <span
                       style={{
-                        width: "16px",
-                        height: "16px",
+                        width: "18px",
+                        height: "18px",
                         borderRadius: "9999px",
                         backgroundColor: "var(--color-gold)",
                         color: "var(--color-foreground)",
-                        fontSize: "9px",
+                        fontSize: "11px",
                         fontWeight: 700,
                         display: "flex",
                         alignItems: "center",
@@ -304,8 +304,8 @@ export default function FilterBar({ totalCount }) {
                     display: "flex",
                     alignItems: "center",
                     gap: "0.4rem",
-                    padding: "6px 14px",
-                    fontSize: "12px",
+                    padding: "8px 14px",
+                    fontSize: "13px",
                     fontFamily: "var(--font-body)",
                     fontWeight: 500,
                     letterSpacing: "0.05em",
@@ -349,8 +349,8 @@ export default function FilterBar({ totalCount }) {
                         style={{
                           width: "100%",
                           textAlign: "left",
-                          padding: "11px 16px",
-                          fontSize: "13px",
+                          padding: "12px 16px",
+                          fontSize: "14px",
                           fontFamily: "var(--font-body)",
                           color:
                             currentSort === option.value
@@ -462,8 +462,8 @@ function CategoryPill({ cat, active, onClick }) {
       onClick={onClick}
       style={{
         flexShrink: 0,
-        padding: "5px 14px",
-        fontSize: "12px",
+        padding: "7px 14px",
+        fontSize: "13px",
         fontFamily: "var(--font-body)",
         fontWeight: active ? 500 : 400,
         letterSpacing: "0.03em",
@@ -520,7 +520,7 @@ function FilterPanel({
         <span
           className="font-body"
           style={{
-            fontSize: "13px",
+            fontSize: "14px",
             fontWeight: 500,
             color: "var(--color-foreground)",
             letterSpacing: "0.05em",
@@ -535,7 +535,7 @@ function FilterPanel({
               onClose();
             }}
             style={{
-              fontSize: "11px",
+              fontSize: "13px",
               fontFamily: "var(--font-body)",
               color: "var(--color-muted)",
               background: "none",
@@ -571,10 +571,10 @@ function FilterPanel({
         <p
           className="font-body"
           style={{
-            fontSize: "11px",
+            fontSize: "13px",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "var(--color-subtle)",
+            color: "var(--color-muted)",
             marginBottom: "0.75rem",
           }}
         >
@@ -592,8 +592,8 @@ function FilterPanel({
               }
               aria-pressed={currentPrice === range.value}
               style={{
-                padding: "6px 12px",
-                fontSize: "12px",
+                padding: "8px 14px",
+                fontSize: "13px",
                 fontFamily: "var(--font-body)",
                 color:
                   currentPrice === range.value
@@ -620,10 +620,10 @@ function FilterPanel({
         <p
           className="font-body"
           style={{
-            fontSize: "11px",
+            fontSize: "13px",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "var(--color-subtle)",
+            color: "var(--color-muted)",
             marginBottom: "0.75rem",
           }}
         >
@@ -672,7 +672,7 @@ function FilterPanel({
           <p
             className="font-body"
             style={{
-              fontSize: "11px",
+              fontSize: "13px",
               color: "var(--color-muted)",
               marginTop: "0.5rem",
             }}
@@ -682,11 +682,11 @@ function FilterPanel({
               onClick={() => setParam("colour", "")}
               style={{
                 marginLeft: "6px",
-                color: "var(--color-subtle)",
+                color: "var(--color-muted)",
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                fontSize: "11px",
+                fontSize: "14px",
               }}
             >
               ×
@@ -700,10 +700,10 @@ function FilterPanel({
         <p
           className="font-body"
           style={{
-            fontSize: "11px",
+            fontSize: "13px",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "var(--color-subtle)",
+            color: "var(--color-muted)",
             marginBottom: "0.75rem",
           }}
         >
@@ -716,9 +716,9 @@ function FilterPanel({
               onClick={() => setParam("size", currentSize === sz ? "" : sz)}
               aria-pressed={currentSize === sz}
               style={{
-                minWidth: "40px",
-                padding: "6px 10px",
-                fontSize: "12px",
+                minWidth: "44px",
+                padding: "8px 12px",
+                fontSize: "13px",
                 fontFamily: "var(--font-body)",
                 color:
                   currentSize === sz
@@ -746,8 +746,8 @@ function FilterPanel({
         style={{
           width: "100%",
           marginTop: "1.5rem",
-          padding: "12px",
-          fontSize: "13px",
+          padding: "14px",
+          fontSize: "14px",
           fontFamily: "var(--font-body)",
           fontWeight: 500,
           letterSpacing: "0.08em",
@@ -782,8 +782,8 @@ function ToggleChip({ active, onClick, icon, label }) {
         display: "flex",
         alignItems: "center",
         gap: "5px",
-        padding: "6px 12px",
-        fontSize: "12px",
+        padding: "8px 14px",
+        fontSize: "13px",
         fontFamily: "var(--font-body)",
         fontWeight: active ? 500 : 400,
         color: active ? "var(--color-background)" : "var(--color-muted)",

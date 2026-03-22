@@ -20,7 +20,32 @@ export async function POST(request) {
     }
 
     // ── 2. Recalculate totals server-side (never trust client) ─
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const variantIds = items.map((i) => i.variantId).filter(Boolean);
+    if (variantIds.length !== items.length) {
+      return NextResponse.json({ error: "Invalid cart items." }, { status: 400 });
+    }
+
+    const { data: variantRows, error: variantFetchError } = await supabaseAdmin
+      .from("product_variants")
+      .select("id, price")
+      .in("id", variantIds);
+
+    if (variantFetchError) {
+      console.error("Variant fetch error:", variantFetchError);
+      return NextResponse.json({ error: "Failed to verify cart prices." }, { status: 500 });
+    }
+
+    const priceMap = new Map(variantRows.map((v) => [v.id, v.price]));
+
+    const missingVariant = items.some((item) => !priceMap.has(item.variantId));
+    if (missingVariant) {
+      return NextResponse.json({ error: "Invalid cart items." }, { status: 400 });
+    }
+
+    const subtotal = items.reduce(
+      (sum, item) => sum + (priceMap.get(item.variantId) ?? 0) * item.quantity,
+      0
+    );
     const shipping = calculateShipping(address.country);
     const vat = calculateVAT(subtotal, address.country);
     const total = subtotal + shipping + vat;
@@ -65,7 +90,7 @@ export async function POST(request) {
       title: item.title,
       size: item.size ?? null,
       colour: item.colour ?? null,
-      price: item.price,
+      price: priceMap.get(item.variantId),
       quantity: item.quantity,
     }));
 

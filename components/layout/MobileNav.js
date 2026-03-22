@@ -71,7 +71,7 @@ export default function MobileNav() {
 
         {/* Links */}
         <div className="flex-1 overflow-y-auto px-6 py-8">
-          <p className="font-body text-xs tracking-[0.15em] uppercase text-subtle mb-4">Shop</p>
+          <p className="font-body text-sm tracking-[0.15em] uppercase text-subtle mb-4">Shop</p>
           <ul className="space-y-1 mb-10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
@@ -105,7 +105,7 @@ export default function MobileNav() {
 
         {/* Footer */}
         <div className="px-6 py-6 border-t border-border">
-          <p className="font-body text-xs text-subtle">
+          <p className="font-body text-sm text-subtle">
             © {new Date().getFullYear()} AIE Fashionz Ltd
           </p>
         </div>

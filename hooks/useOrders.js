@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 export function useOrders() {
   return useQuery({
     queryKey: ["orders"],
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
     queryFn: async () => {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -31,6 +33,8 @@ export function useOrders() {
 export function useOrder(orderId) {
   return useQuery({
     queryKey: ["orders", orderId],
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
     queryFn: async () => {
       const supabase = createClient();
       const { data, error } = await supabase

@@ -94,7 +94,7 @@ export default async function ReviewList({ productId, productTitle }) {
             <span style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-foreground)" }}>
               {avgRating}
             </span>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)" }}>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)" }}>
               ({count} review{count !== 1 ? "s" : ""})
             </span>
           </div>
@@ -110,7 +110,7 @@ export default async function ReviewList({ productId, productTitle }) {
               <p style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-foreground)", marginBottom: "6px" }}>
                 No reviews yet
               </p>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)" }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)" }}>
                 Be the first to review this product after your purchase.
               </p>
             </div>
@@ -120,7 +120,7 @@ export default async function ReviewList({ productId, productTitle }) {
               <div style={{ marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "6px" }}>
                 {tally.map(({ star, count: c }) => (
                   <div key={star} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-muted)", width: "32px", flexShrink: 0 }}>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-muted)", width: "36px", flexShrink: 0 }}>
                       {star}★
                     </span>
                     <div style={{ flex: 1, height: "6px", backgroundColor: "var(--color-border)", borderRadius: "3px", overflow: "hidden" }}>
@@ -133,7 +133,7 @@ export default async function ReviewList({ productId, productTitle }) {
                         }}
                       />
                     </div>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-muted)", width: "20px", flexShrink: 0 }}>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-muted)", width: "24px", flexShrink: 0 }}>
                       {c}
                     </span>
                   </div>
@@ -155,21 +155,21 @@ export default async function ReviewList({ productId, productTitle }) {
                       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <StarDisplay rating={review.rating} size={14} />
                         {review.is_verified && (
-                          <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--color-success)", border: "1px solid var(--color-success)", padding: "2px 7px" }}>
+                          <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--color-success)", border: "1px solid var(--color-success)", padding: "3px 8px" }}>
                             Verified purchase
                           </span>
                         )}
                       </div>
-                      <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-subtle)", flexShrink: 0 }}>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)", flexShrink: 0 }}>
                         {new Date(review.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                       </span>
                     </div>
                     {review.title && (
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", fontWeight: 600, color: "var(--color-foreground)", marginBottom: "6px" }}>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", fontWeight: 600, color: "var(--color-foreground)", marginBottom: "6px" }}>
                         {review.title}
                       </p>
                     )}
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-muted)", lineHeight: 1.75 }}>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)", lineHeight: 1.8 }}>
                       {review.body}
                     </p>
                   </div>
@@ -182,24 +182,24 @@ export default async function ReviewList({ productId, productTitle }) {
         {/* ── Right: write a review ── */}
         <div>
           <div style={{ border: "1px solid var(--color-border)", padding: "1.5rem" }}>
-            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-muted)", marginBottom: "1.25rem" }}>
+            <h3 style={{ fontFamily: "var(--font-body)", fontSize: "13px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-muted)", marginBottom: "1.25rem" }}>
               {existingReview ? "Edit your review" : "Write a review"}
             </h3>
 
             {!user ? (
               <div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)", lineHeight: 1.7, marginBottom: "1rem" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)", lineHeight: 1.75, marginBottom: "1rem" }}>
                   You must be signed in and have purchased this item to leave a review.
                 </p>
                 <a
                   href="/auth/login?redirect=/shop"
-                  style={{ display: "inline-block", padding: "11px 24px", backgroundColor: "var(--color-gold)", color: "var(--color-foreground)", fontFamily: "var(--font-body)", fontSize: "12px", letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}
+                  style={{ display: "inline-block", padding: "12px 28px", backgroundColor: "var(--color-gold)", color: "var(--color-foreground)", fontFamily: "var(--font-body)", fontSize: "14px", letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}
                 >
                   Sign in to review
                 </a>
               </div>
             ) : !canReview ? (
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)", lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)", lineHeight: 1.75 }}>
                 Reviews are only available to customers who have purchased and received this product.
               </p>
             ) : (

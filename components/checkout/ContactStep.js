@@ -21,16 +21,17 @@ export default function ContactStep({ defaultValues, onNext }) {
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate className="space-y-5">
       <div className="grid grid-cols-2 gap-4">
-        <Field label="First name" error={errors.firstName?.message}>
-          <input {...register("firstName")} className={inputCls(errors.firstName)} placeholder="Jane" />
+        <Field id="firstName" label="First name" error={errors.firstName?.message}>
+          <input id="firstName" {...register("firstName")} className={inputCls(errors.firstName)} placeholder="Jane" />
         </Field>
-        <Field label="Last name" error={errors.lastName?.message}>
-          <input {...register("lastName")} className={inputCls(errors.lastName)} placeholder="Smith" />
+        <Field id="lastName" label="Last name" error={errors.lastName?.message}>
+          <input id="lastName" {...register("lastName")} className={inputCls(errors.lastName)} placeholder="Smith" />
         </Field>
       </div>
 
-      <Field label="Email address" error={errors.email?.message}>
+      <Field id="email" label="Email address" error={errors.email?.message}>
         <input
+          id="email"
           {...register("email")}
           type="email"
           className={inputCls(errors.email)}
@@ -39,8 +40,9 @@ export default function ContactStep({ defaultValues, onNext }) {
         />
       </Field>
 
-      <Field label="Phone (optional)" error={errors.phone?.message}>
+      <Field id="phone" label="Phone (optional)" error={errors.phone?.message}>
         <input
+          id="phone"
           {...register("phone")}
           type="tel"
           className={inputCls(errors.phone)}
@@ -56,18 +58,18 @@ export default function ContactStep({ defaultValues, onNext }) {
 
 /* ── Shared sub-components ─────────────────────────── */
 
-export function Field({ label, error, children }) {
+export function Field({ id, label, error, children }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="font-body text-xs tracking-wide text-muted uppercase">{label}</label>
+      <label htmlFor={id} className="font-body text-sm tracking-wide text-muted uppercase">{label}</label>
       {children}
-      {error && <p className="font-body text-xs text-error">{error}</p>}
+      {error && <p className="font-body text-sm text-error">{error}</p>}
     </div>
   );
 }
 
 export function inputCls(error) {
-  return `w-full h-11 px-3 font-body text-sm text-foreground bg-surface border ${
+  return `w-full h-12 px-4 font-body text-base text-foreground bg-surface border ${
     error ? "border-error" : "border-border"
   } focus:outline-none focus:border-foreground transition-colors`;
 }
@@ -76,7 +78,7 @@ export function StepButton({ label }) {
   return (
     <button
       type="submit"
-      className="w-full py-4 mt-2 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors"
+      className="w-full py-4 mt-2 font-body text-base tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors"
     >
       {label}
     </button>

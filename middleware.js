@@ -39,15 +39,18 @@ export async function middleware(request) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Protect /admin/* — redirect unauthenticated users to login
-  if (pathname.startsWith("/admin") && !user) {
-    const loginUrl = new URL("/auth/login", request.url);
-    loginUrl.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(loginUrl);
+  // Protect /admin/* — check auth AND admin role
+  if (pathname.startsWith("/admin")) {
+    if (!user) {
+      const loginUrl = new URL("/auth/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+    // Enforce admin role at the middleware level — layout is not a sufficient guard
+    if (user.app_metadata?.role !== "admin") {
+      return NextResponse.redirect(new URL("/?error=unauthorized", request.url));
+    }
   }
-
-  // Admin role check is done inside admin layout/pages via server-side Supabase query
-  // (avoids storing role in JWT claims for now)
 
   // Expose pathname to server components via header
   supabaseResponse.headers.set("x-pathname", pathname);

@@ -69,10 +69,11 @@ export default function ReviewForm({ productId, productTitle, orderId, existingR
       </div>
 
       <div>
-        <label style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-muted)", display: "block", marginBottom: "6px" }}>
+        <label htmlFor="review-title" style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-muted)", display: "block", marginBottom: "6px" }}>
           Review title (optional)
         </label>
         <input
+          id="review-title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -91,10 +92,11 @@ export default function ReviewForm({ productId, productTitle, orderId, existingR
       </div>
 
       <div>
-        <label style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-muted)", display: "block", marginBottom: "6px" }}>
+        <label htmlFor="review-body" style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-muted)", display: "block", marginBottom: "6px" }}>
           Your review *
         </label>
         <textarea
+          id="review-body"
           required
           rows={4}
           value={body}

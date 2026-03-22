@@ -3,23 +3,26 @@ import { createClient } from "@/lib/supabase/client";
 
 const QUERY_KEY = ["wishlist"];
 
-async function getUser() {
-  const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
+// Single module-level client — avoids creating a new instance per click
+let _supabase;
+function getSupabase() {
+  if (!_supabase) _supabase = createClient();
+  return _supabase;
 }
 
 /**
- * Returns the current user's wishlist product slugs.
+ * Returns the current user's wishlist product IDs.
  */
 export function useWishlist() {
   return useQuery({
     queryKey: QUERY_KEY,
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
     queryFn: async () => {
-      const user = await getUser();
+      const supabase = getSupabase();
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) return [];
 
-      const supabase = createClient();
       const { data, error } = await supabase
         .from("wishlist")
         .select("product_id")
@@ -48,10 +51,10 @@ export function useToggleWishlist() {
 
   return useMutation({
     mutationFn: async (productId) => {
-      const user = await getUser();
+      const supabase = getSupabase();
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Sign in to save items to your wishlist.");
 
-      const supabase = createClient();
       const current = queryClient.getQueryData(QUERY_KEY) ?? [];
       const isWishlisted = current.includes(productId);
 

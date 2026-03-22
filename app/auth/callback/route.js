@@ -9,7 +9,9 @@ import { cookies } from "next/headers";
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/account";
+  // Validate next is a relative path to prevent open redirect
+  const rawNext = searchParams.get("next") ?? "/account";
+  const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/account";
   const error = searchParams.get("error");
 
   if (error) {

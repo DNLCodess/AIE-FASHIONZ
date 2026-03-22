@@ -30,32 +30,37 @@ UK-based luxury multi-category fashion e-commerce. Global market. Mobile-first. 
 
 ### Colours (CSS variables — defined in globals.css @theme)
 
+**These are the canonical variable names. Use exactly these in all code.**
+
 ```
 Light mode:
-  --color-bg-base:        #FDFBF7   (warm ivory — page background)
-  --color-surface:        #FFFFFF   (cards, modals, drawers)
-  --color-surface-raised: #F8F5F2   (hover states, subtle contrast)
-  --color-text-primary:   #1C1C1A   (headings, body)
-  --color-text-secondary: #6B6A66   (labels, captions)
-  --color-text-muted:     #A8A7A3   (placeholders, disabled)
-  --color-border:         #E8E5E0   (dividers, input borders)
-  --color-gold:           #D4AF37   (CTAs, badges, prices, accents)
-  --color-gold-hover:     #BF9B2F   (gold button hover)
-  --color-gold-subtle:    #F7F0D8   (gold-tinted section backgrounds)
-  --color-error:          #C0392B
-  --color-success:        #2D7A47
+  --color-background:     #FDFBF7   (warm ivory — page background)    → Tailwind: bg-background / text-background
+  --color-surface:        #FFFFFF   (cards, modals, drawers)           → bg-surface
+  --color-surface-raised: #F8F5F2   (hover states, subtle contrast)    → bg-surface-raised
+  --color-foreground:     #1C1C1A   (headings, body text)              → text-foreground
+  --color-muted:          #555553   (labels, captions)                 → text-muted
+  --color-subtle:         #888784   (placeholders, disabled)           → text-subtle
+  --color-border:         #E8E5E0   (dividers, input borders)          → border-border
+  --color-gold:           #D4AF37   (CTAs, badges, prices, accents)    → bg-gold / text-gold
+  --color-gold-dark:      #BF9B2F   (gold button hover)               → bg-gold-dark / hover:bg-gold-dark
+  --color-gold-light:     #F7F0D8   (gold-tinted backgrounds, blur placeholder) → bg-gold-light
+  --color-error:          #C0392B                                      → text-error / border-error
+  --color-success:        #2D7A47                                      → text-success
 
 Dark mode ([data-theme="dark"]):
-  --color-bg-base:        #121212
+  --color-background:     #121212
   --color-surface:        #1E1E1E
   --color-surface-raised: #2A2A2A
-  --color-text-primary:   #F5F5F5
-  --color-text-secondary: #A0A0A0
-  --color-text-muted:     #6B6B6B
+  --color-foreground:     #F5F5F5
+  --color-muted:          #B8B8B8
+  --color-subtle:         #888888
   --color-border:         #2E2E2E
   --color-gold:           #D4AF37
-  --color-gold-hover:     #E0C07A
+  --color-gold-dark:      #E0C07A
 ```
+
+> **Do not use** the old names `--color-bg-base`, `--color-text-primary`, `--color-text-secondary`,
+> `--color-text-muted`, `--color-gold-hover`, or `--color-gold-subtle` — they do not exist in globals.css.
 
 ### Typography
 
@@ -181,7 +186,7 @@ middleware.js       — protects /account/* and /admin/*
 - Zod schemas live alongside their form component
 - All currency values stored in pence/kobo (integers) — display layer handles formatting
 - Slugs: lowercase, hyphenated, unique — generated from title on product create
-- Images uploaded to Supabase Storage bucket `product-images` — public CDN URL stored in DB
+- Images stored in Cloudinary — `secure_url` stored in DB (format: `https://res.cloudinary.com/<cloud>/image/upload/...`)
 - All admin mutations go through API routes — never call service role client from browser
 - Webhook routes: always verify signature (Stripe: `stripe.webhooks.constructEvent`, Paystack: HMAC SHA512)
 

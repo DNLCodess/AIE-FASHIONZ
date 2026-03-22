@@ -8,11 +8,13 @@ const STATUSES = ["pending", "processing", "shipped", "delivered", "cancelled", 
 export default function OrderStatusSelect({ orderId, currentStatus }) {
   const [status, setStatus] = useState(currentStatus);
   const [saving, setSaving] = useState(false);
+  const [statusError, setStatusError] = useState(null);
   const router = useRouter();
 
   const handleChange = async (e) => {
     const newStatus = e.target.value;
     setSaving(true);
+    setStatusError(null);
 
     const res = await fetch(`/api/admin/orders/${orderId}`, {
       method: "PATCH",
@@ -24,25 +26,30 @@ export default function OrderStatusSelect({ orderId, currentStatus }) {
       setStatus(newStatus);
       router.refresh();
     } else {
-      alert("Failed to update order status.");
+      setStatusError("Failed to update order status.");
     }
 
     setSaving(false);
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <select
-        value={status}
-        onChange={handleChange}
-        disabled={saving}
-        className="h-9 px-3 font-body text-sm border border-border bg-surface focus:outline-none focus:border-foreground disabled:opacity-60 cursor-pointer capitalize"
-      >
-        {STATUSES.map((s) => (
-          <option key={s} value={s} className="capitalize">{s}</option>
-        ))}
-      </select>
-      {saving && <span className="font-body text-xs text-muted">Saving…</span>}
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-2">
+        <select
+          value={status}
+          onChange={handleChange}
+          disabled={saving}
+          className="h-9 px-3 font-body text-sm border border-border bg-surface focus:outline-none focus:border-foreground disabled:opacity-60 cursor-pointer capitalize"
+        >
+          {STATUSES.map((s) => (
+            <option key={s} value={s} className="capitalize">{s}</option>
+          ))}
+        </select>
+        {saving && <span className="font-body text-xs text-muted">Saving…</span>}
+      </div>
+      {statusError && (
+        <p className="font-body text-xs text-error">{statusError}</p>
+      )}
     </div>
   );
 }

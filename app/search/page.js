@@ -1,8 +1,9 @@
 import { searchProducts } from "@/lib/api/products";
 import SearchResultsView from "@/components/search/SearchResultsView";
 
-export function generateMetadata({ searchParams }) {
-  const q = searchParams?.q ?? "";
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const q = params?.q ?? "";
   return {
     title: q ? `Search: "${q}"` : "Search",
     description: q ? `Search results for "${q}" at AIE Fashionz` : "Search our collections",

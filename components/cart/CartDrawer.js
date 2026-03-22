@@ -48,8 +48,8 @@ export default function CartDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-border">
           <div className="flex items-center gap-2 text-muted">
-            <ShoppingBag size={18} />
-            <span className="font-body text-sm tracking-wide text-foreground">
+            <ShoppingBag size={20} />
+            <span className="font-body text-base tracking-wide text-foreground">
               Cart
               {totalItems > 0 && <span className="text-muted"> ({totalItems})</span>}
             </span>
@@ -68,8 +68,8 @@ export default function CartDrawer() {
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 px-6 text-center">
               <ShoppingBag size={40} className="text-subtle" />
-              <p className="font-heading text-base text-muted">Your cart is empty</p>
-              <p className="font-body text-sm text-subtle">
+              <p className="font-heading text-lg text-muted">Your cart is empty</p>
+              <p className="font-body text-base text-subtle">
                 Discover our collections and find something you love.
               </p>
               <Link
@@ -99,12 +99,12 @@ export default function CartDrawer() {
         {items.length > 0 && (
           <div className="px-6 py-6 space-y-4 border-t border-border">
             <div className="flex items-center justify-between">
-              <span className="font-body text-sm text-muted">Subtotal</span>
+              <span className="font-body text-base text-muted">Subtotal</span>
               <span className="font-heading text-lg text-foreground">
                 {formatCurrency(subtotal, currency)}
               </span>
             </div>
-            <p className="font-body text-xs text-subtle">
+            <p className="font-body text-sm text-subtle">
               Shipping and taxes calculated at checkout.
             </p>
             <Link

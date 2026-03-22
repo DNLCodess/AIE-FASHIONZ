@@ -12,7 +12,7 @@ export default function StepIndicator({ currentStep }) {
           <div key={label} className="flex items-center">
             <div className="flex flex-col items-center gap-1.5">
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center font-body text-[11px] font-medium transition-colors duration-200 ${
+                className={`w-8 h-8 rounded-none flex items-center justify-center font-body text-sm font-medium transition-colors duration-200 ${
                   isComplete
                     ? "bg-gold text-foreground"
                     : isCurrent
@@ -23,7 +23,7 @@ export default function StepIndicator({ currentStep }) {
                 {isComplete ? "✓" : stepNum}
               </div>
               <span
-                className={`font-body text-[10px] tracking-wide uppercase hidden sm:block ${
+                className={`font-body text-xs tracking-wide uppercase hidden sm:block ${
                   isCurrent ? "text-foreground" : "text-muted"
                 }`}
               >

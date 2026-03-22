@@ -161,11 +161,11 @@ export default function ProductCard({ product }) {
               <span
                 className="font-body"
                 style={{
-                  fontSize: "12px",
+                  fontSize: "14px",
                   fontWeight: 600,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "var(--color-text-secondary)",
+                  color: "var(--color-muted)",
                 }}
               >
                 Sold Out
@@ -223,7 +223,7 @@ export default function ProductCard({ product }) {
               top: "10px",
               right: "10px",
               zIndex: 10,
-              padding: "7px",
+              padding: "8px",
               backgroundColor: "rgba(253,251,247,0.92)",
               backdropFilter: "blur(4px)",
               border: "none",
@@ -235,7 +235,7 @@ export default function ProductCard({ product }) {
             }}
           >
             <Heart
-              size={13}
+              size={16}
               style={{
                 color: isWishlisted
                   ? "var(--color-gold)"
@@ -275,7 +275,7 @@ export default function ProductCard({ product }) {
                     <span
                       className="font-body"
                       style={{
-                        fontSize: "11px",
+                        fontSize: "13px",
                         fontWeight: 600,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
@@ -287,7 +287,7 @@ export default function ProductCard({ product }) {
                     <button
                       onClick={handleCancelPick}
                       style={{
-                        padding: "2px",
+                        padding: "4px",
                         background: "none",
                         border: "none",
                         cursor: "pointer",
@@ -295,7 +295,7 @@ export default function ProductCard({ product }) {
                       }}
                       aria-label="Cancel"
                     >
-                      <X size={13} />
+                      <X size={15} />
                     </button>
                   </div>
                   <div
@@ -306,9 +306,9 @@ export default function ProductCard({ product }) {
                         key={sz}
                         onClick={(e) => handleSizeClick(e, sz)}
                         style={{
-                          minWidth: "36px",
-                          padding: "6px 10px",
-                          fontSize: "12px",
+                          minWidth: "40px",
+                          padding: "8px 12px",
+                          fontSize: "13px",
                           fontFamily: "var(--font-body)",
                           fontWeight: selectedSize === sz ? 600 : 500,
                           color:
@@ -332,10 +332,10 @@ export default function ProductCard({ product }) {
                   <p
                     className="font-body"
                     style={{
-                      fontSize: "11px",
+                      fontSize: "13px",
                       fontWeight: 500,
-                      color: "var(--color-text-secondary)",
-                      marginTop: "7px",
+                      color: "var(--color-muted)",
+                      marginTop: "8px",
                     }}
                   >
                     <Link
@@ -370,13 +370,13 @@ export default function ProductCard({ product }) {
                   }}
                 >
                   <ShoppingBag
-                    size={13}
+                    size={16}
                     style={{ color: "var(--color-gold)" }}
                   />
                   <span
                     className="font-body"
                     style={{
-                      fontSize: "13px",
+                      fontSize: "14px",
                       fontWeight: 500,
                       color: "var(--color-background)",
                       letterSpacing: "0.05em",
@@ -420,13 +420,13 @@ export default function ProductCard({ product }) {
                   }
                 >
                   <ShoppingBag
-                    size={13}
+                    size={16}
                     style={{ color: "var(--color-gold)" }}
                   />
                   <span
                     className="font-body"
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       fontWeight: 600,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
@@ -461,11 +461,11 @@ export default function ProductCard({ product }) {
             <p
               className="font-body uppercase truncate"
               style={{
-                fontSize: "10px",
-                letterSpacing: "0.18em",
+                fontSize: "12px",
+                letterSpacing: "0.16em",
                 fontWeight: 600,
-                color: "var(--color-text-secondary)",
-                marginBottom: "5px",
+                color: "var(--color-muted)",
+                marginBottom: "6px",
               }}
             >
               {product.categories.name}
@@ -475,10 +475,10 @@ export default function ProductCard({ product }) {
           <h3
             className="font-body line-clamp-2 leading-snug"
             style={{
-              fontSize: "14px",
+              fontSize: "15px",
               fontWeight: 500,
               color: "var(--color-foreground)",
-              marginBottom: "7px",
+              marginBottom: "8px",
             }}
           >
             {product.title}
@@ -497,14 +497,14 @@ export default function ProductCard({ product }) {
             >
               <span
                 className="font-heading"
-                style={{ fontSize: "1.05rem", fontWeight: 600, color: "var(--color-gold)" }}
+                style={{ fontSize: "1.15rem", fontWeight: 600, color: "var(--color-gold)" }}
               >
                 {formatCurrency(product.base_price)}
               </span>
               {isOnSale && (
                 <span
                   className="font-body line-through"
-                  style={{ fontSize: "13px", color: "var(--color-text-secondary)" }}
+                  style={{ fontSize: "14px", color: "var(--color-muted)" }}
                 >
                   {formatCurrency(product.compare_price)}
                 </span>
@@ -519,7 +519,7 @@ export default function ProductCard({ product }) {
                   <span
                     key={sz}
                     className="font-body"
-                    style={{ fontSize: "10px", fontWeight: 500, color: "var(--color-text-secondary)" }}
+                    style={{ fontSize: "12px", fontWeight: 500, color: "var(--color-muted)" }}
                   >
                     {sz}
                   </span>
@@ -538,10 +538,10 @@ function Badge({ text, bg, color, opacity = 1 }) {
     <span
       className="font-body uppercase"
       style={{
-        fontSize: "10px",
+        fontSize: "11px",
         fontWeight: 700,
         letterSpacing: "0.1em",
-        padding: "4px 8px",
+        padding: "4px 9px",
         backgroundColor: bg,
         color,
         opacity,

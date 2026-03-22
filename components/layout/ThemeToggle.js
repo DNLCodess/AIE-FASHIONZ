@@ -47,7 +47,7 @@ export default function ThemeToggle({ scrolled = false }) {
         background: "none",
         border: "none",
         cursor: "pointer",
-        borderRadius: "9999px",
+        borderRadius: "2px",
         // Matches the exact same colour logic as every other header icon
         color: hovered
           ? scrolled

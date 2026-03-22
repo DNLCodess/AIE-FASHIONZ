@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "plus.unsplash.com" },
-      // Supabase storage CDN (add your project ref when live)
+      // Cloudinary CDN
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      // Supabase storage CDN (keep for auth avatars / misc)
       { protocol: "https", hostname: "*.supabase.co" },
     ],
   },

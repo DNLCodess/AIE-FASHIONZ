@@ -94,7 +94,7 @@ export default function ProfileForm({ user }) {
             <input
               value={user.email}
               disabled
-              className="w-full h-11 px-3 font-body text-sm text-muted bg-surface-raised border border-border cursor-not-allowed"
+              className="w-full h-12 px-4 font-body text-base text-muted bg-surface-raised border border-border cursor-not-allowed"
             />
           </Field>
 
@@ -107,7 +107,7 @@ export default function ProfileForm({ user }) {
           <button
             type="submit"
             disabled={profileForm.formState.isSubmitting}
-            className="px-8 py-3 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
+            className="px-8 py-3.5 font-body text-base tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
           >
             {profileForm.formState.isSubmitting ? "Saving…" : "Save Changes"}
           </button>
@@ -149,7 +149,7 @@ export default function ProfileForm({ user }) {
           <button
             type="submit"
             disabled={passwordForm.formState.isSubmitting}
-            className="px-8 py-3 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
+            className="px-8 py-3.5 font-body text-base tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
           >
             {passwordForm.formState.isSubmitting ? "Updating…" : "Update Password"}
           </button>

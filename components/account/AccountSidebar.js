@@ -31,7 +31,7 @@ export default function AccountSidebar({ user }) {
           <Link
             key={href}
             href={href}
-            className={`flex items-center gap-3 px-4 py-3 font-body text-sm transition-colors ${
+            className={`flex items-center gap-3 px-4 py-3.5 font-body text-base transition-colors ${
               active
                 ? "bg-surface-raised text-foreground border-l-2 border-gold"
                 : "text-muted hover:text-foreground hover:bg-surface-raised"
@@ -44,10 +44,10 @@ export default function AccountSidebar({ user }) {
       })}
 
       <div className="pt-4 border-t border-border mt-4">
-        <p className="px-4 font-body text-xs text-muted mb-2 truncate">{user.email}</p>
+        <p className="px-4 font-body text-sm text-muted mb-2 truncate">{user.email}</p>
         <button
           onClick={handleSignOut}
-          className="flex items-center gap-3 px-4 py-3 w-full font-body text-sm text-muted hover:text-error transition-colors text-left"
+          className="flex items-center gap-3 px-4 py-3.5 w-full font-body text-base text-muted hover:text-error transition-colors text-left"
         >
           <LogOut size={16} />
           Sign out

@@ -3,6 +3,27 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import supabaseAdmin from "@/lib/supabase/admin";
 import { generateSlug } from "@/lib/utils";
+import { z } from "zod";
+
+const variantSchema = z.object({
+  size: z.string().optional(),
+  colour: z.string().optional(),
+  stock: z.number().int().min(0),
+  additional_price: z.number().int().min(0).default(0),
+});
+
+const productSchema = z.object({
+  title: z.string().min(1).max(300),
+  description: z.string().optional(),
+  category_id: z.string().uuid(),
+  base_price: z.number().int().positive(),
+  compare_price: z.number().int().positive().optional(),
+  images: z.array(z.string().url()).optional(),
+  materials: z.string().optional(),
+  is_published: z.boolean().optional(),
+  slug: z.string().optional(),
+  variants: z.array(variantSchema).optional(),
+});
 
 async function assertAdmin(request) {
   const cookieStore = await cookies();
@@ -21,7 +42,13 @@ export async function POST(request) {
   if (!user) return NextResponse.json({ error: "Forbidden." }, { status: 403 });
 
   const body = await request.json();
-  const { variants, ...productData } = body;
+
+  const parsed = productSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid product data." }, { status: 400 });
+  }
+
+  const { variants, ...productData } = parsed.data;
 
   const slug = productData.slug || generateSlug(productData.title);
 
@@ -33,13 +60,16 @@ export async function POST(request) {
 
   if (error) {
     console.error("Product insert:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to create product." }, { status: 500 });
   }
 
   if (variants?.length) {
     const variantRows = variants.map((v) => ({ ...v, product_id: product.id }));
     const { error: varErr } = await supabaseAdmin.from("product_variants").insert(variantRows);
-    if (varErr) console.error("Variant insert:", varErr);
+    if (varErr) {
+      console.error("Variant insert:", varErr);
+      return NextResponse.json({ error: "Failed to create variants." }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ id: product.id }, { status: 201 });

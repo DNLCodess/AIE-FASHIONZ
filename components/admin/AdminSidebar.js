@@ -25,7 +25,7 @@ function SidebarNav({ pathname, onSignOut, onNavigate }) {
               key={href}
               href={href}
               onClick={onNavigate}
-              className={`flex items-center gap-3 px-3 py-2.5 font-body text-sm transition-colors rounded-sm ${
+              className={`flex items-center gap-3 px-3 py-3 font-body text-sm transition-colors rounded-sm ${
                 active
                   ? "bg-gold/10 text-foreground"
                   : "text-muted hover:text-foreground hover:bg-surface-raised"
@@ -41,7 +41,7 @@ function SidebarNav({ pathname, onSignOut, onNavigate }) {
       <div className="p-2 border-t border-border">
         <button
           onClick={onSignOut}
-          className="flex items-center gap-3 px-3 py-2.5 w-full font-body text-sm text-muted hover:text-error transition-colors rounded-sm"
+          className="flex items-center gap-3 px-3 py-3 w-full font-body text-sm text-muted hover:text-error transition-colors rounded-sm"
         >
           <LogOut size={15} />
           Sign out
@@ -106,7 +106,7 @@ export default function AdminSidebar() {
             <span className="font-heading text-base tracking-[0.15em] uppercase text-foreground">
               AIE
             </span>
-            <span className="ml-1.5 font-body text-[10px] tracking-[0.2em] uppercase text-muted">
+            <span className="ml-1.5 font-body text-xs tracking-[0.2em] uppercase text-muted">
               Admin
             </span>
           </div>

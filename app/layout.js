@@ -8,6 +8,7 @@ import MobileNav from "@/components/layout/MobileNav";
 import CartDrawer from "@/components/cart/CartDrawer";
 import SearchModal from "@/components/search/SearchModal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import CookieBanner from "@/components/layout/CookieBanner";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -103,6 +104,12 @@ export default async function RootLayout({ children }) {
     return (
       <html lang="en" data-theme={theme} className={fontClasses}>
         <body style={bodyStyle} className="min-h-screen antialiased">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-gold focus:text-foreground focus:px-4 focus:py-2"
+          >
+            Skip to content
+          </a>
           <Providers initialTheme={theme}>{children}</Providers>
         </body>
       </html>
@@ -112,14 +119,21 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" data-theme={theme} className={fontClasses}>
       <body style={bodyStyle} className="min-h-screen flex flex-col antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-gold focus:text-foreground focus:px-4 focus:py-2"
+        >
+          Skip to content
+        </a>
         <Providers initialTheme={theme}>
           <Header />
           <MobileNav />
           <CartDrawer />
           <SearchModal />
           <WhatsAppButton />
-          <main className="flex-1 pt-16 md:pt-20">{children}</main>
+          <main id="main-content" className="flex-1 pt-16 md:pt-20">{children}</main>
           <Footer />
+          <CookieBanner />
         </Providers>
       </body>
     </html>

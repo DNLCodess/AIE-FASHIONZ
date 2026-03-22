@@ -17,8 +17,6 @@ const NAV_LINKS = [
   { label: "Body Shapers", href: "/shop/body-shapers" },
 ];
 
-const MD = 768;
-
 // Each mobile icon button = 10px padding + icon + 10px padding = 39px
 // ThemeToggle (39) + Search (39) + Cart (39) = 117px + 2px gaps = ~120px
 // Add 16px buffer for safety = 136px
@@ -26,17 +24,9 @@ const SIDE_WIDTH = "136px";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const { openCart, openMobileNav, openSearch } = useUiStore();
   const totalItems = useCartStore(selectTotalItems);
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < MD);
-    checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 80);
@@ -58,7 +48,6 @@ export default function Header() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_e, session) => {
@@ -89,118 +78,66 @@ export default function Header() {
       }}
     >
       <div className="container">
-        {isMobile ? (
-          /* ── MOBILE: strict 3-column grid ─────────────────────
-             Left and right columns are IDENTICAL fixed widths.
-             Logo is in the middle flex:1 column, centred.
-             The logo can never touch either side.
-          ──────────────────────────────────────────────────────── */
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `${SIDE_WIDTH} 1fr ${SIDE_WIDTH}`,
-              alignItems: "center",
-              height: scrolled ? "60px" : "68px",
-              transition: "height 350ms ease",
-            }}
-          >
-            {/* Col 1 — hamburger, left-aligned */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <button
-                onClick={openMobileNav}
-                aria-label="Open menu"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "10px",
-                  marginLeft: "-10px",
-                  color: scrolled
-                    ? "var(--color-foreground)"
-                    : "rgba(255,255,255,0.9)",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "color 200ms ease",
-                }}
-              >
-                <Menu size={22} />
-              </button>
-            </div>
-
-            {/* Col 2 — logo, centred within this column */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-              }}
-            >
-              <Link
-                href="/"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(0.9rem, 3.8vw, 1.2rem)",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                  textDecoration: "none",
-                  color: scrolled
-                    ? "var(--color-foreground)"
-                    : "rgba(255,255,255,0.96)",
-                  transition: "color 350ms ease",
-                }}
-              >
-                AIE Fashionz
-              </Link>
-            </div>
-
-            {/* Col 3 — icons, right-aligned */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                gap: "0px",
-              }}
-            >
-              <ThemeToggle scrolled={scrolled} />
-              <SearchButton
-                openSearch={openSearch}
-                scrolled={scrolled}
-                size={20}
-              />
-              <CartButton
-                totalItems={totalItems}
-                openCart={openCart}
-                scrolled={scrolled}
-                size={20}
-              />
-            </div>
-          </div>
-        ) : (
-          /* ── DESKTOP ─────────────────────────────────────────── */
+        {/* ── MOBILE layout: strict 3-column grid ──────────────────────────
+            Left and right columns are IDENTICAL fixed widths.
+            Logo is in the middle flex:1 column, centred.
+            Hidden on md and above.
+        ─────────────────────────────────────────────────────────────────── */}
+        <div
+          className="flex md:hidden"
+          style={{
+            display: "grid",
+            gridTemplateColumns: `${SIDE_WIDTH} 1fr ${SIDE_WIDTH}`,
+            alignItems: "center",
+            height: scrolled ? "60px" : "68px",
+            transition: "height 350ms ease",
+          }}
+        >
+          {/* Col 1 — hamburger, left-aligned */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              height: scrolled ? "68px" : "76px",
-              transition: "height 350ms ease",
+              justifyContent: "flex-start",
+            }}
+          >
+            <button
+              onClick={openMobileNav}
+              aria-label="Open menu"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px",
+                marginLeft: "-10px",
+                color: scrolled
+                  ? "var(--color-foreground)"
+                  : "rgba(255,255,255,0.9)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                transition: "color 200ms ease",
+              }}
+            >
+              <Menu size={22} />
+            </button>
+          </div>
+
+          {/* Col 2 — logo, centred within this column */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "hidden",
             }}
           >
             <Link
               href="/"
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "1.35rem",
-                letterSpacing: "0.22em",
+                fontSize: "clamp(0.9rem, 3.8vw, 1.2rem)",
+                letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
                 textDecoration: "none",
@@ -208,83 +145,136 @@ export default function Header() {
                   ? "var(--color-foreground)"
                   : "rgba(255,255,255,0.96)",
                 transition: "color 350ms ease",
-                flexShrink: 0,
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-gold)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = scrolled
-                  ? "var(--color-foreground)"
-                  : "rgba(255,255,255,0.96)")
-              }
             >
               AIE Fashionz
             </Link>
+          </div>
+
+          {/* Col 3 — icons, right-aligned */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: "0px",
+            }}
+          >
+            <ThemeToggle scrolled={scrolled} />
+            <SearchButton
+              openSearch={openSearch}
+              scrolled={scrolled}
+              size={20}
+            />
+            <CartButton
+              totalItems={totalItems}
+              openCart={openCart}
+              scrolled={scrolled}
+              size={20}
+            />
+          </div>
+        </div>
+
+        {/* ── DESKTOP layout ────────────────────────────────────────────────
+            Hidden below md.
+        ─────────────────────────────────────────────────────────────────── */}
+        <div
+          className="hidden md:flex"
+          style={{
+            alignItems: "center",
+            height: scrolled ? "68px" : "76px",
+            transition: "height 350ms ease",
+          }}
+        >
+          <Link
+            href="/"
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "1.35rem",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+              textDecoration: "none",
+              color: scrolled
+                ? "var(--color-foreground)"
+                : "rgba(255,255,255,0.96)",
+              transition: "color 350ms ease",
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "var(--color-gold)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = scrolled
+                ? "var(--color-foreground)"
+                : "rgba(255,255,255,0.96)")
+            }
+          >
+            AIE Fashionz
+          </Link>
+
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: "2rem",
+              marginLeft: "2.5rem",
+            }}
+          >
+            <nav
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.75rem",
+              }}
+              aria-label="Main navigation"
+            >
+              {NAV_LINKS.map((link) => (
+                <NavLink key={link.href} href={link.href} scrolled={scrolled}>
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
 
             <div
               style={{
-                display: "flex",
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "flex-end",
-                gap: "2rem",
-                marginLeft: "2.5rem",
+                width: "1px",
+                height: "18px",
+                backgroundColor: scrolled
+                  ? "var(--color-border)"
+                  : "rgba(255,255,255,0.18)",
+                transition: "background-color 350ms ease",
+                flexShrink: 0,
               }}
+            />
+
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "2px" }}
             >
-              <nav
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1.75rem",
-                }}
-                aria-label="Main navigation"
-              >
-                {NAV_LINKS.map((link) => (
-                  <NavLink key={link.href} href={link.href} scrolled={scrolled}>
-                    {link.label}
-                  </NavLink>
-                ))}
-              </nav>
-
-              <div
-                style={{
-                  width: "1px",
-                  height: "18px",
-                  backgroundColor: scrolled
-                    ? "var(--color-border)"
-                    : "rgba(255,255,255,0.18)",
-                  transition: "background-color 350ms ease",
-                  flexShrink: 0,
-                }}
+              <ThemeToggle scrolled={scrolled} />
+              <SearchButton
+                openSearch={openSearch}
+                scrolled={scrolled}
+                size={19}
               />
-
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "2px" }}
+              <HeaderIconButton
+                href="/account"
+                aria-label="My account"
+                scrolled={scrolled}
               >
-                <ThemeToggle scrolled={scrolled} />
-                <SearchButton
-                  openSearch={openSearch}
-                  scrolled={scrolled}
-                  size={19}
-                />
-                <HeaderIconButton
-                  href="/account"
-                  aria-label="My account"
-                  scrolled={scrolled}
-                >
-                  {user ? <UserAvatar user={user} /> : <User size={19} />}
-                </HeaderIconButton>
-                <CartButton
-                  totalItems={totalItems}
-                  openCart={openCart}
-                  scrolled={scrolled}
-                  size={19}
-                />
-              </div>
+                {user ? <UserAvatar user={user} /> : <User size={19} />}
+              </HeaderIconButton>
+              <CartButton
+                totalItems={totalItems}
+                openCart={openCart}
+                scrolled={scrolled}
+                size={19}
+              />
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
@@ -299,7 +289,7 @@ function NavLink({ href, children, scrolled }) {
       href={href}
       style={{
         fontFamily: "var(--font-body)",
-        fontSize: "13.5px",
+        fontSize: "15px",
         fontWeight: 500,
         letterSpacing: "0.04em",
         whiteSpace: "nowrap",
@@ -310,7 +300,7 @@ function NavLink({ href, children, scrolled }) {
             : "rgba(255,255,255,1)"
           : scrolled
             ? "var(--color-muted)"
-            : "rgba(255,255,255,0.82)",
+            : "rgba(255,255,255,0.92)",
         transition: "color 200ms ease",
       }}
       onMouseEnter={() => setHovered(true)}
@@ -414,14 +404,14 @@ function CartButton({ totalItems, openCart, scrolled, size = 19 }) {
             position: "absolute",
             top: "5px",
             right: "5px",
-            minWidth: "16px",
-            height: "16px",
+            minWidth: "18px",
+            height: "18px",
             padding: "0 3px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: "9999px",
-            fontSize: "10px",
+            borderRadius: "2px",
+            fontSize: "11px",
             fontFamily: "var(--font-body)",
             fontWeight: 600,
             backgroundColor: "var(--color-gold)",
@@ -444,13 +434,13 @@ function UserAvatar({ user }) {
   return (
     <span
       style={{
-        width: "22px",
-        height: "22px",
-        borderRadius: "9999px",
+        width: "26px",
+        height: "26px",
+        borderRadius: "2px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontSize: "10px",
+        fontSize: "12px",
         fontFamily: "var(--font-body)",
         fontWeight: 600,
         backgroundColor: "var(--color-gold)",

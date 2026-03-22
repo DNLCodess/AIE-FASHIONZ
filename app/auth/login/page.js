@@ -18,7 +18,9 @@ const schema = z.object({
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") ?? "/account";
+  // Validate redirect is a relative path to prevent open redirect
+  const rawRedirect = searchParams.get("redirect") ?? "/account";
+  const redirect = rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") ? rawRedirect : "/account";
   const urlError = searchParams.get("error");
 
   const [serverError, setServerError] = useState(urlError ? "Authentication failed. Please try again." : null);

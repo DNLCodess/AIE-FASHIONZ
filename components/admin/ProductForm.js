@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
@@ -38,6 +39,7 @@ const schema = z.object({
 
 export default function ProductForm({ product, apiPath, method = "POST" }) {
   const router = useRouter();
+  const [saveError, setSaveError] = useState(null);
 
   const {
     register,
@@ -90,9 +92,11 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
 
     if (!res.ok) {
       const json = await res.json().catch(() => ({}));
-      alert(json.error ?? "Save failed. Please try again.");
+      setSaveError(json.error ?? "Save failed. Please try again.");
       return;
     }
+
+    setSaveError(null);
 
     router.push("/admin/products");
     router.refresh();
@@ -244,21 +248,26 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
       </section>
 
       {/* Submit */}
-      <div className="flex gap-3 pt-2">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="px-8 py-3 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
-        >
-          {isSubmitting ? "Saving…" : product ? "Save Changes" : "Create Product"}
-        </button>
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="px-6 py-3 font-body text-sm tracking-widest uppercase border border-border text-muted hover:text-foreground transition-colors"
-        >
-          Cancel
-        </button>
+      <div className="flex flex-col gap-3 pt-2">
+        {saveError && (
+          <p className="text-error text-sm font-body">{saveError}</p>
+        )}
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-8 py-3 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors disabled:opacity-60"
+          >
+            {isSubmitting ? "Saving…" : product ? "Save Changes" : "Create Product"}
+          </button>
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="px-6 py-3 font-body text-sm tracking-widest uppercase border border-border text-muted hover:text-foreground transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </form>
   );

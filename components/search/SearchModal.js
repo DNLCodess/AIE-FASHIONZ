@@ -77,11 +77,11 @@ function SectionLabel({ children }) {
   return (
     <p style={{
       fontFamily: "var(--font-body)",
-      fontSize: "10px",
+      fontSize: "12px",
       letterSpacing: "0.12em",
       textTransform: "uppercase",
-      color: "var(--color-subtle)",
-      padding: "14px 16px 5px",
+      color: "var(--color-muted)",
+      padding: "14px 16px 6px",
     }}>
       {children}
     </p>
@@ -111,7 +111,7 @@ function SuggestionRow({ label, query, icon, onClick, active, onHover }) {
       <span style={{ color: "var(--color-subtle)", flexShrink: 0, display: "flex" }}>{icon}</span>
       <span style={{
         fontFamily: "var(--font-body)",
-        fontSize: "13.5px",
+        fontSize: "15px",
         color: "var(--color-foreground)",
         flex: 1,
         textAlign: "left",
@@ -149,10 +149,10 @@ function CategoryRow({ category, query, active, onHover }) {
       </span>
       <span style={{
         fontFamily: "var(--font-body)",
-        fontSize: "11px",
+        fontSize: "13px",
         color: "var(--color-muted)",
         border: "1px solid var(--color-border)",
-        padding: "2px 7px",
+        padding: "3px 8px",
         flexShrink: 0,
       }}>
         Browse →
@@ -200,7 +200,7 @@ function ProductRow({ product, query, active, onHover, onClick }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <p style={{
           fontFamily: "var(--font-body)",
-          fontSize: "13.5px",
+          fontSize: "15px",
           fontWeight: 500,
           color: "var(--color-foreground)",
           overflow: "hidden",
@@ -212,13 +212,13 @@ function ProductRow({ product, query, active, onHover, onClick }) {
         </p>
         <p style={{
           fontFamily: "var(--font-body)",
-          fontSize: "11px",
+          fontSize: "13px",
           color: "var(--color-muted)",
           marginBottom: "3px",
         }}>
           {CATEGORY_LABELS[product.category_slug] ?? product.category_slug}
         </p>
-        <p style={{ fontFamily: "var(--font-heading)", fontSize: "13px", color: "var(--color-gold)" }}>
+        <p style={{ fontFamily: "var(--font-heading)", fontSize: "15px", color: "var(--color-gold)" }}>
           {formatCurrency(product.base_price, "GBP")}
         </p>
       </div>
@@ -383,7 +383,7 @@ export default function SearchModal() {
             style={{
               flex: 1, border: "none", outline: "none",
               background: "transparent",
-              fontFamily: "var(--font-body)", fontSize: "15px",
+              fontFamily: "var(--font-body)", fontSize: "16px",
               color: "var(--color-foreground)",
             }}
           />
@@ -401,8 +401,8 @@ export default function SearchModal() {
             </button>
           )}
           <kbd style={{
-            fontFamily: "var(--font-body)", fontSize: "10px",
-            color: "var(--color-subtle)",
+            fontFamily: "var(--font-body)", fontSize: "11px",
+            color: "var(--color-muted)",
             border: "1px solid var(--color-border)",
             borderRadius: "3px", padding: "2px 6px", flexShrink: 0,
           }}>
@@ -438,16 +438,16 @@ export default function SearchModal() {
                     padding: "14px 16px 5px",
                   }}>
                     <p style={{
-                      fontFamily: "var(--font-body)", fontSize: "10px",
+                      fontFamily: "var(--font-body)", fontSize: "12px",
                       letterSpacing: "0.12em", textTransform: "uppercase",
-                      color: "var(--color-subtle)", margin: 0,
+                      color: "var(--color-muted)", margin: 0,
                     }}>
                       Recent
                     </p>
                     <button
                       onClick={() => { clearRecent(); setRecent([]); }}
                       style={{
-                        fontFamily: "var(--font-body)", fontSize: "11px",
+                        fontFamily: "var(--font-body)", fontSize: "13px",
                         color: "var(--color-muted)", background: "none",
                         border: "none", cursor: "pointer",
                       }}
@@ -477,7 +477,7 @@ export default function SearchModal() {
                       >
                         <Clock size={13} style={{ color: "var(--color-subtle)", flexShrink: 0 }} />
                         <span style={{
-                          fontFamily: "var(--font-body)", fontSize: "13.5px",
+                          fontFamily: "var(--font-body)", fontSize: "15px",
                           color: "var(--color-foreground)",
                         }}>
                           {term}
@@ -582,7 +582,7 @@ export default function SearchModal() {
                   }}>
                     No results for &ldquo;{query}&rdquo;
                   </p>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)" }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)" }}>
                     Try a different term or browse our collections.
                   </p>
                 </div>
@@ -605,7 +605,7 @@ export default function SearchModal() {
                 cursor: "pointer", padding: 0,
               }}
             >
-              <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)" }}>
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)" }}>
                 See all results for{" "}
                 <strong style={{ color: "var(--color-foreground)" }}>&ldquo;{query}&rdquo;</strong>
                 {instantData?.total > products.length && (
@@ -631,13 +631,13 @@ export default function SearchModal() {
           ].map(({ keys, label }) => (
             <span key={label} style={{
               display: "flex", alignItems: "center", gap: "4px",
-              fontFamily: "var(--font-body)", fontSize: "10px",
-              color: "var(--color-subtle)",
+              fontFamily: "var(--font-body)", fontSize: "12px",
+              color: "var(--color-muted)",
             }}>
               {keys.map((k) => (
                 <kbd key={k} style={{
                   border: "1px solid var(--color-border)",
-                  borderRadius: "3px", padding: "1px 5px", fontSize: "10px",
+                  borderRadius: "3px", padding: "1px 5px", fontSize: "11px",
                 }}>
                   {k}
                 </kbd>

@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 
 const SHOP_LINKS = [
@@ -48,23 +47,14 @@ export default function Footer() {
           <div>
             <Link
               href="/"
+              className="font-heading inline-block mb-2 transition-colors duration-200"
               style={{
-                display: "inline-block",
-                marginBottom: "0.5rem",
-                fontFamily: "var(--font-heading)",
                 fontSize: "1.25rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 color: "var(--color-gold)",
-                transition: "color 200ms ease",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-gold-dark)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--color-gold)")
-              }
             >
               AIE Fashionz
             </Link>
@@ -72,10 +62,10 @@ export default function Footer() {
             <p
               className="font-body"
               style={{
-                fontSize: "11px",
+                fontSize: "13px",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(255,255,255,0.55)",
                 marginBottom: "1.5rem",
               }}
             >
@@ -85,9 +75,9 @@ export default function Footer() {
             <p
               className="font-body"
               style={{
-                fontSize: "14px",
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.5)",
+                fontSize: "15px",
+                lineHeight: 1.75,
+                color: "rgba(255,255,255,0.75)",
                 marginBottom: "2rem",
                 maxWidth: "26ch",
               }}
@@ -104,19 +94,12 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="font-body"
+                  className="font-body transition-colors duration-200 hover:text-gold"
                   style={{
-                    fontSize: "12px",
-                    color: "rgba(255,255,255,0.3)",
+                    fontSize: "14px",
+                    color: "rgba(255,255,255,0.6)",
                     textDecoration: "none",
-                    transition: "color 200ms ease",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--color-gold)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "rgba(255,255,255,0.3)")
-                  }
                 >
                   {s.label}
                 </a>
@@ -129,10 +112,10 @@ export default function Footer() {
             <h3
               className="font-body"
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(255,255,255,0.55)",
                 marginBottom: "1.5rem",
                 fontWeight: 500,
               }}
@@ -153,10 +136,10 @@ export default function Footer() {
             <h3
               className="font-body"
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(255,255,255,0.55)",
                 marginBottom: "1.5rem",
                 fontWeight: 500,
               }}
@@ -177,10 +160,10 @@ export default function Footer() {
             <h3
               className="font-body"
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(255,255,255,0.55)",
                 marginBottom: "1.5rem",
                 fontWeight: 500,
               }}
@@ -213,14 +196,14 @@ export default function Footer() {
       >
         <p
           className="font-body"
-          style={{ fontSize: "12px", color: "rgba(255,255,255,0.22)" }}
+          style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
         >
           AIE Fashionz Ltd · Company No. [XXXXXXXX] · Registered in England
           &amp; Wales
         </p>
         <p
           className="font-body"
-          style={{ fontSize: "12px", color: "rgba(255,255,255,0.22)" }}
+          style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
         >
           © {new Date().getFullYear()} AIE Fashionz. All rights reserved.
         </p>
@@ -233,19 +216,12 @@ function FooterLink({ href, children }) {
   return (
     <Link
       href={href}
-      className="font-body"
+      className="font-body transition-colors duration-200 hover:text-[rgba(255,255,255,0.97)]"
       style={{
-        fontSize: "14px",
-        color: "rgba(255,255,255,0.5)",
+        fontSize: "15px",
+        color: "rgba(255,255,255,0.78)",
         textDecoration: "none",
-        transition: "color 200ms ease",
       }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.color = "rgba(255,255,255,0.9)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
-      }
     >
       {children}
     </Link>

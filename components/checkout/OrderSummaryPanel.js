@@ -31,19 +31,19 @@ export default function OrderSummaryPanel({ items, subtotal, countryCode = "GB",
                 <div className="w-full h-full bg-surface" />
               )}
               {/* Qty badge */}
-              <span className="absolute -top-1.5 -right-1.5 w-4.5 h-4.5 rounded-full bg-foreground text-background font-body text-[9px] flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-foreground text-background font-body text-[11px] flex items-center justify-center">
                 {item.quantity}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-body text-xs text-foreground line-clamp-2 leading-snug">{item.title}</p>
+              <p className="font-body text-sm text-foreground line-clamp-2 leading-snug">{item.title}</p>
               {(item.size || item.colour) && (
-                <p className="font-body text-[11px] text-muted mt-0.5">
+                <p className="font-body text-xs text-muted mt-0.5">
                   {[item.size, item.colour].filter(Boolean).join(" · ")}
                 </p>
               )}
             </div>
-            <span className="font-heading text-xs text-foreground shrink-0">
+            <span className="font-heading text-sm text-foreground shrink-0">
               {formatCurrency(item.price * item.quantity, currency)}
             </span>
           </li>
@@ -53,7 +53,7 @@ export default function OrderSummaryPanel({ items, subtotal, countryCode = "GB",
       <div className="h-px bg-border" />
 
       {/* Totals */}
-      <div className="space-y-2.5 font-body text-sm">
+      <div className="space-y-2.5 font-body text-base">
         <div className="flex justify-between">
           <span className="text-muted">Subtotal</span>
           <span className="text-foreground">{formatCurrency(subtotal, currency)}</span>
