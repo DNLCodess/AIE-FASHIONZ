@@ -242,6 +242,18 @@ body {
   }
 }
 
+/* ── Quick-add slide up ────────────────────────────────── */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* ── Font utilities (Tailwind v4 doesn't auto-generate font-family) ── */
 .font-heading {
   font-family: var(--font-heading);

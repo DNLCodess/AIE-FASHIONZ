@@ -1,5 +1,5 @@
 import { Instrument_Serif, Instrument_Sans } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import "./globals.css";
 import Providers from "@/lib/providers";
 import Header from "@/components/layout/Header";
@@ -87,20 +87,31 @@ export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
   const theme = cookieStore.get("theme")?.value === "dark" ? "dark" : "light";
 
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? "";
+  const isAdmin = pathname.startsWith("/admin");
+
+  const fontClasses = `${instrumentSerif.variable} ${instrumentSans.variable}`;
+  const bodyStyle = {
+    fontFamily: "var(--font-body)",
+    backgroundColor: "var(--color-background)",
+    color: "var(--color-foreground)",
+  };
+
+  // Admin pages get their own layout — no storefront chrome
+  if (isAdmin) {
+    return (
+      <html lang="en" data-theme={theme} className={fontClasses}>
+        <body style={bodyStyle} className="min-h-screen antialiased">
+          <Providers initialTheme={theme}>{children}</Providers>
+        </body>
+      </html>
+    );
+  }
+
   return (
-    <html
-      lang="en"
-      data-theme={theme}
-      className={`${instrumentSerif.variable} ${instrumentSans.variable}`}
-    >
-      <body
-        style={{
-          fontFamily: "var(--font-body)",
-          backgroundColor: "var(--color-background)",
-          color: "var(--color-foreground)",
-        }}
-        className="min-h-screen flex flex-col antialiased"
-      >
+    <html lang="en" data-theme={theme} className={fontClasses}>
+      <body style={bodyStyle} className="min-h-screen flex flex-col antialiased">
         <Providers initialTheme={theme}>
           <Header />
           <MobileNav />

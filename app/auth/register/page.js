@@ -14,6 +14,9 @@ const schema = z.object({
   firstName: z.string().min(1, "Required"),
   lastName: z.string().min(1, "Required"),
   email: z.string().email("Enter a valid email"),
+  gender: z.enum(["female", "male", "non-binary", "prefer-not-to-say"], {
+    required_error: "Please select an option",
+  }),
   password: z.string().min(8, "Password must be at least 8 characters"),
   confirm: z.string(),
 }).refine((d) => d.password === d.confirm, {
@@ -31,7 +34,7 @@ export default function RegisterPage() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async ({ firstName, lastName, email, password }) => {
+  const onSubmit = async ({ firstName, lastName, email, gender, password }) => {
     setServerError(null);
     setLoading(true);
 
@@ -40,7 +43,7 @@ export default function RegisterPage() {
       email,
       password,
       options: {
-        data: { first_name: firstName, last_name: lastName },
+        data: { first_name: firstName, last_name: lastName, gender },
         emailRedirectTo: `${window.location.origin}/auth/callback?next=/account`,
       },
     });
@@ -104,6 +107,20 @@ export default function RegisterPage() {
             <input {...register("lastName")} className={inputCls(errors.lastName)} placeholder="Smith" />
           </Field>
         </div>
+
+        <Field label="Gender" error={errors.gender?.message}>
+          <select
+            {...register("gender")}
+            className={inputCls(errors.gender)}
+            defaultValue=""
+          >
+            <option value="" disabled>Select…</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="non-binary">Non-binary</option>
+            <option value="prefer-not-to-say">Prefer not to say</option>
+          </select>
+        </Field>
 
         <Field label="Email address" error={errors.email?.message}>
           <input

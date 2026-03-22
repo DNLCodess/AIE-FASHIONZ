@@ -49,6 +49,8 @@ export async function middleware(request) {
   // Admin role check is done inside admin layout/pages via server-side Supabase query
   // (avoids storing role in JWT claims for now)
 
+  // Expose pathname to server components via header
+  supabaseResponse.headers.set("x-pathname", pathname);
   return supabaseResponse;
 }
 

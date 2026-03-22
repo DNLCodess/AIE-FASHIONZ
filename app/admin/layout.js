@@ -37,7 +37,7 @@ export default async function AdminLayout({ children }) {
 
       <div className="flex-1 min-w-0">
         {/* Top bar */}
-        <div className="h-14 border-b border-border flex items-center px-6 gap-4 bg-surface sticky top-0 z-10">
+        <div className="h-14 border-b border-border flex items-center pl-14 pr-6 md:px-6 gap-4 bg-surface sticky top-0 z-10">
           <span className="font-body text-xs tracking-[0.3em] uppercase text-muted">
             AIE Fashionz
           </span>

@@ -33,7 +33,7 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "var(--color-foreground)" }}>
+    <footer style={{ backgroundColor: "#0C0C0A" }}>
       {/* Main grid */}
       <div
         className="container"

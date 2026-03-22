@@ -11,48 +11,96 @@ export const metadata = {
 };
 
 export default async function ShopPage({ searchParams }) {
-  const { sort, size, colour } = await searchParams;
-  const products = await getProducts({ sort, size, colour });
+  const { sort, size, colour, category, price, onSale, inStock } = await searchParams;
+  const products = await getProducts({ sort, size, colour, category, price, onSale, inStock });
 
   return (
     <>
+      {/* ── Page header ───────────────────────────────────── */}
       <section
         style={{
           backgroundColor: "var(--color-background)",
           borderBottom: "1px solid var(--color-border)",
+          paddingTop: "7rem",
+          paddingBottom: "2.5rem",
         }}
-        className="pt-32 pb-16 md:pt-40 md:pb-20"
       >
         <div className="container">
-          <Reveal>
-            <p
-              className="font-body text-[10px] tracking-[0.35em] uppercase mb-4"
-              style={{ color: "var(--color-subtle)" }}
-            >
-              All Collections
-            </p>
-          </Reveal>
-          <Reveal delay={1}>
-            <h1
-              className="font-heading leading-none"
-              style={{
-                color: "var(--color-foreground)",
-                fontSize: "clamp(2.8rem, 7vw, 6rem)",
-              }}
-            >
-              Shop
-            </h1>
-          </Reveal>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            <div>
+              <Reveal>
+                <p
+                  className="font-body uppercase"
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "0.35em",
+                    fontWeight: 500,
+                    color: "var(--color-text-secondary)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  All Collections
+                </p>
+              </Reveal>
+              <Reveal delay={1}>
+                <h1
+                  className="font-heading leading-none"
+                  style={{
+                    color: "var(--color-foreground)",
+                    fontSize: "clamp(2.2rem, 5vw, 4rem)",
+                  }}
+                >
+                  Shop
+                </h1>
+              </Reveal>
+            </div>
+            <Reveal reveal="fade" delay={2}>
+              <p
+                className="font-body"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  paddingBottom: "0.35rem",
+                }}
+              >
+                {products.length} {products.length === 1 ? "piece" : "pieces"}
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <Suspense fallback={null}>
+      {/* ── Filter bar ────────────────────────────────────── */}
+      <Suspense
+        fallback={
+          <div
+            style={{
+              height: "52px",
+              backgroundColor: "var(--color-surface)",
+              borderBottom: "1px solid var(--color-border)",
+            }}
+          />
+        }
+      >
         <FilterBar totalCount={products.length} />
       </Suspense>
 
+      {/* ── Product grid ──────────────────────────────────── */}
       <div
-        style={{ backgroundColor: "var(--color-background)" }}
-        className="py-14 md:py-20"
+        style={{
+          backgroundColor: "var(--color-background)",
+          paddingTop: "3rem",
+          paddingBottom: "5rem",
+        }}
       >
         <div className="container">
           <ProductGrid
