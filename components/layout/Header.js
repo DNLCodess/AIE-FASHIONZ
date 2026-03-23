@@ -84,9 +84,8 @@ export default function Header() {
             Hidden on md and above.
         ─────────────────────────────────────────────────────────────────── */}
         <div
-          className="flex md:hidden"
+          className="grid md:hidden"
           style={{
-            display: "grid",
             gridTemplateColumns: `${SIDE_WIDTH} 1fr ${SIDE_WIDTH}`,
             alignItems: "center",
             height: scrolled ? "60px" : "68px",

@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS products (
   category_slug text REFERENCES categories(slug) ON UPDATE CASCADE,
   base_price    integer NOT NULL,         -- pence
   compare_price integer,                  -- pence
+  images        jsonb NOT NULL DEFAULT '[]'::jsonb,  -- [{url, alt, is_primary}]
   is_active     boolean NOT NULL DEFAULT true,
   is_featured   boolean NOT NULL DEFAULT false,
   created_at    timestamptz NOT NULL DEFAULT now(),
@@ -55,18 +56,6 @@ CREATE TABLE IF NOT EXISTS product_variants (
 
 CREATE INDEX IF NOT EXISTS idx_variants_product_id ON product_variants(product_id);
 
--- ── product_images ───────────────────────────────────────────
-CREATE TABLE IF NOT EXISTS product_images (
-  id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  product_id uuid NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-  url        text NOT NULL,
-  alt        text,
-  is_primary boolean NOT NULL DEFAULT false,
-  position   integer NOT NULL DEFAULT 0
-);
-
-CREATE INDEX IF NOT EXISTS idx_images_product_id ON product_images(product_id);
-
 -- Auto-update products.updated_at
 CREATE TRIGGER products_updated_at
   BEFORE UPDATE ON products
@@ -76,7 +65,6 @@ CREATE TRIGGER products_updated_at
 ALTER TABLE categories        ENABLE ROW LEVEL SECURITY;
 ALTER TABLE products          ENABLE ROW LEVEL SECURITY;
 ALTER TABLE product_variants  ENABLE ROW LEVEL SECURITY;
-ALTER TABLE product_images    ENABLE ROW LEVEL SECURITY;
 
 -- Public reads
 CREATE POLICY "Public can read categories"
@@ -87,9 +75,6 @@ CREATE POLICY "Public can read active products"
 
 CREATE POLICY "Public can read variants"
   ON product_variants FOR SELECT USING (true);
-
-CREATE POLICY "Public can read images"
-  ON product_images FOR SELECT USING (true);
 
 -- Admins can do everything (service role bypasses RLS entirely)
 

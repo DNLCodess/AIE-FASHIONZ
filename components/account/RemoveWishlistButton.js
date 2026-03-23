@@ -11,13 +11,13 @@ export default function RemoveWishlistButton({ productId }) {
   return (
     <button
       onClick={() =>
-        toggle(productId, { onSuccess: () => router.refresh() })
+        toggle({ productId, remove: true }, { onSuccess: () => router.refresh() })
       }
       disabled={isPending}
       aria-label="Remove from wishlist"
-      className="absolute top-2 right-2 z-10 p-1.5 bg-surface/90 backdrop-blur-sm hover:bg-surface-raised transition-colors disabled:opacity-50"
+      className="absolute top-2 right-2 z-10 p-2.5 bg-surface/90 backdrop-blur-sm hover:bg-surface-raised transition-colors disabled:opacity-50"
     >
-      <X size={12} className="text-muted" />
+      <X size={16} className="text-muted" />
     </button>
   );
 }

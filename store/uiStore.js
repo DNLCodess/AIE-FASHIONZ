@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+let _toastId = 0;
+
 const useUiStore = create(
   persist(
     (set) => ({
@@ -8,6 +10,7 @@ const useUiStore = create(
       mobileNavOpen: false,
       searchOpen: false,
       currency: "GBP",
+      toasts: [],
 
       openCart: () => set({ cartOpen: true }),
       closeCart: () => set({ cartOpen: false }),
@@ -22,6 +25,17 @@ const useUiStore = create(
       closeSearch: () => set({ searchOpen: false }),
 
       setCurrency: (currency) => set({ currency }),
+
+      /** @param {{ message: string, type?: "cart"|"wishlist"|"error" }} opts */
+      addToast: (opts) => {
+        const id = ++_toastId;
+        set((state) => ({ toasts: [...state.toasts, { id, ...opts }] }));
+        setTimeout(() => {
+          set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) }));
+        }, 3200);
+      },
+      removeToast: (id) =>
+        set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) })),
     }),
     {
       name: "aie-ui",

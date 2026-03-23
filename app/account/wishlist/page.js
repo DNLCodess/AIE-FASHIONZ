@@ -30,32 +30,32 @@ export default async function WishlistPage() {
 
   const productIds = wishlistRows?.map((r) => r.product_id) ?? [];
 
-  // Fetch matching products from mock/Supabase data layer
-  const allProducts = await getProducts();
-  const wishlisted = allProducts.filter((p) => productIds.includes(p.id));
+  const wishlisted = productIds.length
+    ? await getProducts({ ids: productIds })
+    : [];
 
   return (
     <div>
-      <h2 className="font-heading text-lg text-foreground mb-8">
-        Wishlist{wishlisted.length > 0 && <span className="text-muted text-base ml-2">({wishlisted.length})</span>}
+      <h2 className="font-heading text-2xl text-foreground mb-8">
+        Wishlist{wishlisted.length > 0 && <span className="font-body text-base text-muted ml-3">({wishlisted.length})</span>}
       </h2>
 
       {wishlisted.length ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10">
           {wishlisted.map((product) => (
             <WishlistCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
-        <div className="border border-border p-14 text-center">
+        <div className="border border-border px-8 py-14 text-center">
           <div className="w-px h-10 bg-border mx-auto mb-6" />
-          <p className="font-heading text-lg text-muted mb-2">Your wishlist is empty</p>
-          <p className="font-body text-sm text-muted mb-8">
+          <p className="font-heading text-xl text-muted mb-2">Your wishlist is empty</p>
+          <p className="font-body text-base text-muted mb-8">
             Save pieces you love by tapping the heart icon on any product.
           </p>
           <Link
             href="/shop"
-            className="px-10 py-4 font-body text-sm tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors"
+            className="inline-block px-10 py-4 font-body text-base tracking-widest uppercase bg-gold text-foreground hover:bg-gold-dark transition-colors"
           >
             Browse Collections
           </Link>
@@ -72,7 +72,7 @@ function WishlistCard({ product }) {
 
   return (
     <div className="group">
-      <div className="relative aspect-[3/4] overflow-hidden bg-gold-subtle mb-3">
+      <div className="relative aspect-[3/4] overflow-hidden bg-gold-light mb-3">
         <Link href={`/product/${product.slug}`} className="block w-full h-full">
           {primaryImage && (
             // eslint-disable-next-line @next/next/no-img-element
@@ -86,10 +86,10 @@ function WishlistCard({ product }) {
         <RemoveWishlistButton productId={product.id} />
       </div>
       <Link href={`/product/${product.slug}`} className="block">
-        <p className="font-body text-sm text-foreground line-clamp-2 leading-snug mb-1">
+        <p className="font-body text-base text-foreground line-clamp-2 leading-snug mb-1">
           {product.title}
         </p>
-        <p className="font-heading text-sm text-gold">
+        <p className="font-heading text-base text-gold">
           {formatCurrency(product.base_price, currency)}
         </p>
       </Link>

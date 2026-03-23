@@ -5,6 +5,7 @@ import { getProductBySlug, getAllProductSlugs, getRelatedProducts } from "@/lib/
 import { getCategoryBySlug } from "@/lib/api/categories";
 import ProductGallery from "@/components/product/ProductGallery";
 import VariantSelector from "@/components/product/VariantSelector";
+import ProductActions from "@/components/product/ProductActions";
 import ProductGrid from "@/components/product/ProductGrid";
 import Reveal from "@/components/ui/Reveal";
 import JsonLd from "@/components/seo/JsonLd";
@@ -215,8 +216,15 @@ export default async function ProductPage({ params }) {
                 <VariantSelector product={product} />
               </Reveal>
 
-              {/* Delivery & returns */}
+              {/* Wishlist + Share */}
               <Reveal delay={3}>
+                <div className="mt-4">
+                  <ProductActions product={product} />
+                </div>
+              </Reveal>
+
+              {/* Delivery & returns */}
+              <Reveal delay={4}>
                 <div className="mt-8 space-y-3 border-t border-border pt-8">
                   {[
                     { icon: Truck, text: "Free UK delivery on orders over £150" },
@@ -232,7 +240,7 @@ export default async function ProductPage({ params }) {
               </Reveal>
 
               {/* Description */}
-              <Reveal delay={4}>
+              <Reveal delay={5}>
                 <div className="mt-8 border-t border-border pt-8">
                   <h2 className="font-body text-[10px] tracking-[0.2em] uppercase text-subtle mb-4">
                     Description
@@ -245,7 +253,7 @@ export default async function ProductPage({ params }) {
 
               {/* Materials & Care */}
               {(product.materials || product.care_instructions) && (
-                <Reveal delay={5}>
+                <Reveal delay={6}>
                   <div className="mt-6 border-t border-border pt-6 space-y-4">
                     {product.materials && (
                       <div>

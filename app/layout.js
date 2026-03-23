@@ -9,6 +9,7 @@ import CartDrawer from "@/components/cart/CartDrawer";
 import SearchModal from "@/components/search/SearchModal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import CookieBanner from "@/components/layout/CookieBanner";
+import ToastContainer from "@/components/ui/ToastContainer";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -131,6 +132,7 @@ export default async function RootLayout({ children }) {
           <CartDrawer />
           <SearchModal />
           <WhatsAppButton />
+          <ToastContainer />
           <main id="main-content" className="flex-1 pt-16 md:pt-20">{children}</main>
           <Footer />
           <CookieBanner />

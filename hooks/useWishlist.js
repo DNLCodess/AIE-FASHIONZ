@@ -50,15 +50,14 @@ export function useToggleWishlist() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (productId) => {
+    // Variables: { productId, remove } — caller decides the action so mutationFn
+    // doesn't read from a cache that onMutate has already optimistically updated.
+    mutationFn: async ({ productId, remove }) => {
       const supabase = getSupabase();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Sign in to save items to your wishlist.");
 
-      const current = queryClient.getQueryData(QUERY_KEY) ?? [];
-      const isWishlisted = current.includes(productId);
-
-      if (isWishlisted) {
+      if (remove) {
         const { error } = await supabase
           .from("wishlist")
           .delete()
@@ -73,13 +72,12 @@ export function useToggleWishlist() {
       }
     },
     // Optimistic update
-    onMutate: async (productId) => {
+    onMutate: async ({ productId, remove }) => {
       await queryClient.cancelQueries({ queryKey: QUERY_KEY });
       const previous = queryClient.getQueryData(QUERY_KEY) ?? [];
-      const isIn = previous.includes(productId);
       queryClient.setQueryData(
         QUERY_KEY,
-        isIn ? previous.filter((id) => id !== productId) : [...previous, productId]
+        remove ? previous.filter((id) => id !== productId) : [...previous, productId]
       );
       return { previous };
     },

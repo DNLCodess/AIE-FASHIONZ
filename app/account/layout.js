@@ -31,7 +31,7 @@ export default async function AccountLayout({ children }) {
       <div className="container">
         {/* Page header */}
         <div className="mb-10 md:mb-14">
-          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted mb-3">
+          <p className="font-body text-xs tracking-[0.3em] uppercase text-muted mb-3">
             My account
           </p>
           <h1
@@ -44,8 +44,10 @@ export default async function AccountLayout({ children }) {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 xl:gap-16 items-start">
-          <AccountSidebar user={user} />
+        <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 xl:gap-16 items-start">
+          <div className="border-b border-border md:border-b-0 pb-6 md:pb-0">
+            <AccountSidebar user={user} />
+          </div>
           <main>{children}</main>
         </div>
       </div>
