@@ -146,7 +146,7 @@ export default function Header() {
                 transition: "color 350ms ease",
               }}
             >
-              AIE Fashionz
+              Aiefashion
             </Link>
           </div>
 
@@ -209,7 +209,7 @@ export default function Header() {
                 : "rgba(255,255,255,0.96)")
             }
           >
-            AIE Fashionz
+            Aiefashion
           </Link>
 
           <div

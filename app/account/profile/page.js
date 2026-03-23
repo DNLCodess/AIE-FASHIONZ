@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import ProfileForm from "@/components/account/ProfileForm";
 
-export const metadata = { title: "Profile | AIE Fashionz" };
+export const metadata = { title: "Profile | Aiefashion" };
 
 export default async function ProfilePage() {
   const cookieStore = await cookies();

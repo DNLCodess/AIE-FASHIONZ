@@ -3,7 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/utils";
 
-export const metadata = { title: "My Orders | AIE Fashionz" };
+export const metadata = { title: "My Orders | Aiefashion" };
 
 export default async function OrdersPage() {
   const cookieStore = await cookies();

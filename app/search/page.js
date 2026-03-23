@@ -6,7 +6,7 @@ export async function generateMetadata({ searchParams }) {
   const q = params?.q ?? "";
   return {
     title: q ? `Search: "${q}"` : "Search",
-    description: q ? `Search results for "${q}" at AIE Fashionz` : "Search our collections",
+    description: q ? `Search results for "${q}" at Aiefashion` : "Search our collections",
   };
 }
 

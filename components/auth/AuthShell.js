@@ -11,7 +11,7 @@ export default function AuthShell({ title, subtitle, children, footer }) {
         href="/"
         className="font-heading text-xl tracking-[0.22em] uppercase text-foreground mb-10 hover:text-gold transition-colors"
       >
-        AIE Fashionz
+        Aiefashion
       </Link>
 
       <div className="w-full max-w-md">

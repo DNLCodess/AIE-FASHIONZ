@@ -1,15 +1,15 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "FAQ | AIE Fashionz — Delivery, Returns & Shopping Questions",
+  title: "FAQ | Aiefashion — Delivery, Returns & Shopping Questions",
   description:
-    "Answers to common questions about AIE Fashionz — delivery times, returns, payment methods, sizing, Nigerian shipping, and more.",
+    "Answers to common questions about Aiefashion — delivery times, returns, payment methods, sizing, Nigerian shipping, and more.",
   alternates: { canonical: "/faq" },
   openGraph: {
-    title: "FAQ | AIE Fashionz",
+    title: "FAQ | Aiefashion",
     description: "Answers to common questions about delivery, returns, payment and more.",
     url: "/faq",
   },
@@ -34,7 +34,7 @@ const FAQS = [
   },
   {
     q: "How do I return an item?",
-    a: "You have 14 days from delivery to return any item in its original condition. Email returns@aiefashionz.com with your order number and we will send you a prepaid return label (UK customers). See our full returns policy for details.",
+    a: "You have 14 days from delivery to return any item in its original condition. Email aiefashionllc@gmail.com with your order number and we will send you a prepaid return label (UK customers). See our full returns policy for details.",
   },
   {
     q: "Are the prices inclusive of VAT?",
@@ -46,11 +46,11 @@ const FAQS = [
   },
   {
     q: "Can I cancel or change my order?",
-    a: "Orders can be cancelled or amended within 1 hour of placing them — contact us immediately at support@aiefashionz.com. After dispatch, standard return procedures apply.",
+    a: "Orders can be cancelled or amended within 1 hour of placing them — contact us immediately at aiefashionllc@gmail.com. After dispatch, standard return procedures apply.",
   },
   {
     q: "Are your products authentic luxury?",
-    a: "Yes. Every product stocked at AIE Fashionz is hand-selected against our quality standard. We source directly from trusted makers and suppliers. No imitations, no compromises.",
+    a: "Yes. Every product stocked at Aiefashion is hand-selected against our quality standard. We source directly from trusted makers and suppliers. No imitations, no compromises.",
   },
   {
     q: "Do you offer gift wrapping?",

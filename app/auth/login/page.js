@@ -50,7 +50,7 @@ export default function LoginPage() {
   return (
     <AuthShell
       title="Welcome back"
-      subtitle="Sign in to your AIE Fashionz account"
+      subtitle="Sign in to your Aiefashion account"
       footer={
         <>
           Don&apos;t have an account?{" "}

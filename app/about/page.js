@@ -1,15 +1,15 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "About AIE Fashionz | Our Story — UK Luxury Fashion Boutique",
+  title: "About Aiefashion | Our Story — UK Luxury Fashion Boutique",
   description:
-    "Discover the story behind AIE Fashionz — a UK-based luxury fashion boutique celebrating African elegance and global style. Premium fabrics, bags, jewellery and occasion wear for the modern woman.",
+    "Discover the story behind Aiefashion — a UK-based luxury fashion boutique celebrating African elegance and global style. Premium fabrics, bags, jewellery and occasion wear for the modern woman.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About AIE Fashionz | Our Story",
+    title: "About Aiefashion | Our Story",
     description:
       "A UK luxury fashion boutique celebrating African elegance and global style. Discover our story.",
     url: "/about",
@@ -20,13 +20,13 @@ export default function AboutPage() {
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About AIE Fashionz",
+    name: "About Aiefashion",
     url: `${SITE_URL}/about`,
     description:
-      "AIE Fashionz is a UK-based luxury fashion boutique for women, specialising in premium fabrics, bags & shoes, jewellery, party wear, children's fashion and body shapers.",
+      "Aiefashion is a UK-based luxury fashion boutique for women, specialising in premium fabrics, bags & shoes, jewellery, party wear, children's fashion and body shapers.",
     mainEntity: {
       "@type": "Organization",
-      name: "AIE Fashionz",
+      name: "Aiefashion",
       url: SITE_URL,
       foundingLocation: { "@type": "Place", addressCountry: "GB" },
       description:
@@ -82,7 +82,7 @@ export default function AboutPage() {
               lineHeight: 1.8,
             }}
           >
-            AIE Fashionz was founded to bring genuine luxury fashion to women
+            Aiefashion was founded to bring genuine luxury fashion to women
             who refuse to compromise — wherever in the world they are.
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function AboutPage() {
               }}
             >
               <p>
-                AIE Fashionz was born from a belief that luxury fashion should feel
+                Aiefashion was born from a belief that luxury fashion should feel
                 personal — not just prestigious. We are a UK-based boutique with roots
                 deeply connected to West African fashion culture, and we bring that
                 richness of colour, fabric and craftsmanship to women across the globe.
@@ -137,7 +137,7 @@ export default function AboutPage() {
                 We serve women who know exactly what they want: quality that lasts,
                 style that turns heads, and a shopping experience that respects their
                 time. Whether you are dressing for a gala in Lagos, a wedding in London,
-                or an everyday moment that deserves to feel special — AIE Fashionz is
+                or an everyday moment that deserves to feel special — Aiefashion is
                 your boutique.
               </p>
             </div>

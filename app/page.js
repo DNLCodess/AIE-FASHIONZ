@@ -11,15 +11,15 @@ import JsonLd from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
+  title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
   description:
-    "AIE Fashionz — the UK's destination for luxury women's fashion. Shop premium fabrics, designer bags & shoes, gold jewellery, party & occasion wear, children's fashion and body shapers. Free UK delivery over £150. Worldwide shipping.",
+    "Aiefashion — the UK's destination for luxury women's fashion. Shop premium fabrics, designer bags & shoes, gold jewellery, party & occasion wear, children's fashion and body shapers. Free UK delivery over £150. Worldwide shipping.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
+    title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
     description:
       "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free UK delivery. Worldwide shipping.",
     url: "/",
@@ -28,12 +28,12 @@ export const metadata = {
         url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90",
         width: 1200,
         height: 630,
-        alt: "AIE Fashionz Luxury Fashion",
+        alt: "Aiefashion Luxury Fashion",
       },
     ],
   },
   twitter: {
-    title: "AIE Fashionz | Luxury Fashion for Women — UK Boutique",
+    title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
     description:
       "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
     images: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90"],
@@ -56,7 +56,7 @@ export default async function HomePage() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "AIE Fashionz",
+    name: "Aiefashion",
     url: SITE_URL,
     description:
       "UK-based luxury fashion boutique for women. Premium fabrics, bags & shoes, jewellery, party wear, children's wear and body shapers. Worldwide delivery.",
@@ -65,15 +65,15 @@ export default async function HomePage() {
       addressCountry: "GB",
     },
     sameAs: [
-      "https://www.instagram.com/aiefashionz",
-      "https://www.facebook.com/aiefashionz",
+      "https://www.instagram.com/aiefashion",
+      "https://www.facebook.com/aiefashion",
     ],
   };
 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "AIE Fashionz",
+    name: "Aiefashion",
     url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
@@ -102,7 +102,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 md:hidden">
           <Image
             src={HERO_A}
-            alt="AIE Fashionz luxury fashion"
+            alt="Aiefashion luxury fashion"
             fill
             priority
             sizes="100vw"
@@ -326,7 +326,7 @@ export default async function HomePage() {
       >
         <Image
           src={EDITORIAL}
-          alt="AIE Fashionz editorial"
+          alt="Aiefashion editorial"
           fill
           sizes="100vw"
           className="object-cover object-center"

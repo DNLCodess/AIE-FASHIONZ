@@ -1,7 +1,7 @@
 import { getAllProductSlugs } from "@/lib/api/products";
 import { getCategories } from "@/lib/api/categories";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export default async function sitemap() {
   const [slugs, categories] = await Promise.all([

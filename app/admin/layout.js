@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export const metadata = {
-  title: "Admin | AIE Fashionz",
+  title: "Admin | Aiefashion",
   robots: { index: false, follow: false },
 };
 
@@ -39,7 +39,7 @@ export default async function AdminLayout({ children }) {
         {/* Top bar */}
         <div className="h-14 border-b border-border flex items-center pl-14 pr-6 md:px-6 gap-4 bg-surface sticky top-0 z-10">
           <span className="font-body text-xs tracking-[0.3em] uppercase text-muted">
-            AIE Fashionz
+            Aiefashion
           </span>
           <span className="text-border">·</span>
           <span className="font-body text-xs text-muted">Admin</span>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Package, CreditCard, RotateCcw, HelpCircle, Send, CheckCircle, AlertCircle } from "lucide-react";
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "447911123456";
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "13014335307";
 
 const ISSUE_TYPES = [
   { value: "payment",  label: "Payment issue",          icon: CreditCard,     desc: "Charge problems, failed payments, refund status" },
@@ -304,7 +304,7 @@ export default function ContactPage() {
 
           {/* WhatsApp CTA */}
           <a
-            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hello AIE Fashionz! I need help with my order.")}`}
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hello Aiefashion! I need help with my order.")}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -334,13 +334,13 @@ export default function ContactPage() {
               Other ways to reach us
             </p>
             {[
-              { label: "General support", email: "support@aiefashionz.com" },
-              { label: "Returns & refunds", email: "returns@aiefashionz.com" },
-              { label: "Wholesale & press", email: "trade@aiefashionz.com" },
-            ].map(({ label, email }) => (
+              { label: "General support", email: "aiefashionllc@gmail.com" },
+              { label: "Returns & refunds", email: "aiefashionllc@gmail.com" },
+              { label: "Phone / WhatsApp", email: "+1 (301) 433-5307", href: "tel:+13014335307" },
+            ].map(({ label, email, href }) => (
               <div key={email} style={{ borderTop: "1px solid var(--color-border)", paddingTop: "1rem" }}>
                 <p style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "var(--color-subtle)", marginBottom: "4px" }}>{label}</p>
-                <a href={`mailto:${email}`} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-gold)", textDecoration: "none" }}>{email}</a>
+                <a href={href || `mailto:${email}`} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-gold)", textDecoration: "none" }}>{email}</a>
               </div>
             ))}
           </div>

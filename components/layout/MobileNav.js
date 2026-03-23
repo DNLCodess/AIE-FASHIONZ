@@ -58,7 +58,7 @@ export default function MobileNav() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-border">
           <span className="font-heading text-lg tracking-[0.2em] uppercase text-foreground">
-            AIE Fashionz
+            Aiefashion
           </span>
           <button
             onClick={closeMobileNav}
@@ -106,7 +106,7 @@ export default function MobileNav() {
         {/* Footer */}
         <div className="px-6 py-6 border-t border-border">
           <p className="font-body text-sm text-subtle">
-            © {new Date().getFullYear()} AIE Fashionz Ltd
+            © {new Date().getFullYear()} Aiefashion
           </p>
         </div>
       </nav>

@@ -82,7 +82,7 @@ export default function RegisterPage() {
   return (
     <AuthShell
       title="Create account"
-      subtitle="Join AIE Fashionz for exclusive access"
+      subtitle="Join Aiefashion for exclusive access"
       footer={
         <>
           Already have an account?{" "}

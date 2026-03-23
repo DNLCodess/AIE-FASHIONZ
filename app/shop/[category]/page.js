@@ -10,7 +10,7 @@ import FilterBar from "@/components/shop/FilterBar";
 import Reveal from "@/components/ui/Reveal";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export async function generateStaticParams() {
   const categories = await getCategories();
@@ -22,15 +22,15 @@ export async function generateMetadata({ params }) {
   const cat = await getCategoryBySlug(category);
   if (!cat) return {};
 
-  const desc = `Shop ${cat.name} at AIE Fashionz — ${cat.description ?? "premium luxury fashion for women"}. Free UK delivery on orders over £150. Worldwide shipping.`;
+  const desc = `Shop ${cat.name} at Aiefashion — ${cat.description ?? "premium luxury fashion for women"}. Free UK delivery on orders over £150. Worldwide shipping.`;
 
   return {
-    title: `${cat.name} | AIE Fashionz`,
+    title: `${cat.name} | Aiefashion`,
     description: desc,
-    keywords: [cat.name, "luxury fashion UK", "women's clothing", "AIE Fashionz", "buy online UK"],
+    keywords: [cat.name, "luxury fashion UK", "women's clothing", "Aiefashion", "buy online UK"],
     alternates: { canonical: `/shop/${category}` },
     openGraph: {
-      title: `${cat.name} | AIE Fashionz`,
+      title: `${cat.name} | Aiefashion`,
       description: desc,
       url: `/shop/${category}`,
       images: cat.hero_image_url
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${cat.name} | AIE Fashionz`,
+      title: `${cat.name} | Aiefashion`,
       description: desc,
       images: cat.hero_image_url ? [cat.hero_image_url] : [],
     },

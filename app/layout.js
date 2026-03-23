@@ -26,17 +26,17 @@ const instrumentSans = Instrument_Sans({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "AIE Fashionz | Luxury Fashion UK",
-    template: "%s | AIE Fashionz",
+    default: "Aiefashion | Luxury Fashion UK",
+    template: "%s | Aiefashion",
   },
   description:
-    "Shop luxury fashion at AIE Fashionz — UK-based women's boutique. Premium fabrics, designer bags & shoes, jewellery, party wear, children's wear and body shapers. Free UK delivery. Worldwide shipping.",
+    "Shop luxury fashion at Aiefashion — UK-based women's boutique. Premium fabrics, designer bags & shoes, jewellery, party wear, children's wear and body shapers. Free UK delivery. Worldwide shipping.",
   keywords: [
     "luxury fashion UK",
     "women's luxury clothing",
@@ -48,11 +48,11 @@ export const metadata = {
     "jewellery UK",
     "body shapers",
     "children's wear UK",
-    "AIE Fashionz",
+    "Aiefashion",
   ],
-  authors: [{ name: "AIE Fashionz", url: SITE_URL }],
-  creator: "AIE Fashionz",
-  publisher: "AIE Fashionz",
+  authors: [{ name: "Aiefashion", url: SITE_URL }],
+  creator: "Aiefashion",
+  publisher: "Aiefashion",
   robots: {
     index: true,
     follow: true,
@@ -64,19 +64,19 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_GB",
-    siteName: "AIE Fashionz",
+    siteName: "Aiefashion",
     url: SITE_URL,
-    title: "AIE Fashionz | Luxury Fashion UK",
+    title: "Aiefashion | Luxury Fashion UK",
     description:
-      "Shop luxury fashion at AIE Fashionz — UK-based women's boutique. Premium fabrics, bags & shoes, jewellery, party wear and more. Worldwide delivery.",
+      "Shop luxury fashion at Aiefashion — UK-based women's boutique. Premium fabrics, bags & shoes, jewellery, party wear and more. Worldwide delivery.",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@aiefashionz",
-    creator: "@aiefashionz",
-    title: "AIE Fashionz | Luxury Fashion UK",
+    site: "@aiefashion",
+    creator: "@aiefashion",
+    title: "Aiefashion | Luxury Fashion UK",
     description:
-      "Shop luxury fashion at AIE Fashionz — UK-based women's boutique. Worldwide delivery.",
+      "Shop luxury fashion at Aiefashion — UK-based women's boutique. Worldwide delivery.",
   },
   verification: {
     // Add your Google Search Console and Bing verification codes here when ready

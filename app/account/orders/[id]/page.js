@@ -6,7 +6,7 @@ import { formatCurrency } from "@/lib/utils";
 import { MessageCircle, Star } from "lucide-react";
 
 export async function generateMetadata({ params }) {
-  return { title: `Order ${(await params).id} | AIE Fashionz` };
+  return { title: `Order ${(await params).id} | Aiefashion` };
 }
 
 export default async function OrderDetailPage({ params }) {

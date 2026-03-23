@@ -1,14 +1,14 @@
 import Link from "next/link";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Shipping & Returns | AIE Fashionz",
+  title: "Shipping & Returns | Aiefashion",
   description:
-    "AIE Fashionz delivery information and 14-day returns policy. Free UK delivery on orders over £75. Worldwide shipping available including Nigeria.",
+    "Aiefashion delivery information and 14-day returns policy. Free UK delivery on orders over £75. Worldwide shipping available including Nigeria.",
   alternates: { canonical: "/shipping-returns" },
   openGraph: {
-    title: "Shipping & Returns | AIE Fashionz",
+    title: "Shipping & Returns | Aiefashion",
     description:
       "Free UK delivery on orders over £75. 14-day returns in line with the UK Consumer Rights Act. Worldwide shipping including Nigeria.",
     url: `${SITE_URL}/shipping-returns`,
@@ -236,10 +236,10 @@ export default function ShippingReturnsPage() {
           <PolicyBlock title="How to return">
             Email{" "}
             <a
-              href="mailto:returns@aiefashionz.com"
+              href="mailto:aiefashionllc@gmail.com"
               style={{ color: "var(--color-gold)" }}
             >
-              returns@aiefashionz.com
+              aiefashionllc@gmail.com
             </a>{" "}
             with your order number and reason for return. We will respond within
             2 business days with return instructions. UK customers will receive a
@@ -286,10 +286,10 @@ export default function ShippingReturnsPage() {
           <strong style={{ color: "var(--color-foreground)" }}>30 days</strong>{" "}
           of receipt at{" "}
           <a
-            href="mailto:support@aiefashionz.com"
+            href="mailto:aiefashionllc@gmail.com"
             style={{ color: "var(--color-gold)" }}
           >
-            support@aiefashionz.com
+            aiefashionllc@gmail.com
           </a>
           . We will arrange collection at no cost and offer a full refund or
           replacement — your choice.
@@ -317,10 +317,10 @@ export default function ShippingReturnsPage() {
           </strong>{" "}
           Email{" "}
           <a
-            href="mailto:returns@aiefashionz.com"
+            href="mailto:aiefashionllc@gmail.com"
             style={{ color: "var(--color-gold)" }}
           >
-            returns@aiefashionz.com
+            aiefashionllc@gmail.com
           </a>{" "}
           or visit our{" "}
           <Link href="/faq" style={{ color: "var(--color-gold)" }}>

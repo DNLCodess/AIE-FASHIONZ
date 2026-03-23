@@ -11,7 +11,7 @@ import Reveal from "@/components/ui/Reveal";
 import JsonLd from "@/components/seo/JsonLd";
 import ReviewList from "@/components/reviews/ReviewList";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export async function generateStaticParams() {
   return getAllProductSlugs();
@@ -28,14 +28,14 @@ export async function generateMetadata({ params }) {
   const desc = `${product.description.slice(0, 130)} Free UK delivery. 14-day returns.`;
 
   return {
-    title: `${product.title} | AIE Fashionz`,
+    title: `${product.title} | Aiefashion`,
     description: desc,
     keywords: [
       product.title,
       "luxury fashion UK",
       "women's clothing",
       product.category_slug.replace(/-/g, " "),
-      "AIE Fashionz",
+      "Aiefashion",
     ],
     alternates: { canonical: `/product/${slug}` },
     openGraph: {
@@ -84,7 +84,7 @@ export default async function ProductPage({ params }) {
     name: product.title,
     description: product.description,
     sku: product.variants?.[0]?.sku ?? product.slug,
-    brand: { "@type": "Brand", name: "AIE Fashionz" },
+    brand: { "@type": "Brand", name: "Aiefashion" },
     category: category?.name ?? product.category_slug,
     image: product.images?.map((img) => img.url) ?? [],
     url: `${SITE_URL}/product/${product.slug}`,
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }) {
       availability: inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
-      seller: { "@type": "Organization", name: "AIE Fashionz" },
+      seller: { "@type": "Organization", name: "Aiefashion" },
       url: `${SITE_URL}/product/${product.slug}`,
       priceValidUntil: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
         .toISOString()

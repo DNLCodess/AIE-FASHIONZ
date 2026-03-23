@@ -25,9 +25,10 @@ const LEGAL_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "WhatsApp", href: "#" },
+  { label: "WhatsApp", href: "https://wa.me/13014335307" },
+  { label: "TikTok", href: "https://www.tiktok.com/@aiefashion" },
+  { label: "Facebook", href: "https://www.facebook.com/aiefashion" },
+  { label: "Instagram", href: "https://www.instagram.com/aiefashion" },
 ];
 
 export default function Footer() {
@@ -56,7 +57,7 @@ export default function Footer() {
                 color: "var(--color-gold)",
               }}
             >
-              AIE Fashionz
+              Aiefashion
             </Link>
 
             <p
@@ -69,7 +70,7 @@ export default function Footer() {
                 marginBottom: "1.5rem",
               }}
             >
-              UK Luxury Fashion
+              Premium Fashion
             </p>
 
             <p
@@ -94,6 +95,8 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-body transition-colors duration-200 hover:text-gold"
                   style={{
                     fontSize: "14px",
@@ -155,7 +158,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Get in Touch */}
           <div>
             <h3
               className="font-body"
@@ -168,9 +171,55 @@ export default function Footer() {
                 fontWeight: 500,
               }}
             >
-              Legal
+              Get in Touch
             </h3>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: "1rem" }}>
+                <p
+                  className="font-body"
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.4)",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  Head Office
+                </p>
+                <span
+                  className="font-body"
+                  style={{ fontSize: "15px", color: "rgba(255,255,255,0.78)" }}
+                >
+                  Lanham, Maryland, USA
+                </span>
+              </li>
+              <li style={{ marginBottom: "0.875rem" }}>
+                <a
+                  href="tel:+13014335307"
+                  className="font-body transition-colors duration-200"
+                  style={{
+                    fontSize: "15px",
+                    color: "rgba(255,255,255,0.78)",
+                    textDecoration: "none",
+                  }}
+                >
+                  +1 (301) 433-5307
+                </a>
+              </li>
+              <li style={{ marginBottom: "1.5rem" }}>
+                <a
+                  href="mailto:aiefashionllc@gmail.com"
+                  className="font-body transition-colors duration-200"
+                  style={{
+                    fontSize: "15px",
+                    color: "rgba(255,255,255,0.78)",
+                    textDecoration: "none",
+                  }}
+                >
+                  aiefashionllc@gmail.com
+                </a>
+              </li>
               {LEGAL_LINKS.map((link) => (
                 <li key={link.href} style={{ marginBottom: "0.875rem" }}>
                   <FooterLink href={link.href}>{link.label}</FooterLink>
@@ -198,14 +247,13 @@ export default function Footer() {
           className="font-body"
           style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
         >
-          AIE Fashionz Ltd · Company No. [XXXXXXXX] · Registered in England
-          &amp; Wales
+          Aiefashion · Online orders only · Worldwide delivery
         </p>
         <p
           className="font-body"
           style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
         >
-          © {new Date().getFullYear()} AIE Fashionz. All rights reserved.
+          © {new Date().getFullYear()} Aiefashion. All rights reserved.
         </p>
       </div>
     </footer>

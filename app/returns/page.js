@@ -1,15 +1,15 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Returns & Refunds Policy | AIE Fashionz — 14-Day Free Returns",
+  title: "Returns & Refunds Policy | Aiefashion — 14-Day Free Returns",
   description:
-    "AIE Fashionz offers free 14-day returns on all UK orders in line with the UK Consumer Rights Act 2015. Read our full returns and refund policy.",
+    "Aiefashion offers free 14-day returns on all UK orders in line with the UK Consumer Rights Act 2015. Read our full returns and refund policy.",
   alternates: { canonical: "/returns" },
   openGraph: {
-    title: "Returns & Refunds Policy | AIE Fashionz",
+    title: "Returns & Refunds Policy | Aiefashion",
     description: "Free 14-day returns on all UK orders. Full returns and refund policy.",
     url: "/returns",
   },
@@ -26,7 +26,7 @@ const SECTIONS = [
   },
   {
     title: "How to start a return",
-    body: "Email us at returns@aiefashionz.com with your order number and the reason for your return. We will respond within 2 business days with return instructions and a prepaid label for UK customers.",
+    body: "Email us at aiefashionllc@gmail.com with your order number and the reason for your return. We will respond within 2 business days with return instructions and a prepaid label for UK customers.",
   },
   {
     title: "Refunds",
@@ -34,7 +34,7 @@ const SECTIONS = [
   },
   {
     title: "Faulty or incorrect items",
-    body: "If you receive a faulty or incorrect item, contact us immediately at support@aiefashionz.com. We will arrange collection at no cost and provide a full refund or replacement at your choice.",
+    body: "If you receive a faulty or incorrect item, contact us immediately at aiefashionllc@gmail.com. We will arrange collection at no cost and provide a full refund or replacement at your choice.",
   },
   {
     title: "International returns",
@@ -52,7 +52,7 @@ export default function ReturnsPage() {
     "@type": "WebPage",
     name: "Returns & Refunds Policy",
     url: `${SITE_URL}/returns`,
-    description: "AIE Fashionz returns and refunds policy — 14-day free returns for UK customers.",
+    description: "Aiefashion returns and refunds policy — 14-day free returns for UK customers.",
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -145,8 +145,8 @@ export default function ReturnsPage() {
           <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-muted)", lineHeight: 1.8 }}>
             <strong style={{ color: "var(--color-foreground)" }}>Need help?</strong>
             {" "}Contact our customer care team at{" "}
-            <a href="mailto:returns@aiefashionz.com" style={{ color: "var(--color-gold)" }}>
-              returns@aiefashionz.com
+            <a href="mailto:aiefashionllc@gmail.com" style={{ color: "var(--color-gold)" }}>
+              aiefashionllc@gmail.com
             </a>
             {" "}or visit our{" "}
             <Link href="/faq" style={{ color: "var(--color-gold)" }}>FAQ page</Link>.

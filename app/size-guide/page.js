@@ -1,12 +1,12 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Size Guide | AIE Fashionz",
+  title: "Size Guide | Aiefashion",
   description:
-    "Find your perfect fit with the AIE Fashionz size guide. Women's and men's clothing sizes, shoe sizes, and jewellery sizing — UK, EU and US conversions.",
+    "Find your perfect fit with the Aiefashion size guide. Women's and men's clothing sizes, shoe sizes, and jewellery sizing — UK, EU and US conversions.",
   alternates: { canonical: "/size-guide" },
   openGraph: {
-    title: "Size Guide | AIE Fashionz",
+    title: "Size Guide | Aiefashion",
     description:
       "Women's, men's and children's clothing size charts with UK, EU and US conversions, plus shoe and jewellery sizing guides.",
     url: `${SITE_URL}/size-guide`,
@@ -326,10 +326,10 @@ export default function SizeGuidePage() {
           <strong>Tip:</strong> If you are between sizes, size up for a relaxed
           fit. Still unsure? Email{" "}
           <a
-            href="mailto:support@aiefashionz.com"
+            href="mailto:aiefashionllc@gmail.com"
             style={{ color: "var(--color-gold)" }}
           >
-            support@aiefashionz.com
+            aiefashionllc@gmail.com
           </a>{" "}
           and our team will help.
         </p>

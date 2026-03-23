@@ -5,9 +5,9 @@ import FilterBar from "@/components/shop/FilterBar";
 import Reveal from "@/components/ui/Reveal";
 
 export const metadata = {
-  title: "Shop — AIE Fashionz",
+  title: "Shop — Aiefashion",
   description:
-    "Browse the full AIE Fashionz collection — luxury fabrics, bags, jewellery, party wear, children's wear and body shapers.",
+    "Browse the full Aiefashion collection — luxury fabrics, bags, jewellery, party wear, children's wear and body shapers.",
 };
 
 export default async function ShopPage({ searchParams }) {

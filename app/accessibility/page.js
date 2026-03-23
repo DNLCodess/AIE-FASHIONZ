@@ -1,14 +1,14 @@
 import Link from "next/link";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashionz.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Accessibility Statement | AIE Fashionz",
+  title: "Accessibility Statement | Aiefashion",
   description:
-    "AIE Fashionz is committed to making our website accessible to everyone. Read our WCAG 2.1 AA accessibility statement.",
+    "Aiefashion is committed to making our website accessible to everyone. Read our WCAG 2.1 AA accessibility statement.",
   alternates: { canonical: "/accessibility" },
   openGraph: {
-    title: "Accessibility Statement | AIE Fashionz",
+    title: "Accessibility Statement | Aiefashion",
     description:
       "Our commitment to WCAG 2.1 AA compliance, keyboard navigation, screen reader support and inclusive design.",
     url: `${SITE_URL}/accessibility`,
@@ -88,7 +88,7 @@ export default function AccessibilityPage() {
           lineHeight: 1.8,
         }}
       >
-        Last reviewed: March 2026. AIE Fashionz is committed to ensuring our
+        Last reviewed: March 2026. Aiefashion is committed to ensuring our
         website is accessible and usable by everyone, regardless of disability,
         assistive technology, or browsing method.
       </p>
@@ -267,10 +267,10 @@ export default function AccessibilityPage() {
           If you experience any difficulty accessing content on our website, or
           if you have suggestions for improvement, please contact us at{" "}
           <a
-            href="mailto:accessibility@aiefashionz.com"
+            href="mailto:aiefashionllc@gmail.com"
             style={{ color: "var(--color-gold)" }}
           >
-            accessibility@aiefashionz.com
+            aiefashionllc@gmail.com
           </a>
           . We aim to respond to accessibility queries within{" "}
           <strong style={{ color: "var(--color-foreground)" }}>

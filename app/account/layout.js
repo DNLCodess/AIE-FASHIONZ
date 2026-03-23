@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import AccountSidebar from "@/components/account/AccountSidebar";
 
 export const metadata = {
-  title: "My Account | AIE Fashionz",
+  title: "My Account | Aiefashion",
   robots: { index: false, follow: false },
 };
 

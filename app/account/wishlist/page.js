@@ -5,7 +5,7 @@ import { formatCurrency } from "@/lib/utils";
 import { getProducts } from "@/lib/api/products";
 import RemoveWishlistButton from "@/components/account/RemoveWishlistButton";
 
-export const metadata = { title: "Wishlist | AIE Fashionz" };
+export const metadata = { title: "Wishlist | Aiefashion" };
 
 export default async function WishlistPage() {
   const cookieStore = await cookies();

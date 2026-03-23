@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 
-// Set NEXT_PUBLIC_WHATSAPP_NUMBER in .env.local (e.g. 447911123456 — no + or spaces)
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "447911123456";
+// Set NEXT_PUBLIC_WHATSAPP_NUMBER in .env.local (e.g. 13014335307 — no + or spaces)
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "13014335307";
 const WA_MESSAGE = encodeURIComponent(
-  "Hello AIE Fashionz! I'd like some help with my order."
+  "Hello Aiefashion! I'd like some help with my order."
 );
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
 

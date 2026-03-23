@@ -50,14 +50,14 @@ export async function POST(req) {
       : `[${safeLabel}] ${safeName}`;
 
     await resend.emails.send({
-      from: "AIE Fashionz Support <noreply@aiefashionz.com>",
-      to: "support@aiefashionz.com",
+      from: "Aiefashion Support <noreply@aiefashion.com>",
+      to: "aiefashionllc@gmail.com",
       replyTo: email.trim(),
       subject,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
           <h2 style="color:#1C1C1A;margin-bottom:4px">${safeLabel}</h2>
-          <p style="color:#6B6A66;font-size:13px;margin-top:0">New message via aiefashionz.com</p>
+          <p style="color:#6B6A66;font-size:13px;margin-top:0">New message via aiefashion.com</p>
           <hr style="border:none;border-top:1px solid #E8E5E0;margin:20px 0"/>
           <table style="width:100%;border-collapse:collapse;font-size:14px">
             <tr><td style="padding:6px 0;color:#6B6A66;width:130px">Name</td><td style="padding:6px 0;color:#1C1C1A">${safeName}</td></tr>
@@ -76,7 +76,7 @@ export async function POST(req) {
 
     // Auto-reply to customer
     await resend.emails.send({
-      from: "AIE Fashionz <noreply@aiefashionz.com>",
+      from: "Aiefashion <noreply@aiefashion.com>",
       to: email.trim(),
       subject: `We've received your message — ${safeLabel}`,
       html: `
@@ -86,7 +86,7 @@ export async function POST(req) {
           ${safeOrderRef ? `<p style="color:#6B6A66">Your enquiry references order <strong style="color:#1C1C1A">${safeOrderRef}</strong>.</p>` : ""}
           <p style="color:#6B6A66;line-height:1.7">If your issue is urgent, you can also reach us directly on WhatsApp.</p>
           <hr style="border:none;border-top:1px solid #E8E5E0;margin:20px 0"/>
-          <p style="font-size:12px;color:#A8A7A3">AIE Fashionz · support@aiefashionz.com</p>
+          <p style="font-size:12px;color:#A8A7A3">Aiefashion · aiefashionllc@gmail.com</p>
         </div>
       `,
     });

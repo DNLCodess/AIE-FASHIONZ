@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Shopping Cart | AIE Fashionz",
+  title: "Shopping Cart | Aiefashion",
   robots: { index: false, follow: false },
 };
 
