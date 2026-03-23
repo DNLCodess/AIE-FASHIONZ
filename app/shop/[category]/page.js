@@ -22,12 +22,12 @@ export async function generateMetadata({ params }) {
   const cat = await getCategoryBySlug(category);
   if (!cat) return {};
 
-  const desc = `Shop ${cat.name} at Aiefashion — ${cat.description ?? "premium luxury fashion for women"}. Free UK delivery on orders over £150. Worldwide shipping.`;
+  const desc = `Shop ${cat.name} at Aiefashion — ${cat.description ?? "premium luxury fashion for women"}. Free US shipping on orders over $75. Worldwide delivery.`;
 
   return {
     title: `${cat.name} | Aiefashion`,
     description: desc,
-    keywords: [cat.name, "luxury fashion UK", "women's clothing", "Aiefashion", "buy online UK"],
+    keywords: [cat.name, "luxury fashion", "women's clothing", "Aiefashion", "buy online"],
     alternates: { canonical: `/shop/${category}` },
     openGraph: {
       title: `${cat.name} | Aiefashion`,

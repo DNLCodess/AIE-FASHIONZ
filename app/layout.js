@@ -32,22 +32,22 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Aiefashion | Luxury Fashion UK",
+    default: "Aiefashion | Premium Fashion",
     template: "%s | Aiefashion",
   },
   description:
-    "Shop luxury fashion at Aiefashion — UK-based women's boutique. Premium fabrics, designer bags & shoes, jewellery, party wear, children's wear and body shapers. Free UK delivery. Worldwide shipping.",
+    "Shop luxury fashion at Aiefashion — premium women's fashion. Designer bags & shoes, jewellery, party wear, children's wear and body shapers. Free US shipping. Worldwide delivery.",
   keywords: [
-    "luxury fashion UK",
+    "luxury fashion",
     "women's luxury clothing",
-    "designer bags UK",
+    "designer bags",
     "luxury fabrics online",
-    "party wear UK",
-    "Nigerian fashion UK",
+    "party wear",
+    "Nigerian fashion",
     "occasion wear",
-    "jewellery UK",
+    "jewellery",
     "body shapers",
-    "children's wear UK",
+    "children's wear",
     "Aiefashion",
   ],
   authors: [{ name: "Aiefashion", url: SITE_URL }],
@@ -63,20 +63,20 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_GB",
+    locale: "en_US",
     siteName: "Aiefashion",
     url: SITE_URL,
-    title: "Aiefashion | Luxury Fashion UK",
+    title: "Aiefashion | Premium Fashion",
     description:
-      "Shop luxury fashion at Aiefashion — UK-based women's boutique. Premium fabrics, bags & shoes, jewellery, party wear and more. Worldwide delivery.",
+      "Shop luxury fashion at Aiefashion — US-based women's boutique. Premium fabrics, bags & shoes, jewellery, party wear and more. Worldwide delivery.",
   },
   twitter: {
     card: "summary_large_image",
     site: "@aiefashion",
     creator: "@aiefashion",
-    title: "Aiefashion | Luxury Fashion UK",
+    title: "Aiefashion | Premium Fashion",
     description:
-      "Shop luxury fashion at Aiefashion — UK-based women's boutique. Worldwide delivery.",
+      "Shop luxury fashion at Aiefashion — US-based women's boutique. Worldwide delivery.",
   },
   verification: {
     // Add your Google Search Console and Bing verification codes here when ready

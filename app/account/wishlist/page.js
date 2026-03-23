@@ -68,7 +68,7 @@ export default async function WishlistPage() {
 function WishlistCard({ product }) {
   const primaryImage =
     product.images?.find((i) => i.is_primary)?.url ?? product.images?.[0]?.url;
-  const currency = "GBP";
+  const currency = "USD";
 
   return (
     <div className="group">

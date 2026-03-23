@@ -1,5 +1,5 @@
-// All monetary values are in PENCE (GBP × 100).
-// e.g. base_price: 2800 → £28.00
+// All monetary values are in CENTS (USD × 100).
+// e.g. base_price: 2800 → $28.00
 const U = "https://images.unsplash.com";
 const img = (id, w = 800, h = 1067) =>
   `${U}/photo-${id}?w=${w}&h=${h}&fit=crop&crop=top&q=85&auto=format`;

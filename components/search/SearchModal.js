@@ -219,7 +219,7 @@ function ProductRow({ product, query, active, onHover, onClick }) {
           {CATEGORY_LABELS[product.category_slug] ?? product.category_slug}
         </p>
         <p style={{ fontFamily: "var(--font-heading)", fontSize: "15px", color: "var(--color-gold)" }}>
-          {formatCurrency(product.base_price, "GBP")}
+          {formatCurrency(product.base_price, "USD")}
         </p>
       </div>
     </Link>

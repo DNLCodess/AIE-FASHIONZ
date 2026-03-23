@@ -14,14 +14,14 @@ export const revalidate = 60;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
+  title: "Aiefashion | Luxury Fashion for Women — Premium Fashion",
   description:
-    "Aiefashion — the UK's destination for luxury women's fashion. Shop premium fabrics, designer bags & shoes, gold jewellery, party & occasion wear, children's fashion and body shapers. Free UK delivery over £150. Worldwide shipping.",
+    "Aiefashion — your destination for luxury women's fashion. Shop premium fabrics, designer bags & shoes, gold jewellery, party & occasion wear, children's fashion and body shapers. Free US shipping over $75. Worldwide delivery.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
+    title: "Aiefashion | Luxury Fashion for Women — Premium Fashion",
     description:
-      "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free UK delivery. Worldwide shipping.",
+      "destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free US shipping. Worldwide delivery.",
     url: "/",
     images: [
       {
@@ -33,9 +33,9 @@ export const metadata = {
     ],
   },
   twitter: {
-    title: "Aiefashion | Luxury Fashion for Women — UK Boutique",
+    title: "Aiefashion | Luxury Fashion for Women — Premium Fashion",
     description:
-      "UK's destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
+      "destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
     images: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90"],
   },
 };
@@ -59,10 +59,13 @@ export default async function HomePage() {
     name: "Aiefashion",
     url: SITE_URL,
     description:
-      "UK-based luxury fashion boutique for women. Premium fabrics, bags & shoes, jewellery, party wear, children's wear and body shapers. Worldwide delivery.",
+      "US-based luxury fashion boutique for women. Premium fabrics, bags & shoes, jewellery, party wear, children's wear and body shapers. Worldwide delivery.",
     address: {
       "@type": "PostalAddress",
-      addressCountry: "GB",
+      streetAddress: "Lanham, Maryland",
+      addressLocality: "Lanham",
+      addressRegion: "MD",
+      addressCountry: "US",
     },
     sameAs: [
       "https://www.instagram.com/aiefashion",
@@ -449,7 +452,7 @@ export default async function HomePage() {
               {
                 num: "02",
                 title: "Worldwide Delivery",
-                body: "UK-based, globally shipped. Nigeria, EU, and beyond — we bring AIE to you.",
+                body: "US-based, globally shipped. Nigeria, EU, and beyond — we bring AIE to you.",
               },
               {
                 num: "03",

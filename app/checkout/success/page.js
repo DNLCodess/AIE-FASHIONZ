@@ -56,14 +56,14 @@ function SuccessContent() {
   }, [orderId]);
 
   // Determine delivery estimate based on shipping country
-  const isUK =
+  const isUS =
     !order?.shipping_country ||
-    order.shipping_country === "GB" ||
-    order.shipping_country === "United Kingdom";
+    order.shipping_country === "US" ||
+    order.shipping_country === "United States";
 
-  const deliveryEstimate = isUK
+  const deliveryEstimate = isUS
     ? "3–5 business days"
-    : "5–10 business days";
+    : "7–14 business days";
 
   const orderReference =
     order?.order_number || orderId || "—";
@@ -369,7 +369,7 @@ function SuccessContent() {
           {[
             { icon: <RotateCcw size={14} strokeWidth={1.5} />, label: "Free Returns" },
             { icon: <ShieldCheck size={14} strokeWidth={1.5} />, label: "Secure Payment" },
-            { icon: <Package size={14} strokeWidth={1.5} />, label: "UK Quality" },
+            { icon: <Package size={14} strokeWidth={1.5} />, label: "Premium Quality" },
           ].map(({ icon, label }) => (
             <div
               key={label}

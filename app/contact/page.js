@@ -81,7 +81,7 @@ export default function ContactPage() {
           We&apos;re here to help.
         </h1>
         <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--color-muted)", lineHeight: 1.8 }}>
-          Monday–Friday, 9am–5pm GMT. We respond to all messages within 24 hours.
+          Monday–Friday, 9am–5pm EST. We respond to all messages within 24 hours.
           For urgent issues, use the WhatsApp button below.
         </p>
       </div>
@@ -350,7 +350,7 @@ export default function ContactPage() {
             <p style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-subtle)", marginBottom: "0.75rem" }}>
               Support hours
             </p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-foreground)", marginBottom: "4px" }}>Mon – Fri, 9am – 5pm GMT</p>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--color-foreground)", marginBottom: "4px" }}>Mon – Fri, 9am – 5pm EST</p>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--color-muted)" }}>We aim to reply within 24 hours.<br />WhatsApp is monitored 7 days a week.</p>
           </div>
 

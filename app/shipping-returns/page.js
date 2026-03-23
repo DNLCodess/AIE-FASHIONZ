@@ -5,36 +5,36 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com
 export const metadata = {
   title: "Shipping & Returns | Aiefashion",
   description:
-    "Aiefashion delivery information and 14-day returns policy. Free UK delivery on orders over £75. Worldwide shipping available including Nigeria.",
+    "Aiefashion delivery information and 30-day returns policy. Free US shipping on orders over $75. Worldwide shipping available including Nigeria.",
   alternates: { canonical: "/shipping-returns" },
   openGraph: {
     title: "Shipping & Returns | Aiefashion",
     description:
-      "Free UK delivery on orders over £75. 14-day returns in line with the UK Consumer Rights Act. Worldwide shipping including Nigeria.",
+      "Free US shipping on orders over $75. 30-day returns. Worldwide shipping including Nigeria.",
     url: `${SITE_URL}/shipping-returns`,
   },
 };
 
 const DELIVERY_ROWS = [
   {
-    service: "UK Standard",
+    service: "US Standard",
     time: "3–5 business days",
-    cost: "FREE over £75 · £4.99 otherwise",
+    cost: "FREE over $75 · $4.99 otherwise",
   },
   {
-    service: "UK Express",
+    service: "US Express",
     time: "1–2 business days",
-    cost: "£8.99",
+    cost: "$9.99",
   },
   {
-    service: "Europe",
+    service: "Canada & Mexico",
     time: "5–8 business days",
-    cost: "From £12.99",
+    cost: "From $12.99",
   },
   {
     service: "International (incl. Nigeria)",
     time: "7–14 business days",
-    cost: "From £15.99",
+    cost: "From $24.99",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function ShippingReturnsPage() {
       >
         Last updated: March 2026. All orders are dispatched Monday–Friday with a
         cut-off time of{" "}
-        <strong style={{ color: "var(--color-foreground)" }}>2pm GMT</strong>.
+        <strong style={{ color: "var(--color-foreground)" }}>2pm EST</strong>.
         Orders placed after this time or on weekends will be processed the next
         working day.
       </p>
@@ -212,13 +212,10 @@ export default function ShippingReturnsPage() {
         </h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-          <PolicyBlock title="14-day return window">
-            You have 14 calendar days from the date you receive your order to
-            return any item. This is your statutory right under the{" "}
-            <strong style={{ color: "var(--color-foreground)" }}>
-              UK Consumer Rights Act 2015
-            </strong>{" "}
-            and the Consumer Contracts Regulations 2013.
+          <PolicyBlock title="30-day return window">
+            You have 30 calendar days from the date you receive your order to
+            return any item in its original, unworn condition with all tags
+            attached.
           </PolicyBlock>
 
           <PolicyBlock title="Condition of returned items">
@@ -242,8 +239,7 @@ export default function ShippingReturnsPage() {
               aiefashionllc@gmail.com
             </a>{" "}
             with your order number and reason for return. We will respond within
-            2 business days with return instructions. UK customers will receive a
-            prepaid returns label.
+            2 business days with return instructions.
           </PolicyBlock>
 
           <PolicyBlock title="Refunds">

@@ -68,7 +68,7 @@ export default async function AdminDashboardPage() {
     const d = new Date();
     d.setDate(d.getDate() - (29 - i));
     const key = d.toISOString().slice(0, 10);
-    const label = d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    const label = d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
     return { key, label, value: revenueByDay[key] ?? 0 };
   });
 
@@ -95,7 +95,7 @@ export default async function AdminDashboardPage() {
   const stats = [
     {
       label: "Total Revenue",
-      value: formatCurrency(totalRevenue, "GBP"),
+      value: formatCurrency(totalRevenue, "USD"),
       sub: "Paid orders only",
       trend: null,
     },
@@ -190,7 +190,7 @@ export default async function AdminDashboardPage() {
             items={topCountries.map(([country, revenue]) => ({
               label: country,
               value: revenue,
-              display: formatCurrency(revenue, "GBP"),
+              display: formatCurrency(revenue, "USD"),
             }))}
           />
         </section>
@@ -406,7 +406,7 @@ function RecentOrdersTable({ orders }) {
                 <StatusBadge status={order.status} />
               </td>
               <td className="px-4 py-3 text-muted whitespace-nowrap">
-                {new Date(order.created_at).toLocaleDateString("en-GB")}
+                {new Date(order.created_at).toLocaleDateString("en-US")}
               </td>
             </tr>
           ))}

@@ -88,7 +88,7 @@ export default async function AdminOrdersPage({ searchParams }) {
                       <StatusBadge status={o.status} />
                     </td>
                     <td className="px-4 py-3 text-muted whitespace-nowrap">
-                      {new Date(o.created_at).toLocaleDateString("en-GB")}
+                      {new Date(o.created_at).toLocaleDateString("en-US")}
                     </td>
                   </tr>
                 ))}

@@ -14,8 +14,8 @@ export default function CartPage() {
   const { currency } = useUiStore();
   const subtotal = useCartStore(selectSubtotal);
 
-  // Default shipping estimate to GB until address is provided
-  const shippingEstimate = useMemo(() => calculateShipping("GB"), []);
+  // Default shipping estimate to US until address is provided
+  const shippingEstimate = useMemo(() => calculateShipping("US"), []);
   const estimatedTotal = subtotal + shippingEstimate;
 
   if (items.length === 0) {
@@ -95,8 +95,8 @@ export default function CartPage() {
                 <span className="text-foreground">{formatCurrency(shippingEstimate, currency)}</span>
               </div>
               <p className="text-[11px] text-muted leading-relaxed">
-                VAT (20%) calculated at checkout for UK orders.
                 Final shipping determined by your delivery address.
+                Free shipping on US orders over $75.
               </p>
             </div>
 

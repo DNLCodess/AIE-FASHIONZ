@@ -24,7 +24,7 @@ export default async function AdminOrderDetailPage({ params }) {
 
   if (!order) notFound();
 
-  const currency = order.currency ?? "GBP";
+  const currency = order.currency ?? "USD";
 
   return (
     <div className="space-y-8 max-w-3xl">
@@ -35,7 +35,7 @@ export default async function AdminOrderDetailPage({ params }) {
           </Link>
           <h1 className="font-heading text-2xl text-foreground mt-2">{order.reference}</h1>
           <p className="font-body text-sm text-muted mt-0.5">
-            {new Date(order.created_at).toLocaleDateString("en-GB", {
+            {new Date(order.created_at).toLocaleDateString("en-US", {
               day: "numeric", month: "long", year: "numeric",
             })}
           </p>
@@ -93,7 +93,7 @@ export default async function AdminOrderDetailPage({ params }) {
         <h3 className="font-heading text-sm text-foreground mb-4">Payment</h3>
         <Row label="Subtotal" value={formatCurrency(order.subtotal, currency)} />
         <Row label="Shipping" value={formatCurrency(order.shipping, currency)} />
-        {order.vat > 0 && <Row label="VAT (20%)" value={formatCurrency(order.vat, currency)} />}
+        {/* VAT row removed — US store */}
         <div className="h-px bg-border" />
         <Row label="Total" value={formatCurrency(order.total, currency)} bold />
         {order.payment_provider && (

@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { items, contact, address, delivery, currency = "GBP" } = body;
+    const { items, contact, address, delivery, currency = "USD" } = body;
 
     // ── 1. Validate input ────────────────────────────────────
     if (!items?.length) {
@@ -46,8 +46,8 @@ export async function POST(request) {
       (sum, item) => sum + (priceMap.get(item.variantId) ?? 0) * item.quantity,
       0
     );
-    const shipping = calculateShipping(address.country);
-    const vat = calculateVAT(subtotal, address.country);
+    const shipping = calculateShipping(address.country, subtotal);
+    const vat = calculateVAT(subtotal, address.country); // always 0 (US store)
     const total = subtotal + shipping + vat;
 
     // ── 3. Create pending order in Supabase ──────────────────
@@ -120,7 +120,7 @@ export async function POST(request) {
         orderId: order.id,
       });
     } else {
-      // Stripe — amounts in smallest currency unit (pence for GBP)
+      // Stripe — amounts in smallest currency unit (cents for USD)
       const paymentIntent = await stripe.paymentIntents.create({
         amount: total,
         currency: currency.toLowerCase(),

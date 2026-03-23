@@ -53,7 +53,7 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
     defaultValues: product
       ? {
           ...product,
-          // Convert pence → pounds for display
+          // Convert cents → dollars for display
           base_price: product.base_price / 100,
           compare_price: product.compare_price ? product.compare_price / 100 : undefined,
           variants: product.variants?.map((v) => ({
@@ -73,7 +73,7 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
   const title = watch("title");
 
   const onSubmit = async (data) => {
-    // Convert pounds back to pence
+    // Convert dollars back to cents
     const payload = {
       ...data,
       base_price: Math.round(data.base_price * 100),
@@ -145,9 +145,9 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
 
       {/* Pricing */}
       <section className="space-y-5">
-        <SectionHead>Pricing (£)</SectionHead>
+        <SectionHead>Pricing (USD)</SectionHead>
         <div className="grid grid-cols-2 gap-4">
-          <Field label="Base price (£)" error={errors.base_price?.message}>
+          <Field label="Base price ($)" error={errors.base_price?.message}>
             <input
               {...register("base_price")}
               type="number"
@@ -157,7 +157,7 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
               placeholder="28.00"
             />
           </Field>
-          <Field label="Compare price (£) — optional" error={errors.compare_price?.message}>
+          <Field label="Compare price ($) — optional" error={errors.compare_price?.message}>
             <input
               {...register("compare_price")}
               type="number"
@@ -168,7 +168,7 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
             />
           </Field>
         </div>
-        <p className="font-body text-xs text-muted">Enter prices in pounds. Stored in pence internally.</p>
+        <p className="font-body text-xs text-muted">Enter prices in dollars. Stored in cents internally.</p>
       </section>
 
       {/* Variants */}
@@ -189,7 +189,7 @@ export default function ProductForm({ product, apiPath, method = "POST" }) {
               <Field label="Colour" error={errors.variants?.[i]?.colour?.message}>
                 <input {...register(`variants.${i}.colour`)} className={inputCls()} placeholder="e.g. Royal Blue" />
               </Field>
-              <Field label="Extra price (£)" error={errors.variants?.[i]?.additional_price?.message}>
+              <Field label="Extra price ($)" error={errors.variants?.[i]?.additional_price?.message}>
                 <input
                   {...register(`variants.${i}.additional_price`)}
                   type="number"

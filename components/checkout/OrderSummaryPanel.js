@@ -5,8 +5,8 @@ import { formatCurrency } from "@/lib/utils";
 import { calculateShipping } from "@/lib/shipping";
 import { calculateVAT } from "@/lib/vat";
 
-export default function OrderSummaryPanel({ items, subtotal, countryCode = "GB", currency = "GBP" }) {
-  const shipping = calculateShipping(countryCode);
+export default function OrderSummaryPanel({ items, subtotal, countryCode = "US", currency = "USD" }) {
+  const shipping = calculateShipping(countryCode, subtotal);
   const vat = calculateVAT(subtotal, countryCode);
   const total = subtotal + shipping + vat;
 
@@ -62,12 +62,7 @@ export default function OrderSummaryPanel({ items, subtotal, countryCode = "GB",
           <span className="text-muted">Shipping</span>
           <span className="text-foreground">{formatCurrency(shipping, currency)}</span>
         </div>
-        {vat > 0 && (
-          <div className="flex justify-between">
-            <span className="text-muted">VAT (20%)</span>
-            <span className="text-foreground">{formatCurrency(vat, currency)}</span>
-          </div>
-        )}
+        {/* VAT row removed — US store */}
       </div>
 
       <div className="h-px bg-border" />

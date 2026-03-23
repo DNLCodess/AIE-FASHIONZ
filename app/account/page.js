@@ -54,7 +54,7 @@ export default async function AccountOverviewPage() {
                 <div>
                   <p className="font-body text-sm text-foreground">{order.reference}</p>
                   <p className="font-body text-xs text-muted mt-0.5">
-                    {new Date(order.created_at).toLocaleDateString("en-GB", {
+                    {new Date(order.created_at).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "long",
                       year: "numeric",

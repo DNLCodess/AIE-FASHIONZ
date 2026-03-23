@@ -161,7 +161,7 @@ export default async function ReviewList({ productId, productTitle }) {
                         )}
                       </div>
                       <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--color-muted)", flexShrink: 0 }}>
-                        {new Date(review.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                        {new Date(review.created_at).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}
                       </span>
                     </div>
                     {review.title && (

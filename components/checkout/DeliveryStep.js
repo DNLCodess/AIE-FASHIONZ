@@ -4,7 +4,7 @@ import { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
 import { getShippingOption } from "@/lib/shipping";
 
-export default function DeliveryStep({ countryCode = "GB", currency = "GBP", onNext, onBack }) {
+export default function DeliveryStep({ countryCode = "US", currency = "USD", onNext, onBack }) {
   const option = getShippingOption(countryCode);
   const [selected] = useState(option);
 

@@ -15,15 +15,15 @@ const schema = z.object({
 });
 
 const COUNTRIES = [
-  { code: "GB", label: "United Kingdom" },
-  { code: "NG", label: "Nigeria" },
   { code: "US", label: "United States" },
+  { code: "NG", label: "Nigeria" },
+  { code: "CA", label: "Canada" },
+  { code: "GB", label: "United Kingdom" },
+  { code: "AU", label: "Australia" },
   { code: "DE", label: "Germany" },
   { code: "FR", label: "France" },
   { code: "IE", label: "Ireland" },
   { code: "NL", label: "Netherlands" },
-  { code: "CA", label: "Canada" },
-  { code: "AU", label: "Australia" },
   { code: "ZA", label: "South Africa" },
 ];
 
@@ -34,7 +34,7 @@ export default function AddressStep({ defaultValues, onNext, onBack }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { country: "GB", ...defaultValues },
+    defaultValues: { country: "US", ...defaultValues },
   });
 
   return (

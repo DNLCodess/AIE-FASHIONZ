@@ -18,11 +18,11 @@ export const metadata = {
 const FAQS = [
   {
     q: "Where do you ship to?",
-    a: "We ship worldwide. UK orders are dispatched within 1–2 business days. We deliver to Nigeria, the EU, USA, Canada, and most international destinations. Shipping costs and times vary by location and are calculated at checkout.",
+    a: "We ship worldwide. US orders are dispatched within 1–2 business days. We deliver to Nigeria, Canada, the EU, and most international destinations. Shipping costs and times vary by location and are calculated at checkout.",
   },
   {
-    q: "How long does UK delivery take?",
-    a: "Standard UK delivery takes 2–5 business days. Express options are available at checkout. Orders placed before 12pm Monday–Friday are typically dispatched the same day.",
+    q: "How long does US delivery take?",
+    a: "Standard US delivery takes 3–5 business days. Express options are available at checkout. Orders placed before 2pm EST Monday–Friday are typically dispatched the same day.",
   },
   {
     q: "Do you ship to Nigeria?",
@@ -34,11 +34,11 @@ const FAQS = [
   },
   {
     q: "How do I return an item?",
-    a: "You have 14 days from delivery to return any item in its original condition. Email aiefashionllc@gmail.com with your order number and we will send you a prepaid return label (UK customers). See our full returns policy for details.",
+    a: "You have 30 days from delivery to return any item in its original condition. Email aiefashionllc@gmail.com with your order number and we will send you return instructions. See our full returns policy for details.",
   },
   {
     q: "Are the prices inclusive of VAT?",
-    a: "All prices shown are inclusive of UK VAT at 20% for UK customers. VAT is itemised at checkout. International customers outside the UK may be charged import duties by their local customs authority — these are not included in our prices.",
+    a: "All prices are shown in USD. International customers may be charged import duties or taxes by their local customs authority — these are not included in our prices.",
   },
   {
     q: "How do I know which size to order?",
@@ -206,7 +206,7 @@ export default function FaqPage() {
                 marginBottom: "1.25rem",
               }}
             >
-              Our customer care team is here to help Monday–Friday, 9am–5pm GMT.
+              Our customer care team is here to help Monday–Friday, 9am–5pm EST.
             </p>
             <Link
               href="/contact"

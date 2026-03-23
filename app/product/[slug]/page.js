@@ -25,14 +25,14 @@ export async function generateMetadata({ params }) {
   const primaryImage =
     product.images?.find((i) => i.is_primary)?.url ?? product.images?.[0]?.url;
   const price = (product.base_price / 100).toFixed(2);
-  const desc = `${product.description.slice(0, 130)} Free UK delivery. 14-day returns.`;
+  const desc = `${product.description.slice(0, 130)} Free US shipping. 30-day returns.`;
 
   return {
     title: `${product.title} | Aiefashion`,
     description: desc,
     keywords: [
       product.title,
-      "luxury fashion UK",
+      "luxury fashion",
       "women's clothing",
       product.category_slug.replace(/-/g, " "),
       "Aiefashion",
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
     },
     other: {
       "product:price:amount": price,
-      "product:price:currency": "GBP",
+      "product:price:currency": "USD",
     },
   };
 }
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }) {
     url: `${SITE_URL}/product/${product.slug}`,
     offers: {
       "@type": "Offer",
-      priceCurrency: "GBP",
+      priceCurrency: "USD",
       price: (product.base_price / 100).toFixed(2),
       availability: inStock
         ? "https://schema.org/InStock"
@@ -105,11 +105,11 @@ export default async function ProductPage({ params }) {
         shippingRate: {
           "@type": "MonetaryAmount",
           value: "0",
-          currency: "GBP",
+          currency: "USD",
         },
         shippingDestination: {
           "@type": "DefinedRegion",
-          addressCountry: "GB",
+          addressCountry: "US",
         },
         deliveryTime: {
           "@type": "ShippingDeliveryTime",
@@ -227,8 +227,8 @@ export default async function ProductPage({ params }) {
               <Reveal delay={4}>
                 <div className="mt-8 space-y-3 border-t border-border pt-8">
                   {[
-                    { icon: Truck, text: "Free UK delivery on orders over £150" },
-                    { icon: RotateCcw, text: "Free returns within 14 days (UK Consumer Rights Act)" },
+                    { icon: Truck, text: "Free US shipping on orders over $75" },
+                    { icon: RotateCcw, text: "30-day free returns" },
                     { icon: Shield, text: "Secure checkout — Stripe & Paystack" },
                   ].map(({ icon: Icon, text }) => (
                     <div key={text} className="flex items-start gap-3">

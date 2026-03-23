@@ -64,10 +64,10 @@ const SIZE_OPTIONS = [
 ];
 
 export const PRICE_RANGES = [
-  { value: "under-50", label: "Under £50", min: 0, max: 4999 },
-  { value: "50-150", label: "£50 – £150", min: 5000, max: 14999 },
-  { value: "150-300", label: "£150 – £300", min: 15000, max: 29999 },
-  { value: "over-300", label: "£300+", min: 30000, max: Infinity },
+  { value: "under-50", label: "Under $50", min: 0, max: 4999 },
+  { value: "50-150", label: "$50 – $150", min: 5000, max: 14999 },
+  { value: "150-300", label: "$150 – $300", min: 15000, max: 29999 },
+  { value: "over-300", label: "$300+", min: 30000, max: Infinity },
 ];
 
 /* ── Hook: sync grid density preference ──────────────────── */

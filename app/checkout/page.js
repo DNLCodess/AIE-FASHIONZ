@@ -27,7 +27,7 @@ export default function CheckoutPage() {
   const [apiError, setApiError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const countryCode = formData.address?.country ?? "GB";
+  const countryCode = formData.address?.country ?? "US";
 
   // ── Step handlers ──────────────────────────────────────────
   const handleContact = (data) => {

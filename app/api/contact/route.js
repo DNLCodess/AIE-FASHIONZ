@@ -82,7 +82,7 @@ export async function POST(req) {
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
           <h2 style="color:#1C1C1A">Thank you, ${safeName}.</h2>
-          <p style="color:#6B6A66;line-height:1.7">We've received your message and our team will respond within <strong style="color:#1C1C1A">24 hours</strong> (Monday–Friday, 9am–5pm GMT).</p>
+          <p style="color:#6B6A66;line-height:1.7">We've received your message and our team will respond within <strong style="color:#1C1C1A">24 hours</strong> (Monday–Friday, 9am–5pm EST).</p>
           ${safeOrderRef ? `<p style="color:#6B6A66">Your enquiry references order <strong style="color:#1C1C1A">${safeOrderRef}</strong>.</p>` : ""}
           <p style="color:#6B6A66;line-height:1.7">If your issue is urgent, you can also reach us directly on WhatsApp.</p>
           <hr style="border:none;border-top:1px solid #E8E5E0;margin:20px 0"/>

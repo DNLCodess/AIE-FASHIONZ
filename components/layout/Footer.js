@@ -84,7 +84,7 @@ export default function Footer() {
               }}
             >
               Premium fashion for women who shop with intention. Delivered
-              globally from the UK.
+              globally.
             </p>
 
             <div

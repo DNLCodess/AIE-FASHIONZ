@@ -4,21 +4,21 @@ import JsonLd from "@/components/seo/JsonLd";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "Returns & Refunds Policy | Aiefashion — 14-Day Free Returns",
+  title: "Returns & Refunds Policy | Aiefashion — 30-Day Free Returns",
   description:
-    "Aiefashion offers free 14-day returns on all UK orders in line with the UK Consumer Rights Act 2015. Read our full returns and refund policy.",
+    "Aiefashion offers 30-day returns. Easy, hassle-free return process. Read our full returns and refund policy.",
   alternates: { canonical: "/returns" },
   openGraph: {
     title: "Returns & Refunds Policy | Aiefashion",
-    description: "Free 14-day returns on all UK orders. Full returns and refund policy.",
+    description: "30-day returns. Easy, hassle-free return process. Full returns and refund policy.",
     url: "/returns",
   },
 };
 
 const SECTIONS = [
   {
-    title: "14-day return window",
-    body: "You have 14 calendar days from the date you receive your order to return any item. This is in accordance with your rights under the UK Consumer Rights Act 2015 and the Consumer Contracts Regulations 2013.",
+    title: "30-day return window",
+    body: "You have 30 calendar days from the date you receive your order to return any item in its original condition.",
   },
   {
     title: "Condition of returned items",
@@ -26,7 +26,7 @@ const SECTIONS = [
   },
   {
     title: "How to start a return",
-    body: "Email us at aiefashionllc@gmail.com with your order number and the reason for your return. We will respond within 2 business days with return instructions and a prepaid label for UK customers.",
+    body: "Email us at aiefashionllc@gmail.com with your order number and the reason for your return. We will respond within 2 business days with return instructions.",
   },
   {
     title: "Refunds",
@@ -38,7 +38,7 @@ const SECTIONS = [
   },
   {
     title: "International returns",
-    body: "Customers outside the UK are responsible for return shipping costs and any applicable customs duties. We recommend using a tracked service. Refunds will be issued once items are received and inspected.",
+    body: "Customers outside the US are responsible for return shipping costs and any applicable customs duties. We recommend using a tracked service. Refunds will be issued once items are received and inspected.",
   },
   {
     title: "Non-returnable items",
@@ -52,7 +52,7 @@ export default function ReturnsPage() {
     "@type": "WebPage",
     name: "Returns & Refunds Policy",
     url: `${SITE_URL}/returns`,
-    description: "Aiefashion returns and refunds policy — 14-day free returns for UK customers.",
+    description: "Aiefashion returns and refunds policy — 30-day free returns.",
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [

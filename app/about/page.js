@@ -4,14 +4,14 @@ import JsonLd from "@/components/seo/JsonLd";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aiefashion.com";
 
 export const metadata = {
-  title: "About Aiefashion | Our Story — UK Luxury Fashion Boutique",
+  title: "About Aiefashion | Our Story — Premium Fashion Boutique",
   description:
-    "Discover the story behind Aiefashion — a UK-based luxury fashion boutique celebrating African elegance and global style. Premium fabrics, bags, jewellery and occasion wear for the modern woman.",
+    "Discover the story behind Aiefashion — a US-based luxury fashion boutique celebrating African elegance and global style. Premium fabrics, bags, jewellery and occasion wear for the modern woman.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Aiefashion | Our Story",
     description:
-      "A UK luxury fashion boutique celebrating African elegance and global style. Discover our story.",
+      "A premium fashion boutique celebrating African elegance and global style. Discover our story.",
     url: "/about",
   },
 };
@@ -23,14 +23,14 @@ export default function AboutPage() {
     name: "About Aiefashion",
     url: `${SITE_URL}/about`,
     description:
-      "Aiefashion is a UK-based luxury fashion boutique for women, specialising in premium fabrics, bags & shoes, jewellery, party wear, children's fashion and body shapers.",
+      "Aiefashion is a US-based luxury fashion boutique for women, specialising in premium fabrics, bags & shoes, jewellery, party wear, children's fashion and body shapers.",
     mainEntity: {
       "@type": "Organization",
       name: "Aiefashion",
       url: SITE_URL,
-      foundingLocation: { "@type": "Place", addressCountry: "GB" },
+      foundingLocation: { "@type": "Place", addressLocality: "Lanham", addressRegion: "MD", addressCountry: "US" },
       description:
-        "UK-based luxury fashion boutique celebrating African elegance and global style.",
+        "US-based luxury fashion boutique celebrating African elegance and global style.",
     },
   };
 
@@ -123,7 +123,7 @@ export default function AboutPage() {
             >
               <p>
                 Aiefashion was born from a belief that luxury fashion should feel
-                personal — not just prestigious. We are a UK-based boutique with roots
+                personal — not just prestigious. We are a US-based boutique with roots
                 deeply connected to West African fashion culture, and we bring that
                 richness of colour, fabric and craftsmanship to women across the globe.
               </p>
@@ -184,7 +184,7 @@ export default function AboutPage() {
               },
               {
                 title: "Global women, local care",
-                body: "UK-based. Worldwide shipping. Nigeria, EU and beyond — we come to you.",
+                body: "US-based. Worldwide shipping. Nigeria, EU and beyond — we come to you.",
               },
               {
                 title: "Radical transparency",

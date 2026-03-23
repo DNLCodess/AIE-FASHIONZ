@@ -9,7 +9,7 @@ const useUiStore = create(
       cartOpen: false,
       mobileNavOpen: false,
       searchOpen: false,
-      currency: "GBP",
+      currency: "USD",
       toasts: [],
 
       openCart: () => set({ cartOpen: true }),

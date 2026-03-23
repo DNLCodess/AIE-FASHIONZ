@@ -1,9 +1,12 @@
-# AIE Fashionz — Claude Code Instructions
+# Aiefashion — Claude Code Instructions
 
 ## Project
 
-UK-based luxury multi-category fashion e-commerce. Global market. Mobile-first. High-quality minimalist UI.
+US-based (Lanham, Maryland) luxury multi-category fashion e-commerce. Global market. Mobile-first. High-quality minimalist UI.
 
+**Brand name:** Aiefashion (no Z)
+**Contact:** aiefashionllc@gmail.com · +1 (301) 433-5307
+**Default currency:** USD (cents as integers internally)
 **Live site being replaced:** https://www.aiefashionz.com
 
 ---
@@ -16,7 +19,7 @@ UK-based luxury multi-category fashion e-commerce. Global market. Mobile-first. 
 - **Database/Auth/Storage:** Supabase
 - **Server state:** React Query (TanStack Query v5)
 - **Client state:** Zustand
-- **Payments:** Stripe (UK/international) + Paystack (Nigeria)
+- **Payments:** Stripe (US/international) + Paystack (Nigeria)
 - **Email:** Resend + React Email
 - **Dark/light mode:** next-themes
 - **Forms:** React Hook Form + Zod
@@ -192,14 +195,13 @@ middleware.js       — protects /account/* and /admin/*
 
 ---
 
-## UK Legal (non-negotiable, built-in from day one)
+## US Legal (non-negotiable, built-in from day one)
 
-- VAT 20% calculated and shown at checkout
-- GDPR cookie consent banner on first visit
-- 14-day returns policy clearly stated at checkout and in footer
-- Companies House registered name + number in footer
+- No VAT — sales tax not collected at checkout (US state tax complexity handled separately if required)
+- 30-day returns policy clearly stated at checkout and in footer
+- Cookie consent banner on first visit (CCPA-aligned for California users)
 - WCAG 2.1 AA accessibility minimum
-- BNPL (Klarna/Clearpay) must include FCA-required credit messaging
+- BNPL must include required credit disclosures if added in future
 
 ---
 
@@ -237,7 +239,7 @@ Reusable instruction modules. Read before executing that task type:
 - Do not use the Pages Router
 - Do not add CSS-in-JS libraries (styled-components, emotion)
 - Do not use Redux — Zustand only for client state
-- Do not store prices as floats — integers (pence/kobo) only
+- Do not store prices as floats — integers (cents/kobo) only
 - Do not call Supabase service role client from any Client Component
 - Do not skip RLS testing
 - Do not use `any` workarounds or disable eslint rules without a comment explaining why
