@@ -40,16 +40,14 @@ export const metadata = {
   },
 };
 
-const HERO_A =
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&h=1200&fit=crop&crop=top&q=90&auto=format";
-const HERO_B =
-  "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&h=1200&fit=crop&crop=top&q=90&auto=format";
-const EDITORIAL =
-  "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&h=700&fit=crop&crop=center&q=90&auto=format";
+const HERO_IMG =
+  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1400&h=900&fit=crop&crop=top&q=90&auto=format";
+const QUALITY_IMG =
+  "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1000&fit=crop&crop=center&q=90&auto=format";
 
 export default async function HomePage() {
   const [featured, categories] = await Promise.all([
-    getFeaturedProducts(4),
+    getFeaturedProducts(8),
     getCategories(),
   ]);
 
@@ -92,137 +90,57 @@ export default async function HomePage() {
     <>
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
+
       {/* ─────────────────────────────────────────────────────────
-          HERO — Triptych layout
-          Desktop: large left image / centre editorial text / right image
-          Mobile:  full-bleed image + text overlay
+          HERO — full-bleed image with text overlay
       ───────────────────────────────────────────────────────── */}
       <section
         className="relative -mt-16 md:-mt-20 overflow-hidden"
         style={{ minHeight: "100svh" }}
       >
-        {/* ── Mobile: single full-bleed image ── */}
-        <div className="absolute inset-0 md:hidden">
+        {/* Background image — full bleed on all screen sizes */}
+        <div className="absolute inset-0">
           <Image
-            src={HERO_A}
+            src={HERO_IMG}
             alt="Aiefashion luxury fashion"
             fill
             priority
             sizes="100vw"
             className="object-cover object-top"
           />
+          {/* Gradient — stronger at bottom on mobile, balanced on desktop */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.08) 100%)",
+                "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%)",
             }}
           />
         </div>
 
-        {/* ── Desktop: triptych ── */}
+        {/* Content */}
         <div
-          className="hidden md:grid absolute inset-0"
-          style={{ gridTemplateColumns: "1fr 480px 1fr" }}
+          className="relative z-10 flex flex-col justify-end items-center text-center px-6"
+          style={{ minHeight: "100svh", paddingBottom: "5rem", paddingTop: "7rem" }}
         >
-          {/* Left image panel */}
-          <div className="relative overflow-hidden">
-            <Image
-              src={HERO_A}
-              alt=""
-              fill
-              priority
-              sizes="33vw"
-              className="object-cover object-top hero-scale"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to right, rgba(253,251,247,0) 70%, rgba(253,251,247,0.95) 100%)",
-              }}
-            />
-          </div>
-
-          {/* Centre ivory panel — text lives here */}
-          <div style={{ backgroundColor: "var(--color-background)" }} />
-
-          {/* Right image panel */}
-          <div className="relative overflow-hidden">
-            <Image
-              src={HERO_B}
-              alt=""
-              fill
-              priority
-              sizes="33vw"
-              className="object-cover object-top hero-scale"
-              style={{ animationDelay: "0.3s" }}
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to left, rgba(253,251,247,0) 70%, rgba(253,251,247,0.95) 100%)",
-              }}
-            />
-          </div>
-        </div>
-
-        {/* ── Content layer — sits over everything ── */}
-        <div
-          className="relative z-10 flex flex-col justify-end md:justify-center items-center text-center px-6"
-          style={{
-            minHeight: "100svh",
-            paddingBottom: "5rem",
-            paddingTop: "7rem",
-          }}
-        >
-          {/* Season eyebrow */}
           <p
-            className="hero-up font-body uppercase tracking-[0.4em] mb-6 text-white md:text-opacity-100"
-            style={{
-              animationDelay: "0.1s",
-              fontSize: "10px",
-              color: "rgba(255,255,255,0.6)",
-            }}
+            className="hero-up font-body uppercase tracking-[0.4em] mb-5"
+            style={{ animationDelay: "0.1s", fontSize: "10px", color: "rgba(255,255,255,0.55)" }}
           >
-            <span className="md:hidden">New Season — SS25</span>
-            <span
-              className="hidden md:inline"
-              style={{ color: "var(--color-subtle)" }}
-            >
-              New Season — SS25
-            </span>
+            New Arrivals — SS25
           </p>
 
-          {/* Headline — oversized editorial serif */}
           <h1
-            className="hero-up font-heading leading-[0.88] tracking-[-0.02em] text-white mb-0"
-            style={{
-              animationDelay: "0.2s",
-              fontSize: "clamp(4rem, 11vw, 10rem)",
-            }}
+            className="hero-up font-heading leading-[0.9] tracking-[-0.02em] text-white mb-0"
+            style={{ animationDelay: "0.2s", fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
           >
-            <span className="md:hidden">
-              Dress
-              <br />
-              with
-              <br />
-              <em style={{ color: "var(--color-gold)" }}>intention.</em>
-            </span>
-            <span
-              className="hidden md:block"
-              style={{ color: "var(--color-foreground)" }}
-            >
-              Dress
-              <br />
-              with
-              <br />
-              <em style={{ color: "var(--color-gold)" }}>intention.</em>
-            </span>
+            Dress
+            <br />
+            with
+            <br />
+            <em style={{ color: "var(--color-gold)" }}>intention.</em>
           </h1>
 
-          {/* Gold rule */}
           <div
             className="hero-line mx-auto my-8"
             style={{
@@ -233,79 +151,30 @@ export default async function HomePage() {
             }}
           />
 
-          {/* Sub-copy */}
           <p
             className="hero-up font-body leading-relaxed max-w-xs mb-10"
-            style={{
-              animationDelay: "0.5s",
-              fontSize: "15px",
-              color: "rgba(255,255,255,0.65)",
-            }}
+            style={{ animationDelay: "0.5s", fontSize: "15px", color: "rgba(255,255,255,0.6)" }}
           >
-            <span className="md:hidden">
-              Six categories. One standard — luxury.
-            </span>
-            <span
-              className="hidden md:block"
-              style={{ color: "var(--color-muted)" }}
-            >
-              Six categories. One standard — luxury.
-              <br />
-              Premium fashion for the woman who knows.
-            </span>
+            Six categories. One standard — luxury.
           </p>
 
-          {/* CTAs */}
           <div
-            className="hero-up flex flex-col sm:flex-row items-center gap-4"
+            className="hero-up flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
             style={{ animationDelay: "0.65s" }}
           >
             <Link
               href="/shop"
-              className="font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200"
+              className="w-full sm:w-auto font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 text-center"
             >
               Shop Now
             </Link>
             <Link
               href="/shop/party-dinner-wear"
-              className="font-body uppercase tracking-widest text-sm px-10 py-4 transition-colors duration-200 border"
-              style={{
-                borderColor: "rgba(255,255,255,0.35)",
-                color: "rgba(255,255,255,0.85)",
-              }}
+              className="w-full sm:w-auto font-body uppercase tracking-widest text-sm px-10 py-4 border transition-colors duration-200 text-center"
+              style={{ borderColor: "rgba(255,255,255,0.35)", color: "rgba(255,255,255,0.85)" }}
             >
-              <span className="md:hidden">New Arrivals</span>
-              <span
-                className="hidden md:inline"
-                style={{
-                  borderColor: "var(--color-border)",
-                  color: "var(--color-muted)",
-                }}
-              >
-                New Arrivals
-              </span>
+              New Arrivals
             </Link>
-          </div>
-
-          {/* Scroll indicator — desktop */}
-          <div
-            className="hidden md:flex hero-fade flex-col items-center gap-3 absolute bottom-10"
-            style={{ animationDelay: "1.4s" }}
-          >
-            <div
-              className="scroll-line"
-              style={{
-                width: "1px",
-                height: "3rem",
-                backgroundColor: "var(--color-border)",
-              }}
-            />
-            <span
-              className="font-body uppercase tracking-[0.3em]"
-              style={{ fontSize: "10px", color: "var(--color-subtle)" }}
-            >
-              Scroll
-            </span>
           </div>
         </div>
       </section>
@@ -316,60 +185,7 @@ export default async function HomePage() {
       <Marquee />
 
       {/* ─────────────────────────────────────────────────────────
-          CATEGORIES — Editorial numbered list
-      ───────────────────────────────────────────────────────── */}
-      <CategoryShowcase categories={categories} />
-
-      {/* ─────────────────────────────────────────────────────────
-          EDITORIAL BAND — full-bleed image with overlaid statement
-      ───────────────────────────────────────────────────────── */}
-      <section
-        className="relative overflow-hidden"
-        style={{ height: "60vh", minHeight: "380px" }}
-      >
-        <Image
-          src={EDITORIAL}
-          alt="Aiefashion editorial"
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: "rgba(28,28,26,0.55)" }}
-        />
-        <div className="relative z-10 h-full flex items-center justify-center px-6 text-center">
-          <Reveal reveal="fade">
-            <p
-              className="font-body uppercase tracking-[0.5em] mb-6"
-              style={{ fontSize: "10px", color: "var(--color-gold)" }}
-            >
-              The AIE Standard
-            </p>
-            <blockquote
-              className="font-heading italic text-white leading-[1.1]"
-              style={{
-                fontSize: "clamp(1.8rem, 5vw, 4rem)",
-                maxWidth: "900px",
-              }}
-            >
-              &ldquo;Every piece chosen for the woman
-              <br className="hidden md:block" />
-              who shops with intention.&rdquo;
-            </blockquote>
-            <Link
-              href="/about"
-              className="font-body uppercase tracking-[0.3em] mt-10 inline-block text-white/50 hover:text-white transition-colors duration-200"
-              style={{ fontSize: "11px" }}
-            >
-              Our Story →
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────
-          FEATURED PRODUCTS
+          SHOP THE LATEST LOOKS — Featured products near top
       ───────────────────────────────────────────────────────── */}
       {featured.length > 0 && (
         <section
@@ -377,53 +193,41 @@ export default async function HomePage() {
             backgroundColor: "var(--color-surface)",
             borderTop: "1px solid var(--color-border)",
           }}
-          className="py-20 md:py-28"
+          className="py-16 md:py-24"
         >
           <div className="container">
-            {/* Header row */}
-            <div className="flex items-end justify-between mb-12 md:mb-16">
-              <Reveal>
-                <div>
-                  <p
-                    className="font-body uppercase tracking-[0.4em] mb-3"
-                    style={{ fontSize: "10px", color: "var(--color-subtle)" }}
-                  >
-                    Curated for you
-                  </p>
-                  <h2
-                    className="font-heading leading-none"
-                    style={{
-                      color: "var(--color-foreground)",
-                      fontSize: "clamp(2rem, 4vw, 3rem)",
-                    }}
-                  >
-                    Featured Pieces
-                  </h2>
-                </div>
-              </Reveal>
-
-              <Reveal reveal="fade">
-                <Link
-                  href="/shop"
-                  className="hidden sm:flex items-center gap-2 font-body uppercase tracking-[0.2em] text-muted hover:text-foreground transition-colors duration-200"
-                  style={{ fontSize: "11px" }}
-                >
-                  View all
-                  <span style={{ color: "var(--color-gold)" }}>→</span>
-                </Link>
-              </Reveal>
-            </div>
+            {/* Header */}
+            <Reveal className="mb-4">
+              <p
+                className="font-body uppercase tracking-[0.4em] mb-3"
+                style={{ fontSize: "10px", color: "var(--color-subtle)" }}
+              >
+                New season
+              </p>
+              <h2
+                className="font-heading leading-none"
+                style={{ color: "var(--color-foreground)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}
+              >
+                Shop The Latest Looks
+              </h2>
+            </Reveal>
+            <Reveal reveal="fade" className="mb-12">
+              <p
+                className="font-body"
+                style={{ fontSize: "14px", color: "var(--color-muted)", maxWidth: "42ch" }}
+              >
+                Refresh your wardrobe with these super cute collections.
+              </p>
+            </Reveal>
 
             <ProductGrid products={featured} />
 
-            {/* Mobile view-all */}
-            <Reveal className="mt-12 text-center sm:hidden">
+            <Reveal className="mt-12 text-center">
               <Link
                 href="/shop"
-                className="font-body uppercase tracking-[0.2em]"
-                style={{ fontSize: "11px", color: "var(--color-muted)" }}
+                className="inline-block font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200"
               >
-                View all products →
+                View More Collections
               </Link>
             </Reveal>
           </div>
@@ -431,70 +235,85 @@ export default async function HomePage() {
       )}
 
       {/* ─────────────────────────────────────────────────────────
-          TRUST / USP STRIP — 3 pillars
+          QUALITY STATEMENT — text + image two-column
       ───────────────────────────────────────────────────────── */}
       <section
         style={{
           backgroundColor: "var(--color-background)",
           borderTop: "1px solid var(--color-border)",
-          borderBottom: "1px solid var(--color-border)",
         }}
-        className="py-14 md:py-16"
+        className="py-16 md:py-24"
       >
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
-            {[
-              {
-                num: "01",
-                title: "Curated Quality",
-                body: "Every product is hand-selected to meet the AIE standard — no compromises.",
-              },
-              {
-                num: "02",
-                title: "Worldwide Delivery",
-                body: "US-based, globally shipped. Nigeria, EU, and beyond — we bring AIE to you.",
-              },
-              {
-                num: "03",
-                title: "Luxury Returns",
-                body: "14-day hassle-free returns. Your satisfaction is the only acceptable outcome.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.num} delay={i + 1} className="flex flex-col">
-                <span
-                  className="font-heading mb-5 block"
-                  style={{
-                    fontSize: "2.5rem",
-                    color: "var(--color-gold)",
-                    opacity: 0.35,
-                  }}
-                >
-                  {item.num}
-                </span>
-                <div
-                  className="h-px w-8 mb-5"
-                  style={{ backgroundColor: "var(--color-gold)" }}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+            {/* Text */}
+            <Reveal>
+              <p
+                className="font-body uppercase mb-5"
+                style={{ fontSize: "11px", letterSpacing: "0.4em", color: "var(--color-gold)" }}
+              >
+                The AIE Standard
+              </p>
+              <h2
+                className="font-heading mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                  color: "var(--color-foreground)",
+                  lineHeight: 1.05,
+                }}
+              >
+                Quality never
+                <br />
+                goes out of style.
+              </h2>
+              <p
+                className="font-body leading-relaxed mb-4"
+                style={{ fontSize: "15px", color: "var(--color-muted)", maxWidth: "46ch" }}
+              >
+                Aiefashion is your destination for luxury women&apos;s fashion based in Lanham,
+                Maryland. We are a fast-growing boutique because we always put customers first. A
+                customer-centred shopping experience has always been our goal, and we pride ourselves
+                on comprehensive policies that put us in a realm above our competitors.
+              </p>
+              <p
+                className="font-body leading-relaxed mb-8"
+                style={{ fontSize: "15px", color: "var(--color-muted)", maxWidth: "46ch" }}
+              >
+                Every piece is hand-selected to meet the AIE standard — no compromises on quality,
+                style, or delivery.
+              </p>
+              <Link
+                href="/about"
+                className="font-body uppercase tracking-[0.3em] text-foreground hover:text-gold transition-colors duration-200"
+                style={{ fontSize: "12px" }}
+              >
+                Learn More →
+              </Link>
+            </Reveal>
+
+            {/* Image */}
+            <Reveal reveal="fade">
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: "4/5", backgroundColor: "var(--color-gold-light)" }}
+              >
+                <Image
+                  src={QUALITY_IMG}
+                  alt="Aiefashion quality fashion"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover object-center"
                 />
-                <h3
-                  className="font-heading mb-3"
-                  style={{
-                    fontSize: "1.25rem",
-                    color: "var(--color-foreground)",
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className="font-body leading-relaxed"
-                  style={{ fontSize: "14px", color: "var(--color-muted)" }}
-                >
-                  {item.body}
-                </p>
-              </Reveal>
-            ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
+
+      {/* ─────────────────────────────────────────────────────────
+          OUR COLLECTIONS — image grid (CategoryShowcase)
+      ───────────────────────────────────────────────────────── */}
+      <CategoryShowcase categories={categories} />
 
       {/* ─────────────────────────────────────────────────────────
           NEWSLETTER — dark section, gold accent
@@ -506,15 +325,12 @@ export default async function HomePage() {
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
             <Reveal reveal="up">
-              {/* Decorative motif */}
               <div className="flex items-center justify-center gap-4 mb-10">
                 <div
                   className="h-px flex-1 max-w-16"
                   style={{ backgroundColor: "rgba(212,175,55,0.3)" }}
                 />
-                <span style={{ color: "var(--color-gold)", fontSize: "18px" }}>
-                  ◆
-                </span>
+                <span style={{ color: "var(--color-gold)", fontSize: "18px" }}>◆</span>
                 <div
                   className="h-px flex-1 max-w-16"
                   style={{ backgroundColor: "rgba(212,175,55,0.3)" }}
@@ -541,11 +357,7 @@ export default async function HomePage() {
               </h2>
               <p
                 className="font-body mb-10"
-                style={{
-                  fontSize: "15px",
-                  color: "rgba(253,251,247,0.55)",
-                  lineHeight: 1.7,
-                }}
+                style={{ fontSize: "15px", color: "rgba(253,251,247,0.55)", lineHeight: 1.7 }}
               >
                 Sign up and receive 10% off your first order.
               </p>

@@ -18,7 +18,7 @@ export default function OrderSummaryPanel({ items, subtotal, countryCode = "US",
       <ul className="space-y-4">
         {items.map((item) => (
           <li key={item.id} className="flex gap-3">
-            <div className="relative w-14 shrink-0 aspect-[3/4] bg-gold-subtle overflow-hidden">
+            <div className="relative w-14 shrink-0 aspect-3/4 bg-gold-light overflow-hidden">
               {item.image ? (
                 <Image
                   src={item.image}
