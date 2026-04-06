@@ -245,6 +245,41 @@ body {
   }
 }
 
+/* ── Image scroll strip ───────────────────────────────── */
+@keyframes image-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes image-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.image-scroll-track {
+  display: flex;
+  will-change: transform;
+  animation: image-scroll 50s linear infinite;
+}
+
+.image-scroll-track-reverse {
+  display: flex;
+  will-change: transform;
+  animation: image-scroll-reverse 45s linear infinite;
+}
+
+.image-scroll-wrap:hover .image-scroll-track,
+.image-scroll-wrap:hover .image-scroll-track-reverse {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-scroll-track,
+  .image-scroll-track-reverse {
+    animation: none;
+  }
+}
+
 /* ── Quick-add slide up ────────────────────────────────── */
 @keyframes slideUp {
   from {
@@ -256,6 +291,37 @@ body {
     opacity: 1;
   }
 }
+
+/* ── Category / editorial card hover — image zoom ─────── */
+.group:hover img {
+  transform: scale(1.05) !important;
+}
+
+/* ── Footer link hover utilities (RSC-safe, no JS needed) ─ */
+.footer-nav-link {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  transition: color 200ms ease;
+  font-size: 15px;
+}
+.footer-nav-link:hover { color: rgba(255, 255, 255, 0.97); }
+
+.footer-social-link {
+  color: rgba(255, 255, 255, 0.52);
+  text-decoration: none;
+  transition: color 200ms ease;
+  font-size: 14px;
+  line-height: 2;
+}
+.footer-social-link:hover { color: var(--color-gold); }
+
+.footer-legal-link {
+  color: rgba(255, 255, 255, 0.32);
+  text-decoration: none;
+  transition: color 200ms ease;
+  font-size: 13px;
+}
+.footer-legal-link:hover { color: rgba(255, 255, 255, 0.7); }
 
 /* ── Font utilities (Tailwind v4 doesn't auto-generate font-family) ── */
 .font-heading {
@@ -269,5 +335,30 @@ body {
 @media (min-width: 768px) {
   .md\:grid-cols-footer {
     grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  }
+}
+
+/* ── Announcement bar layout ───────────────────────────── */
+:root {
+  --bar-h: 0px;
+}
+
+#main-content {
+  padding-top: calc(var(--bar-h, 0px) + 4rem);
+}
+
+@media (min-width: 768px) {
+  #main-content {
+    padding-top: calc(var(--bar-h, 0px) + 5rem);
+  }
+}
+
+.hero-section {
+  margin-top: calc(-1 * (var(--bar-h, 0px) + 4rem));
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    margin-top: calc(-1 * (var(--bar-h, 0px) + 5rem));
   }
 }

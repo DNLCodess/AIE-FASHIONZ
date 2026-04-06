@@ -13,6 +13,7 @@ import useUiStore from "@/store/uiStore";
 import StripePaymentForm from "@/components/checkout/StripePaymentForm";
 import { formatCurrency } from "@/lib/utils";
 import { calculateShipping, getShippingOption } from "@/lib/shipping";
+import { Truck, MapPin } from "lucide-react";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -57,6 +58,7 @@ export default function CheckoutPage() {
   const [apiError, setApiError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
+  const [selectedPayment, setSelectedPayment] = useState("credit-card");
 
   const {
     register,
@@ -70,6 +72,7 @@ export default function CheckoutPage() {
 
   const watchedCountry = watch("country");
   const watchedDeliveryType = watch("deliveryType");
+  const watchedLine1 = watch("line1");
   const shippingOption = getShippingOption(watchedCountry || "US");
   const shipping = calculateShipping(watchedCountry || "US", subtotal);
   const total = subtotal + shipping;
@@ -200,15 +203,9 @@ export default function CheckoutPage() {
   return (
     <CheckoutShell>
       {/* Mobile order summary toggle */}
-      <div
-        className="lg:hidden border-b border-border px-4 py-3 flex items-center justify-between"
-        style={{ backgroundColor: "var(--color-surface-raised)" }}
-      >
-        <span className="font-body text-sm text-muted">
-          Order summary · {items.length} item{items.length !== 1 ? "s" : ""}
-        </span>
-        <span className="font-heading text-sm text-foreground">{formatCurrency(total, currency)}</span>
-      </div>
+      <MobileOrderSummary items={items} total={total} currency={currency}>
+        {orderSummary}
+      </MobileOrderSummary>
 
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 lg:gap-16 items-start">
@@ -225,16 +222,33 @@ export default function CheckoutPage() {
                 Express checkout
               </p>
               <div className="grid grid-cols-3 gap-3 mb-6">
-                {["Shop Pay", "PayPal", "G Pay"].map((label) => (
-                  <div
-                    key={label}
-                    className="h-12 border border-border flex items-center justify-center"
-                    style={{ opacity: 0.4 }}
-                    aria-hidden="true"
-                  >
-                    <span className="font-body text-xs text-muted">{label}</span>
-                  </div>
-                ))}
+                <button
+                  type="button"
+                  disabled
+                  title="Shop Pay — coming soon"
+                  className="h-12 flex items-center justify-center font-body text-sm font-semibold tracking-wide cursor-not-allowed"
+                  style={{ backgroundColor: "#5B42F3", color: "#fff", opacity: 0.85 }}
+                >
+                  shop
+                </button>
+                <button
+                  type="button"
+                  disabled
+                  title="PayPal — coming soon"
+                  className="h-12 flex items-center justify-center font-body text-sm font-semibold cursor-not-allowed"
+                  style={{ backgroundColor: "#FFC439", color: "#003087", opacity: 0.85 }}
+                >
+                  PayPal
+                </button>
+                <button
+                  type="button"
+                  disabled
+                  title="Google Pay — coming soon"
+                  className="h-12 flex items-center justify-center font-body text-sm font-semibold cursor-not-allowed"
+                  style={{ backgroundColor: "#1a1a1a", color: "#fff", opacity: 0.85 }}
+                >
+                  G Pay
+                </button>
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px" style={{ backgroundColor: "var(--color-border)" }} />
@@ -279,7 +293,7 @@ export default function CheckoutPage() {
 
               {/* Ship / Pickup toggle */}
               <div className="grid grid-cols-2 mb-5" style={{ border: "1px solid var(--color-border)" }}>
-                {(["ship", "pickup"] ).map((type) => (
+                {(["ship", "pickup"]).map((type) => (
                   <label
                     key={type}
                     className="flex items-center justify-center gap-2 h-12 cursor-pointer transition-colors"
@@ -289,6 +303,7 @@ export default function CheckoutPage() {
                     }}
                   >
                     <input type="radio" value={type} {...register("deliveryType")} className="sr-only" />
+                    {type === "ship" ? <Truck size={15} style={{ color: "var(--color-muted)" }} /> : <MapPin size={15} style={{ color: "var(--color-muted)" }} />}
                     <span className="font-body text-sm text-foreground capitalize">{type}</span>
                   </label>
                 ))}
@@ -399,27 +414,37 @@ export default function CheckoutPage() {
             {/* Shipping method */}
             <div>
               <h2 className="font-heading text-lg text-foreground mb-5">Shipping method</h2>
-              <div
-                className="flex items-center justify-between p-4"
-                style={{
-                  border: "1px solid var(--color-gold)",
-                  backgroundColor: "var(--color-gold-light)",
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  {/* Custom radio */}
-                  <div
-                    className="flex items-center justify-center shrink-0"
-                    style={{ width: "18px", height: "18px", border: "2px solid var(--color-gold)", borderRadius: "50%" }}
-                  >
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+              {watchedLine1 ? (
+                <div
+                  className="flex items-center justify-between p-4"
+                  style={{
+                    border: "1px solid var(--color-gold)",
+                    backgroundColor: "var(--color-gold-light)",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: "18px", height: "18px", border: "2px solid var(--color-gold)", borderRadius: "50%" }}
+                    >
+                      <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                    </div>
+                    <span className="font-body text-sm text-foreground">{shippingOption.label}</span>
                   </div>
-                  <span className="font-body text-sm text-foreground">{shippingOption.label}</span>
+                  <span className="font-heading text-sm text-foreground">
+                    {shipping === 0 ? "Free" : formatCurrency(shipping, currency)}
+                  </span>
                 </div>
-                <span className="font-heading text-sm text-foreground">
-                  {shipping === 0 ? "Free" : formatCurrency(shipping, currency)}
-                </span>
-              </div>
+              ) : (
+                <div
+                  className="p-4"
+                  style={{ border: "1px solid var(--color-border)", backgroundColor: "var(--color-surface-raised)" }}
+                >
+                  <p className="font-body text-sm text-muted text-center">
+                    Enter your shipping address to view available shipping methods.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Payment */}
@@ -432,41 +457,162 @@ export default function CheckoutPage() {
                 All transactions are secure and encrypted.
               </p>
 
-              {/* Credit card option */}
-              <div
-                className="border p-4 mb-2"
-                style={{ borderColor: "var(--color-gold)", backgroundColor: "var(--color-gold-light)" }}
-              >
-                <div className="flex items-center justify-between">
+              <div className="space-y-2">
+                {/* Credit card */}
+                <label
+                  className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                  style={{
+                    borderColor: selectedPayment === "credit-card" ? "var(--color-gold)" : "var(--color-border)",
+                    backgroundColor: selectedPayment === "credit-card" ? "var(--color-gold-light)" : "var(--color-surface)",
+                  }}
+                >
                   <div className="flex items-center gap-3">
                     <div
                       className="flex items-center justify-center shrink-0"
-                      style={{ width: "18px", height: "18px", border: "2px solid var(--color-gold)", borderRadius: "50%" }}
+                      style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "credit-card" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
                     >
-                      <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      {selectedPayment === "credit-card" && (
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      )}
                     </div>
                     <span className="font-body text-sm text-foreground">Credit card</span>
                   </div>
                   <span className="font-body text-xs text-muted">VISA · MC · AMEX</span>
-                </div>
-                <p
-                  className="font-body mt-3 ml-7"
-                  style={{ fontSize: "12px", color: "var(--color-muted)" }}
+                  <input type="radio" name="paymentMethod" value="credit-card" checked={selectedPayment === "credit-card"} onChange={() => setSelectedPayment("credit-card")} className="sr-only" />
+                </label>
+
+                {/* PayPal */}
+                <label
+                  className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                  style={{
+                    borderColor: selectedPayment === "paypal" ? "var(--color-gold)" : "var(--color-border)",
+                    backgroundColor: selectedPayment === "paypal" ? "var(--color-gold-light)" : "var(--color-surface)",
+                  }}
                 >
-                  Card details will be collected securely on the next step.
-                </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "paypal" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
+                    >
+                      {selectedPayment === "paypal" && (
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      )}
+                    </div>
+                    <span className="font-body text-sm text-foreground">PayPal</span>
+                  </div>
+                  <span className="font-body text-xs font-semibold" style={{ color: "#003087" }}>PayPal</span>
+                  <input type="radio" name="paymentMethod" value="paypal" checked={selectedPayment === "paypal"} onChange={() => setSelectedPayment("paypal")} className="sr-only" />
+                </label>
+
+                {/* Zip - Pay in installments */}
+                <label
+                  className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                  style={{
+                    borderColor: selectedPayment === "zip" ? "var(--color-gold)" : "var(--color-border)",
+                    backgroundColor: selectedPayment === "zip" ? "var(--color-gold-light)" : "var(--color-surface)",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "zip" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
+                    >
+                      {selectedPayment === "zip" && (
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      )}
+                    </div>
+                    <span className="font-body text-sm text-foreground">Zip — Pay in installments</span>
+                  </div>
+                  <input type="radio" name="paymentMethod" value="zip" checked={selectedPayment === "zip"} onChange={() => setSelectedPayment("zip")} className="sr-only" />
+                </label>
+
+                {/* Cash on Delivery */}
+                <label
+                  className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                  style={{
+                    borderColor: selectedPayment === "cod" ? "var(--color-gold)" : "var(--color-border)",
+                    backgroundColor: selectedPayment === "cod" ? "var(--color-gold-light)" : "var(--color-surface)",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "cod" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
+                    >
+                      {selectedPayment === "cod" && (
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      )}
+                    </div>
+                    <span className="font-body text-sm text-foreground">Cash on Delivery (COD)</span>
+                  </div>
+                  <input type="radio" name="paymentMethod" value="cod" checked={selectedPayment === "cod"} onChange={() => setSelectedPayment("cod")} className="sr-only" />
+                </label>
+
+                {/* Bank Deposit */}
+                <label
+                  className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                  style={{
+                    borderColor: selectedPayment === "bank" ? "var(--color-gold)" : "var(--color-border)",
+                    backgroundColor: selectedPayment === "bank" ? "var(--color-gold-light)" : "var(--color-surface)",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "bank" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
+                    >
+                      {selectedPayment === "bank" && (
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                      )}
+                    </div>
+                    <span className="font-body text-sm text-foreground">Bank Deposit</span>
+                  </div>
+                  <input type="radio" name="paymentMethod" value="bank" checked={selectedPayment === "bank"} onChange={() => setSelectedPayment("bank")} className="sr-only" />
+                </label>
+
+                {/* Paystack — Nigeria only */}
+                {watchedCountry === "NG" && (
+                  <label
+                    className="flex items-center justify-between p-4 cursor-pointer border transition-colors"
+                    style={{
+                      borderColor: selectedPayment === "paystack" ? "var(--color-gold)" : "var(--color-border)",
+                      backgroundColor: selectedPayment === "paystack" ? "var(--color-gold-light)" : "var(--color-surface)",
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="flex items-center justify-center shrink-0"
+                        style={{ width: "18px", height: "18px", border: `2px solid ${selectedPayment === "paystack" ? "var(--color-gold)" : "var(--color-border)"}`, borderRadius: "50%" }}
+                      >
+                        {selectedPayment === "paystack" && (
+                          <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-gold)" }} />
+                        )}
+                      </div>
+                      <span className="font-body text-sm text-foreground">Paystack (Nigeria)</span>
+                    </div>
+                    <input type="radio" name="paymentMethod" value="paystack" checked={selectedPayment === "paystack"} onChange={() => setSelectedPayment("paystack")} className="sr-only" />
+                  </label>
+                )}
+
+                {/* Info message for non-card methods */}
+                {!["credit-card", "paystack"].includes(selectedPayment) && (
+                  <div className="p-4" style={{ backgroundColor: "var(--color-surface-raised)", border: "1px solid var(--color-border)" }}>
+                    <p className="font-body text-sm text-muted">
+                      {selectedPayment === "cod"
+                        ? "Cash on Delivery is available for select locations. Our team will contact you to confirm your order."
+                        : selectedPayment === "bank"
+                        ? "Bank transfer details will be sent to your email after order placement."
+                        : "This payment method will be available soon. Please select Credit card or Paystack to complete your order."}
+                    </p>
+                  </div>
+                )}
               </div>
 
-              {/* Paystack — Nigeria only */}
-              {watchedCountry === "NG" && (
-                <div className="border border-border p-4 flex items-center gap-3">
-                  <div
-                    className="flex items-center justify-center shrink-0"
-                    style={{ width: "18px", height: "18px", border: "2px solid var(--color-border)", borderRadius: "50%" }}
-                  />
-                  <span className="font-body text-sm text-foreground">Paystack (Nigeria)</span>
-                </div>
-              )}
+              {/* Use shipping as billing */}
+              <label className="flex items-center gap-3 mt-4 cursor-pointer">
+                <input type="checkbox" defaultChecked className="w-4 h-4 accent-gold shrink-0" />
+                <span className="font-body text-sm text-muted">Use shipping address as billing address</span>
+              </label>
             </div>
 
             {/* Save info */}
@@ -565,6 +711,33 @@ function CheckoutShell({ children }) {
 
       {children}
     </main>
+  );
+}
+
+/* ── Mobile collapsible order summary ───────────────────── */
+
+function MobileOrderSummary({ items, total, currency, children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="lg:hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full border-b border-border px-4 py-3 flex items-center justify-between"
+        style={{ backgroundColor: "var(--color-surface-raised)" }}
+      >
+        <span className="font-body text-sm text-muted flex items-center gap-2">
+          Order summary
+          <span style={{ fontSize: "18px", lineHeight: 1, transform: open ? "rotate(180deg)" : "none", display: "inline-block", transition: "transform 200ms ease" }}>›</span>
+        </span>
+        <span className="font-heading text-sm text-foreground">{formatCurrency(total, currency)}</span>
+      </button>
+      {open && (
+        <div className="border-b border-border" style={{ backgroundColor: "var(--color-surface-raised)" }}>
+          {children}
+        </div>
+      )}
+    </div>
   );
 }
 

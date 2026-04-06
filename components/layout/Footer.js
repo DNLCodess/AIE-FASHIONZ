@@ -1,60 +1,100 @@
+/**
+ * Footer — Server Component.
+ * All hover states use CSS classes from globals.css (no event handlers).
+ *
+ * Mobile grid  : 2-col → brand spans both cols (top), Shop + Help side-by-side (below)
+ * Desktop grid : 3-col → brand | Shop | Help
+ */
 import Link from "next/link";
 
 const SHOP_LINKS = [
-  { label: "Luxury Fabrics", href: "/shop/luxury-fabrics" },
-  { label: "Bags & Shoes", href: "/shop/bags-shoes" },
-  { label: "Jewellery", href: "/shop/jewellery" },
-  { label: "Party & Dinner Wear", href: "/shop/party-dinner-wear" },
-  { label: "Children's Wear", href: "/shop/childrens-wear" },
-  { label: "Body Shapers", href: "/shop/body-shapers" },
+  { label: "Luxury Fabrics",       href: "/shop/luxury-fabrics"    },
+  { label: "Bags & Shoes",         href: "/shop/bags-shoes"        },
+  { label: "Jewellery",            href: "/shop/jewellery"         },
+  { label: "Party & Dinner Wear",  href: "/shop/party-dinner-wear" },
+  { label: "Children's Wear",      href: "/shop/childrens-wear"    },
+  { label: "Body Shapers",         href: "/shop/body-shapers"      },
 ];
 
 const HELP_LINKS = [
-  { label: "Contact Us", href: "/contact" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Shipping & Returns", href: "/shipping-returns" },
-  { label: "Size Guide", href: "/size-guide" },
-  { label: "Track My Order", href: "/account/orders" },
+  { label: "Contact Us",          href: "/contact"          },
+  { label: "FAQ",                 href: "/faq"              },
+  { label: "Shipping & Returns",  href: "/shipping-returns" },
+  { label: "Size Guide",          href: "/size-guide"       },
+  { label: "Track My Order",      href: "/account/orders"   },
 ];
 
 const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms" },
-  { label: "Cookie Policy", href: "/privacy-policy#cookies" },
-  { label: "Accessibility", href: "/accessibility" },
+  { label: "Privacy",        href: "/privacy-policy"         },
+  { label: "Terms",          href: "/terms"                  },
+  { label: "Cookies",        href: "/privacy-policy#cookies" },
+  { label: "Accessibility",  href: "/accessibility"          },
 ];
 
 const SOCIAL_LINKS = [
-  { label: "WhatsApp", href: "https://wa.me/13014335307" },
-  { label: "TikTok", href: "https://www.tiktok.com/@aiefashion" },
-  { label: "Facebook", href: "https://www.facebook.com/aiefashion" },
-  { label: "Instagram", href: "https://www.instagram.com/aiefashion" },
+  { label: "Instagram",  href: "https://www.instagram.com/aiefashion" },
+  { label: "TikTok",     href: "https://www.tiktok.com/@aiefashion"   },
+  { label: "Facebook",   href: "https://www.facebook.com/aiefashion"  },
+  { label: "WhatsApp",   href: "https://wa.me/13014335307"            },
 ];
+
+/* ── Column heading ─────────────────────────────────────── */
+function ColHeading({ children }) {
+  return (
+    <p
+      className="font-body uppercase"
+      style={{
+        fontSize: "13px",
+        letterSpacing: "0.22em",
+        color: "rgba(255,255,255,0.38)",
+        marginBottom: "1.25rem",
+        fontWeight: 500,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
 
 export default function Footer() {
   return (
     <footer style={{ backgroundColor: "#0C0C0A" }}>
-      {/* Main grid */}
+
+      {/* ── Main columns ───────────────────────────────────── */}
       <div
         className="container"
         style={{
-          paddingTop: "4rem",
-          paddingBottom: "4rem",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          paddingTop: "3.5rem",
+          paddingBottom: "3.5rem",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Brand */}
-          <div>
+        {/*
+          Mobile  (2-col): brand col-span-2 → Shop | Help
+          Desktop (3-col): brand | Shop | Help
+        */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-10 md:gap-y-0">
+
+          {/* ── Brand (full-width on mobile, 1-col on desktop) ─ */}
+          <div
+            className="col-span-2 md:col-span-1"
+            style={{
+              paddingBottom: "2rem",
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+            }}
+          >
+            {/* Logo */}
             <Link
               href="/"
-              className="font-heading inline-block mb-2 transition-colors duration-200"
+              className="font-heading"
               style={{
-                fontSize: "1.25rem",
-                letterSpacing: "0.2em",
+                fontSize: "1.1rem",
+                letterSpacing: "0.24em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 color: "var(--color-gold)",
+                display: "block",
+                marginBottom: "0.4rem",
               }}
             >
               Aiefashion
@@ -63,46 +103,41 @@ export default function Footer() {
             <p
               className="font-body"
               style={{
-                fontSize: "13px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.55)",
-                marginBottom: "1.5rem",
+                fontSize: "14px",
+                color: "rgba(255,255,255,0.3)",
+                marginBottom: "1.75rem",
               }}
             >
-              Premium Fashion
+              Luxury Fashion · Lanham, Maryland
             </p>
 
-            <p
-              className="font-body"
-              style={{
-                fontSize: "15px",
-                lineHeight: 1.75,
-                color: "rgba(255,255,255,0.75)",
-                marginBottom: "2rem",
-                maxWidth: "26ch",
-              }}
-            >
-              Premium fashion for women who shop with intention. Delivered
-              globally.
-            </p>
+            {/* Contact — brief */}
+            <div style={{ marginBottom: "1.75rem" }}>
+              <a
+                href="tel:+13014335307"
+                className="font-body footer-nav-link"
+                style={{ display: "block", marginBottom: "0.35rem" }}
+              >
+                +1 (301) 433-5307
+              </a>
+              <a
+                href="mailto:aiefashionllc@gmail.com"
+                className="font-body footer-nav-link"
+              >
+                aiefashionllc@gmail.com
+              </a>
+            </div>
 
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}
-            >
+            {/* Social */}
+            <div style={{ display: "flex", flexWrap: "wrap", columnGap: "1.25rem", rowGap: "0.25rem" }}>
               {SOCIAL_LINKS.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
-                  aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body transition-colors duration-200 hover:text-gold"
-                  style={{
-                    fontSize: "14px",
-                    color: "rgba(255,255,255,0.6)",
-                    textDecoration: "none",
-                  }}
+                  aria-label={`Aiefashion on ${s.label}`}
+                  className="font-body footer-social-link"
                 >
                   {s.label}
                 </a>
@@ -110,168 +145,69 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop */}
+          {/* ── Shop ───────────────────────────────────────── */}
           <div>
-            <h3
-              className="font-body"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.55)",
-                marginBottom: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
-              Shop
-            </h3>
+            <ColHeading>Shop</ColHeading>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {SHOP_LINKS.map((link) => (
-                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
-                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                <li key={link.href} style={{ marginBottom: "0.7rem" }}>
+                  <Link href={link.href} className="font-body footer-nav-link">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Help */}
+          {/* ── Help ───────────────────────────────────────── */}
           <div>
-            <h3
-              className="font-body"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.55)",
-                marginBottom: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
-              Help
-            </h3>
+            <ColHeading>Help</ColHeading>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {HELP_LINKS.map((link) => (
-                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
-                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                <li key={link.href} style={{ marginBottom: "0.7rem" }}>
+                  <Link href={link.href} className="font-body footer-nav-link">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Get in Touch */}
-          <div>
-            <h3
-              className="font-body"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.55)",
-                marginBottom: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
-              Get in Touch
-            </h3>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: "1rem" }}>
-                <p
-                  className="font-body"
-                  style={{
-                    fontSize: "11px",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.4)",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  Head Office
-                </p>
-                <span
-                  className="font-body"
-                  style={{ fontSize: "15px", color: "rgba(255,255,255,0.78)" }}
-                >
-                  Lanham, Maryland, USA
-                </span>
-              </li>
-              <li style={{ marginBottom: "0.875rem" }}>
-                <a
-                  href="tel:+13014335307"
-                  className="font-body transition-colors duration-200"
-                  style={{
-                    fontSize: "15px",
-                    color: "rgba(255,255,255,0.78)",
-                    textDecoration: "none",
-                  }}
-                >
-                  +1 (301) 433-5307
-                </a>
-              </li>
-              <li style={{ marginBottom: "1.5rem" }}>
-                <a
-                  href="mailto:aiefashionllc@gmail.com"
-                  className="font-body transition-colors duration-200"
-                  style={{
-                    fontSize: "15px",
-                    color: "rgba(255,255,255,0.78)",
-                    textDecoration: "none",
-                  }}
-                >
-                  aiefashionllc@gmail.com
-                </a>
-              </li>
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href} style={{ marginBottom: "0.875rem" }}>
-                  <FooterLink href={link.href}>{link.label}</FooterLink>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* ── Bottom bar ─────────────────────────────────────── */}
       <div
         className="container"
         style={{
-          paddingTop: "1.25rem",
-          paddingBottom: "1.25rem",
+          paddingTop: "1.1rem",
+          paddingBottom: "1.1rem",
           display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "0.5rem",
+          flexDirection: "column",
+          gap: "0.6rem",
         }}
       >
+        {/* Legal links row */}
+        <nav
+          aria-label="Legal"
+          style={{ display: "flex", flexWrap: "wrap", gap: "0 1.25rem" }}
+        >
+          {LEGAL_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="font-body footer-legal-link">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Copyright */}
         <p
           className="font-body"
-          style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
+          style={{ fontSize: "13px", color: "rgba(255,255,255,0.22)" }}
         >
-          Aiefashion · Online orders only · Worldwide delivery
-        </p>
-        <p
-          className="font-body"
-          style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}
-        >
-          © {new Date().getFullYear()} Aiefashion. All rights reserved.
+          © {new Date().getFullYear()} Aiefashion LLC. All rights reserved. · Online orders only · Worldwide delivery.
         </p>
       </div>
-    </footer>
-  );
-}
 
-function FooterLink({ href, children }) {
-  return (
-    <Link
-      href={href}
-      className="font-body transition-colors duration-200 hover:text-[rgba(255,255,255,0.97)]"
-      style={{
-        fontSize: "15px",
-        color: "rgba(255,255,255,0.78)",
-        textDecoration: "none",
-      }}
-    >
-      {children}
-    </Link>
+    </footer>
   );
 }

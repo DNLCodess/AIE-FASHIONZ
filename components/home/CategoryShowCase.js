@@ -3,47 +3,76 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 
 /**
- * CategoryShowcase — Image grid layout.
- * 2-col on mobile, 3-col on tablet/desktop.
- * Each card: portrait image with name overlay + arrow badge.
+ * CategoryShowcase — editorial text-below-image grid.
+ *
+ * Pattern used by COS, Massimo Dutti, Arket:
+ * — Portrait image (no text overlay — image speaks for itself)
+ * — Below: gold index number · category name · description · CTA
+ *
+ * This gives users instant clarity on what each category contains
+ * without having to decode text overlaid on a busy image.
+ *
+ * Grid: 2-col mobile → 3-col desktop.
+ * All 6 categories carry equal visual weight (no forced asymmetry).
  */
+
 export default function CategoryShowcase({ categories }) {
   if (!categories?.length) return null;
 
+  const cats = categories.slice(0, 6);
+
   return (
     <section
-      style={{ backgroundColor: "var(--color-background)" }}
+      style={{
+        backgroundColor: "var(--color-background)",
+        borderTop: "1px solid var(--color-border)",
+      }}
       className="py-16 md:py-24"
     >
       <div className="container">
-        {/* Section header */}
-        <Reveal className="mb-10 md:mb-12">
+
+        {/* ── Section header ─────────────────────────────── */}
+        <Reveal className="mb-12 md:mb-16">
           <p
-            className="font-body uppercase mb-3"
-            style={{ fontSize: "11px", letterSpacing: "0.4em", color: "var(--color-subtle)" }}
+            className="font-body uppercase mb-4"
+            style={{ fontSize: "14px", letterSpacing: "0.4em", color: "var(--color-gold)" }}
           >
             Collections
           </p>
           <h2
             className="font-heading"
             style={{
-              fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
               color: "var(--color-foreground)",
-              lineHeight: 1.1,
+              lineHeight: 1.05,
             }}
           >
-            Our Collections
+            Six categories.
+            <br />
+            <em style={{ color: "var(--color-muted)", fontStyle: "normal" }}>
+              One standard.
+            </em>
           </h2>
         </Reveal>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {categories.slice(0, 6).map((cat, i) => (
-            <Reveal key={cat.slug} delay={Math.min(i + 1, 4)}>
-              <Link href={`/shop/${cat.slug}`} className="group block" style={{ textDecoration: "none" }}>
+        {/* ── Category grid ──────────────────────────────── */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-14">
+          {cats.map((cat, i) => (
+            <Reveal key={cat.slug} delay={Math.min(i + 1, 5)}>
+              <Link
+                href={`/shop/${cat.slug}`}
+                className="group block"
+                style={{ textDecoration: "none" }}
+              >
+
+                {/* ── Image ──────────────────────────────── */}
                 <div
                   className="relative overflow-hidden"
-                  style={{ aspectRatio: "3/4", backgroundColor: "var(--color-gold-light)" }}
+                  style={{
+                    aspectRatio: "3/4",
+                    backgroundColor: "var(--color-gold-light)",
+                    marginBottom: "1.25rem",
+                  }}
                 >
                   {cat.hero_image_url && (
                     <Image
@@ -52,77 +81,112 @@ export default function CategoryShowcase({ categories }) {
                       fill
                       sizes="(min-width: 768px) 33vw, 50vw"
                       className="object-cover object-center"
-                      style={{ transition: "transform 700ms cubic-bezier(0.22,1,0.36,1)" }}
+                      style={{
+                        transition: "transform 700ms cubic-bezier(0.22,1,0.36,1)",
+                      }}
                     />
                   )}
 
-                  {/* Dark gradient */}
+                  {/* Hover — subtle scrim appears */}
                   <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100"
                     style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
+                      backgroundColor: "rgba(0,0,0,0.12)",
+                      transition: "opacity 350ms ease",
                     }}
                   />
+                </div>
 
-                  {/* Content overlay */}
-                  <div
+                {/* ── Text block ─────────────────────────── */}
+                <div>
+                  {/* Gold index */}
+                  <span
+                    className="font-body block"
                     style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: "1.25rem",
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "space-between",
+                      fontSize: "12px",
+                      letterSpacing: "0.4em",
+                      color: "var(--color-gold)",
+                      marginBottom: "0.5rem",
                     }}
                   >
-                    <div>
-                      <h3
-                        className="font-heading text-white"
-                        style={{ fontSize: "clamp(0.9rem, 2vw, 1.15rem)", lineHeight: 1.1 }}
-                      >
-                        {cat.name}
-                      </h3>
-                      <span
-                        className="font-body mt-1 flex items-center gap-1"
-                        style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)" }}
-                      >
-                        Shop now
-                        <span style={{ color: "var(--color-gold)" }}>→</span>
-                      </span>
-                    </div>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-                    {/* Arrow badge */}
-                    <div
-                      className="shrink-0 hidden sm:flex items-center justify-center"
+                  {/* Category name */}
+                  <h3
+                    className="font-heading"
+                    style={{
+                      fontSize: "clamp(1.05rem, 2.2vw, 1.35rem)",
+                      color: "var(--color-foreground)",
+                      lineHeight: 1.15,
+                      marginBottom: "0.6rem",
+                      transition: "color 200ms ease",
+                    }}
+                  >
+                    {cat.name}
+                  </h3>
+
+                  {/* Description — clamped to 2 lines on mobile */}
+                  {cat.description && (
+                    <p
+                      className="font-body"
                       style={{
-                        width: "36px",
-                        height: "36px",
-                        border: "1px solid rgba(255,255,255,0.3)",
-                        transition: "border-color 200ms ease",
+                        fontSize: "15px",
+                        color: "var(--color-muted)",
+                        lineHeight: 1.6,
+                        marginBottom: "1rem",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
                       }}
                     >
-                      <span style={{ color: "var(--color-gold)", fontSize: "14px" }}>→</span>
-                    </div>
-                  </div>
+                      {cat.description}
+                    </p>
+                  )}
+
+                  {/* CTA */}
+                  <span
+                    className="font-body uppercase inline-flex items-center gap-2"
+                    style={{
+                      fontSize: "13px",
+                      letterSpacing: "0.2em",
+                      color: "var(--color-foreground)",
+                      fontWeight: 500,
+                      borderBottom: "1px solid var(--color-border)",
+                      paddingBottom: "3px",
+                      transition: "border-color 200ms ease, color 200ms ease",
+                    }}
+                  >
+                    Shop Collection
+                    <span
+                      style={{
+                        color: "var(--color-gold)",
+                        transition: "transform 200ms ease",
+                        display: "inline-block",
+                      }}
+                    >
+                      →
+                    </span>
+                  </span>
                 </div>
+
               </Link>
             </Reveal>
           ))}
         </div>
 
-        {/* CTA */}
-        <Reveal className="mt-10 text-center">
+        {/* ── Footer CTA ─────────────────────────────────── */}
+        <Reveal className="mt-14 md:mt-20 text-center">
           <Link
             href="/shop"
-            className="inline-block font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200"
+            className="inline-block font-body uppercase bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 w-full sm:w-auto"
+            style={{ fontSize: "16px", padding: "18px 56px", letterSpacing: "0.2em" }}
           >
-            View More Collections
+            View All Collections
           </Link>
         </Reveal>
+
       </div>
     </section>
   );

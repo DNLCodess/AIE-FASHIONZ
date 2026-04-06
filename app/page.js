@@ -7,6 +7,9 @@ import NewsletterForm from "@/components/home/NewsletterForm";
 import Marquee from "@/components/ui/Marquee";
 import Reveal from "@/components/ui/Reveal";
 import CategoryShowcase from "@/components/home/CategoryShowCase";
+import VideoHero from "@/components/home/VideoHero";
+import TrustBar from "@/components/home/TrustBar";
+import PromoDualPanel from "@/components/home/PromoDualPanel";
 import JsonLd from "@/components/seo/JsonLd";
 
 export const revalidate = 60;
@@ -21,11 +24,11 @@ export const metadata = {
   openGraph: {
     title: "Aiefashion | Luxury Fashion for Women — Premium Fashion",
     description:
-      "destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free US shipping. Worldwide delivery.",
+      "Destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more. Free US shipping. Worldwide delivery.",
     url: "/",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90",
+        url: `${SITE_URL}/promotions/image1.jpeg`,
         width: 1200,
         height: 630,
         alt: "Aiefashion Luxury Fashion",
@@ -35,15 +38,10 @@ export const metadata = {
   twitter: {
     title: "Aiefashion | Luxury Fashion for Women — Premium Fashion",
     description:
-      "destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
-    images: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop&q=90"],
+      "Destination for luxury women's fashion. Premium fabrics, bags, jewellery, party wear and more.",
+    images: [`${SITE_URL}/promotions/image1.jpeg`],
   },
 };
-
-const HERO_IMG =
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1400&h=900&fit=crop&crop=top&q=90&auto=format";
-const QUALITY_IMG =
-  "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1000&fit=crop&crop=center&q=90&auto=format";
 
 export default async function HomePage() {
   const [featured, categories] = await Promise.all([
@@ -91,102 +89,24 @@ export default async function HomePage() {
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
 
-      {/* ─────────────────────────────────────────────────────────
-          HERO — full-bleed image with text overlay
-      ───────────────────────────────────────────────────────── */}
-      <section
-        className="relative -mt-16 md:-mt-20 overflow-hidden"
-        style={{ minHeight: "100svh" }}
-      >
-        {/* Background image — full bleed on all screen sizes */}
-        <div className="absolute inset-0">
-          <Image
-            src={HERO_IMG}
-            alt="Aiefashion luxury fashion"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-top"
-          />
-          {/* Gradient — stronger at bottom on mobile, balanced on desktop */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%)",
-            }}
-          />
-        </div>
+      {/* ═══════════════════════════════════════════════════════
+          1. HERO — full-viewport video background
+      ═══════════════════════════════════════════════════════ */}
+      <VideoHero />
 
-        {/* Content */}
-        <div
-          className="relative z-10 flex flex-col justify-end items-center text-center px-6"
-          style={{ minHeight: "100svh", paddingBottom: "5rem", paddingTop: "7rem" }}
-        >
-          <p
-            className="hero-up font-body uppercase tracking-[0.4em] mb-5"
-            style={{ animationDelay: "0.1s", fontSize: "10px", color: "rgba(255,255,255,0.55)" }}
-          >
-            New Arrivals — SS25
-          </p>
-
-          <h1
-            className="hero-up font-heading leading-[0.9] tracking-[-0.02em] text-white mb-0"
-            style={{ animationDelay: "0.2s", fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
-          >
-            Dress
-            <br />
-            with
-            <br />
-            <em style={{ color: "var(--color-gold)" }}>intention.</em>
-          </h1>
-
-          <div
-            className="hero-line mx-auto my-8"
-            style={{
-              animationDelay: "0.4s",
-              height: "1px",
-              width: "3rem",
-              backgroundColor: "var(--color-gold)",
-            }}
-          />
-
-          <p
-            className="hero-up font-body leading-relaxed max-w-xs mb-10"
-            style={{ animationDelay: "0.5s", fontSize: "15px", color: "rgba(255,255,255,0.6)" }}
-          >
-            Six categories. One standard — luxury.
-          </p>
-
-          <div
-            className="hero-up flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-            style={{ animationDelay: "0.65s" }}
-          >
-            <Link
-              href="/shop"
-              className="w-full sm:w-auto font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 text-center"
-            >
-              Shop Now
-            </Link>
-            <Link
-              href="/shop/party-dinner-wear"
-              className="w-full sm:w-auto font-body uppercase tracking-widest text-sm px-10 py-4 border transition-colors duration-200 text-center"
-              style={{ borderColor: "rgba(255,255,255,0.35)", color: "rgba(255,255,255,0.85)" }}
-            >
-              New Arrivals
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────
-          MARQUEE TICKER
-      ───────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════════
+          2. MARQUEE TICKER
+      ═══════════════════════════════════════════════════════ */}
       <Marquee />
 
-      {/* ─────────────────────────────────────────────────────────
-          SHOP THE LATEST LOOKS — Featured products near top
-      ───────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════════
+          3. TRUST BAR — 4 signals
+      ═══════════════════════════════════════════════════════ */}
+      <TrustBar />
+
+      {/* ═══════════════════════════════════════════════════════
+          4. SHOP THE LATEST — featured products (first 4)
+      ═══════════════════════════════════════════════════════ */}
       {featured.length > 0 && (
         <section
           style={{
@@ -196,128 +116,343 @@ export default async function HomePage() {
           className="py-16 md:py-24"
         >
           <div className="container">
-            {/* Header */}
-            <Reveal className="mb-4">
+            <Reveal className="mb-3">
               <p
-                className="font-body uppercase tracking-[0.4em] mb-3"
-                style={{ fontSize: "10px", color: "var(--color-subtle)" }}
+                className="font-body uppercase mb-4"
+                style={{ fontSize: "14px", letterSpacing: "0.35em", color: "var(--color-gold)" }}
               >
-                New season
+                New Season
               </p>
               <h2
-                className="font-heading leading-none"
-                style={{ color: "var(--color-foreground)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}
+                className="font-heading"
+                style={{
+                  fontSize: "clamp(1.75rem, 4vw, 3rem)",
+                  color: "var(--color-foreground)",
+                  lineHeight: 1.05,
+                }}
               >
-                Shop The Latest Looks
+                Shop the Latest Looks
               </h2>
             </Reveal>
             <Reveal reveal="fade" className="mb-12">
               <p
                 className="font-body"
-                style={{ fontSize: "14px", color: "var(--color-muted)", maxWidth: "42ch" }}
+                style={{ fontSize: "16px", color: "var(--color-muted)", maxWidth: "42ch", lineHeight: 1.6 }}
               >
-                Refresh your wardrobe with these super cute collections.
+                Refresh your wardrobe with our carefully curated collections — each piece meeting the AIE standard.
               </p>
             </Reveal>
 
-            <ProductGrid products={featured} />
+            <ProductGrid products={featured.slice(0, 4)} />
 
             <Reveal className="mt-12 text-center">
               <Link
                 href="/shop"
-                className="inline-block font-body uppercase tracking-widest text-sm px-10 py-4 bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200"
+                className="inline-block font-body uppercase bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 w-full sm:w-auto"
+                style={{ fontSize: "16px", padding: "18px 56px", letterSpacing: "0.2em" }}
               >
-                View More Collections
+                View All Collections
               </Link>
             </Reveal>
           </div>
         </section>
       )}
 
-      {/* ─────────────────────────────────────────────────────────
-          QUALITY STATEMENT — text + image two-column
-      ───────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════════
+          5. EDITORIAL SPLIT — image left / brand statement right
+      ═══════════════════════════════════════════════════════ */}
+      <section style={{ backgroundColor: "var(--color-foreground)" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Image panel */}
+          <div
+            className="relative overflow-hidden"
+            style={{ minHeight: "clamp(280px, 65vw, 640px)" }}
+          >
+            <Image
+              src="/promotions/image3.jpeg"
+              alt="Aiefashion editorial — the AIE standard"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover object-center"
+              loading="lazy"
+            />
+            {/* Subtle bottom-up tint to anchor text */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%)",
+              }}
+            />
+          </div>
+
+          {/* Text panel */}
+          <Reveal
+            className="flex flex-col justify-center"
+            style={{ padding: "clamp(2.5rem, 5vw, 5rem)" }}
+          >
+            <p
+              className="font-body uppercase mb-6"
+              style={{ fontSize: "14px", letterSpacing: "0.4em", color: "var(--color-gold)" }}
+            >
+              The AIE Standard
+            </p>
+            <h2
+              className="font-heading mb-6"
+              style={{
+                fontSize: "clamp(2rem, 4.5vw, 4rem)",
+                color: "var(--color-background)",
+                lineHeight: 1.0,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Quality never<br />
+              goes out<br />
+              of style.
+            </h2>
+            <p
+              className="font-body mb-4"
+              style={{
+                fontSize: "16px",
+                color: "rgba(253,251,247,0.65)",
+                lineHeight: 1.75,
+                maxWidth: "42ch",
+              }}
+            >
+              Aiefashion is your destination for luxury women&apos;s fashion based in Lanham, Maryland.
+              A fast-growing boutique because we always put customers first.
+            </p>
+            <p
+              className="font-body mb-10"
+              style={{
+                fontSize: "16px",
+                color: "rgba(253,251,247,0.65)",
+                lineHeight: 1.75,
+                maxWidth: "42ch",
+              }}
+            >
+              Every piece is hand-selected to meet the AIE standard — no compromises on quality,
+              style, or delivery.
+            </p>
+            <Link
+              href="/about"
+              className="font-body uppercase"
+              style={{
+                fontSize: "14px",
+                letterSpacing: "0.3em",
+                color: "var(--color-background)",
+                borderBottom: "1px solid rgba(253,251,247,0.35)",
+                paddingBottom: "4px",
+                width: "fit-content",
+                transition: "border-color 200ms ease",
+              }}
+            >
+              Our Story →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          6. DUAL-PANEL CATEGORY SPOTLIGHT
+      ═══════════════════════════════════════════════════════ */}
+      <PromoDualPanel />
+
+      {/* ═══════════════════════════════════════════════════════
+          7. CATEGORY SHOWCASE — editorial asymmetric grid
+      ═══════════════════════════════════════════════════════ */}
+      <CategoryShowcase categories={categories} />
+
+      {/* ═══════════════════════════════════════════════════════
+          8. MID-PAGE VIDEO STATEMENT — full-bleed with overlay
+      ═══════════════════════════════════════════════════════ */}
       <section
-        style={{
-          backgroundColor: "var(--color-background)",
-          borderTop: "1px solid var(--color-border)",
-        }}
-        className="py-16 md:py-24"
+        className="relative overflow-hidden"
+        style={{ minHeight: "clamp(380px, 70vh, 720px)" }}
       >
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-            {/* Text */}
-            <Reveal>
-              <p
-                className="font-body uppercase mb-5"
-                style={{ fontSize: "11px", letterSpacing: "0.4em", color: "var(--color-gold)" }}
+        {/* Video background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/promotions/image9.jpeg"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        >
+          <source src="/promotions/video3.mp4" type="video/mp4" />
+          <source src="/promotions/video2.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(0,0,0,0.58)" }}
+        />
+
+        {/* Content */}
+        <div
+          className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
+          style={{ minHeight: "clamp(380px, 70vh, 720px)" }}
+        >
+          <Reveal reveal="up">
+            <p
+              className="font-body uppercase text-white mb-5"
+              style={{ fontSize: "14px", letterSpacing: "0.45em", opacity: 0.7 }}
+            >
+              The Aiefashion Way
+            </p>
+            <h2
+              className="font-heading text-white mb-10"
+              style={{
+                fontSize: "clamp(2.2rem, 7vw, 6.5rem)",
+                lineHeight: 0.95,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              A New Standard<br />
+              <em style={{ color: "var(--color-gold)" }}>in Fashion.</em>
+            </h2>
+            <Link
+              href="/shop"
+              className="inline-block font-body uppercase bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 w-full sm:w-auto"
+              style={{ fontSize: "16px", padding: "18px 56px", letterSpacing: "0.2em" }}
+            >
+              Shop the Collection
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          9. URGENCY BANNER — promo code, full gold strip
+      ═══════════════════════════════════════════════════════ */}
+      <section style={{ backgroundColor: "var(--color-gold)" }}>
+        <div
+          className="container flex flex-col md:flex-row items-center justify-between gap-6"
+          style={{ paddingBlock: "clamp(2.5rem, 5vw, 4rem)" }}
+        >
+          <div className="text-center md:text-left">
+            <p
+              className="font-body uppercase mb-2"
+              style={{ fontSize: "14px", letterSpacing: "0.35em", color: "var(--color-foreground)", opacity: 0.65, fontWeight: 600 }}
+            >
+              Limited Time Offer
+            </p>
+            <h2
+              className="font-heading"
+              style={{
+                fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
+                color: "var(--color-foreground)",
+                lineHeight: 1.05,
+                marginBottom: "0.5rem",
+              }}
+            >
+              10% Off Everything
+            </h2>
+            <p
+              className="font-body"
+              style={{ fontSize: "17px", color: "var(--color-foreground)", opacity: 0.75, lineHeight: 1.5 }}
+            >
+              Use code{" "}
+              <strong
+                style={{
+                  fontFamily: "var(--font-body)",
+                  letterSpacing: "0.1em",
+                  color: "var(--color-foreground)",
+                  fontSize: "18px",
+                }}
               >
-                The AIE Standard
+                AIETEN
+              </strong>{" "}
+              at checkout
+            </p>
+          </div>
+          <Link
+            href="/shop"
+            className="font-body uppercase text-center shrink-0 w-full md:w-auto"
+            style={{
+              fontSize: "16px",
+              fontWeight: 600,
+              padding: "18px 56px",
+              backgroundColor: "var(--color-foreground)",
+              color: "var(--color-background)",
+              letterSpacing: "0.18em",
+              transition: "opacity 200ms ease",
+              minHeight: "56px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Shop &amp; Save 10%
+          </Link>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          10. LATEST COLLECTIONS — remaining featured products
+      ═══════════════════════════════════════════════════════ */}
+      {featured.length > 4 && (
+        <section
+          style={{
+            backgroundColor: "var(--color-surface)",
+            borderTop: "1px solid var(--color-border)",
+          }}
+          className="py-16 md:py-24"
+        >
+          <div className="container">
+            <Reveal className="mb-3">
+              <p
+                className="font-body uppercase mb-4"
+                style={{ fontSize: "14px", letterSpacing: "0.35em", color: "var(--color-gold)" }}
+              >
+                Trending Now
               </p>
               <h2
-                className="font-heading mb-6"
+                className="font-heading"
                 style={{
-                  fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                  fontSize: "clamp(1.75rem, 4vw, 3rem)",
                   color: "var(--color-foreground)",
                   lineHeight: 1.05,
                 }}
               >
-                Quality never
-                <br />
-                goes out of style.
+                Latest Collections
               </h2>
+            </Reveal>
+            <Reveal reveal="fade" className="mb-12">
               <p
-                className="font-body leading-relaxed mb-4"
-                style={{ fontSize: "15px", color: "var(--color-muted)", maxWidth: "46ch" }}
+                className="font-body"
+                style={{ fontSize: "16px", color: "var(--color-muted)", maxWidth: "42ch", lineHeight: 1.6 }}
               >
-                Aiefashion is your destination for luxury women&apos;s fashion based in Lanham,
-                Maryland. We are a fast-growing boutique because we always put customers first. A
-                customer-centred shopping experience has always been our goal, and we pride ourselves
-                on comprehensive policies that put us in a realm above our competitors.
+                New arrivals carefully curated for the modern woman who demands luxury.
               </p>
-              <p
-                className="font-body leading-relaxed mb-8"
-                style={{ fontSize: "15px", color: "var(--color-muted)", maxWidth: "46ch" }}
-              >
-                Every piece is hand-selected to meet the AIE standard — no compromises on quality,
-                style, or delivery.
-              </p>
+            </Reveal>
+
+            <ProductGrid products={featured.slice(4)} />
+
+            <Reveal className="mt-12 text-center">
               <Link
-                href="/about"
-                className="font-body uppercase tracking-[0.3em] text-foreground hover:text-gold transition-colors duration-200"
-                style={{ fontSize: "12px" }}
+                href="/shop"
+                className="inline-block font-body uppercase bg-gold hover:bg-gold-dark text-foreground transition-colors duration-200 w-full sm:w-auto"
+                style={{ fontSize: "16px", padding: "18px 56px", letterSpacing: "0.2em" }}
               >
-                Learn More →
+                Shop More
               </Link>
             </Reveal>
-
-            {/* Image */}
-            <Reveal reveal="fade">
-              <div
-                className="relative overflow-hidden"
-                style={{ aspectRatio: "4/5", backgroundColor: "var(--color-gold-light)" }}
-              >
-                <Image
-                  src={QUALITY_IMG}
-                  alt="Aiefashion quality fashion"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover object-center"
-                />
-              </div>
-            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ─────────────────────────────────────────────────────────
-          OUR COLLECTIONS — image grid (CategoryShowcase)
-      ───────────────────────────────────────────────────────── */}
-      <CategoryShowcase categories={categories} />
-
-      {/* ─────────────────────────────────────────────────────────
-          NEWSLETTER — dark section, gold accent
-      ───────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════════
+          11. NEWSLETTER — dark section, gold accent
+      ═══════════════════════════════════════════════════════ */}
       <section
         style={{ backgroundColor: "var(--color-foreground)" }}
         className="py-24 md:py-32"
@@ -338,28 +473,27 @@ export default async function HomePage() {
               </div>
 
               <p
-                className="font-body uppercase tracking-[0.4em] mb-5"
-                style={{ fontSize: "10px", color: "var(--color-gold)" }}
+                className="font-body uppercase mb-5"
+                style={{ fontSize: "14px", letterSpacing: "0.4em", color: "var(--color-gold)" }}
               >
                 Join the inner circle
               </p>
               <h2
                 className="font-heading mb-4"
                 style={{
+                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
                   color: "var(--color-background)",
-                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
-                  lineHeight: 1.1,
+                  lineHeight: 1.05,
                 }}
               >
-                First access.
-                <br />
+                First access.<br />
                 Exclusive offers.
               </h2>
               <p
                 className="font-body mb-10"
-                style={{ fontSize: "15px", color: "rgba(253,251,247,0.55)", lineHeight: 1.7 }}
+                style={{ fontSize: "17px", color: "rgba(253,251,247,0.55)", lineHeight: 1.7 }}
               >
-                Sign up and receive 10% off your first order.
+                Sign up and receive 10% off your first order. No spam, ever.
               </p>
             </Reveal>
 
@@ -367,7 +501,7 @@ export default async function HomePage() {
               <NewsletterForm dark />
               <p
                 className="font-body mt-5"
-                style={{ fontSize: "12px", color: "rgba(253,251,247,0.3)" }}
+                style={{ fontSize: "14px", color: "rgba(253,251,247,0.3)" }}
               >
                 No spam. Unsubscribe at any time. We respect your privacy.
               </p>
